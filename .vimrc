@@ -400,12 +400,3 @@ map <leader>pp :setlocal paste!<cr>
 
 map <leader>bb :cd ..<cr>
 
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => OUTLINE MODE
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Set outline mode for text files by default.
-if (filetype=text)
-    set ai
-    set foldmethod=indent
-endif
