@@ -112,8 +112,8 @@ set undofile
 " => Text, tab and indent related
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set expandtab
-set shiftwidth=4
-set tabstop=4
+set shiftwidth=2
+set tabstop=2
 set smarttab
 
 " Ruby likes tabstop=2
@@ -399,4 +399,9 @@ au BufRead,BufNewFile ~/buffer iab <buffer> xh1 ================================
 map <leader>pp :setlocal paste!<cr>
 
 map <leader>bb :cd ..<cr>
+
+""""""""""""""""""""""""""""""""""""""""""""""
+" => PATHOGEN
+""""""""""""""""""""""""""""""""""""""""""""""
+execute pathogen#infect()
 
