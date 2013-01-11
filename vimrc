@@ -116,7 +116,7 @@ set shiftwidth=2
 set tabstop=2
 set smarttab
 
-" Ruby likes tabstop=2
+" Ruby likes tabstop=2. Set this in case global shiftwidth,tabstop is not 2
 autocmd FileType rb setlocal shiftwidth=2 tabstop=2
 
 set lbr
@@ -165,7 +165,6 @@ function! VisualSearch(direction) range
   let @" = l:saved_reg
 endfunction
 
-
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Command mode related
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -210,6 +209,11 @@ endfunc
 func! CurrentFileDir(cmd)
   return a:cmd . " " . expand("%:p:h") . "/"
 endfunc
+
+"""""""""""""""""""""""""""""
+" => Allow saving of files as sudo when I forgot to start vim using sudo.
+"""""""""""""""""""""""""""""
+cmap w!! %!sudo tee > /dev/null %
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
