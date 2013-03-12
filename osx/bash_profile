@@ -1,0 +1,26 @@
+source ~/.bash_aliases
+
+if [ -f ~/.bashrc ]; then
+  source ~/.bashrc
+fi
+
+if [ -f `brew --prefix`/etc/bash_completion ]; then
+  . `brew --prefix`/etc/bash_completion
+fi
+
+PS1="\W\$(__git_ps1) \$ "
+
+export JAVA_HOME=/System/Library/Frameworks/JavaVM.framework/Versions/CurrentJDK/Home
+
+export MAVEN_OPTS="-Xmx1024m -XX:MaxPermSize=256m -Xss1024k"
+
+PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
+PATH=$PATH:$HOME/devtools/groovy/bin
+
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
+
+function ancestor()
+{
+  (~/dotfiles/ancestor.rb $1) && cd $(~/dotfiles/ancestor.rb $1)
+}
+
