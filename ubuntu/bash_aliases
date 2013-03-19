@@ -1,0 +1,7 @@
+## Include common *nix aliases
+source ~/dotfiles/bash_aliases
+
+## Ubuntu aliases
+alias pbcopy='xclip -selection clipboard'
+alias pbpaste='xclip -selection clipboard -o'
+
