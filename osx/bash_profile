@@ -16,6 +16,7 @@ export MAVEN_OPTS="-Xmx1024m -XX:MaxPermSize=256m -Xss1024k"
 
 PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
 PATH=$PATH:$HOME/devtools/groovy/bin
+PATH=$PATH:/usr/local/bin
 
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
 
