@@ -1,0 +1,5 @@
+--type-add
+css=.sass,.scss,.less
+
+--type-set=sass=.scss,.sass
+
