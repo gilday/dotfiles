@@ -112,8 +112,8 @@ set undofile
 " => Text, tab and indent related
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set expandtab
-set shiftwidth=2
-set tabstop=2
+set shiftwidth=4
+set tabstop=4
 set smarttab
 
 " Ruby likes tabstop=2. Set this in case global shiftwidth,tabstop is not 2
