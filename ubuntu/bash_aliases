@@ -5,3 +5,5 @@ source ~/dotfiles/bash_aliases
 alias pbcopy='xclip -selection clipboard'
 alias pbpaste='xclip -selection clipboard -o'
 
+## Java
+mvnci='mvn clean install'
