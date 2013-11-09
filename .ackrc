@@ -1,0 +1,7 @@
+--type-set
+css=.css,.less,.sass
+
+# Yeoman
+--ignore-dir=node_modules
+--ignore-dir=dist
+--ignore-dir=bower_components
