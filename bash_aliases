@@ -5,7 +5,7 @@ alias treediff="rsync -rvnc --delete $1 $2"
 
 alias mvnci="mvn clean install"
 
-alias ll="ls -lah"
+alias ll="ls -Glah"
 alias l='ls -CF'
 
 # When I type "gits" I mistyped and meant "git s"

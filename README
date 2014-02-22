@@ -1,1 +1,7 @@
-This is a fairly Unix-specific file.  If using this on Windows or Mac, please look carefully through it for OS-specific lines.
+# Mac
+
+First, install git and its bash-completion from Homebrew to get the git bash prompt and tab completion to work
+
+    brew install git bash-completion
+
+
