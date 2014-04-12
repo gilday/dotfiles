@@ -41,3 +41,6 @@ function ancestor()
   (~/dotfiles/ancestor.rb $1) && cd $(~/dotfiles/ancestor.rb $1)
 }
 
+
+### Added by the Heroku Toolbelt
+export PATH="/usr/local/heroku/bin:$PATH"

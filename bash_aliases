@@ -15,3 +15,5 @@ alias http="python -m SimpleHTTPServer"
 
 alias tcpd8443="sudo tcpdump -s 0 -A -i lo0 'tcp port 8443 and (((ip[2:2] - ((ip[0]&0xf)<<2)) - ((tcp[12]&0xf0)>>2)) != 0)'"
 
+alias encrypt="openssl des3 -in $1 -out $2"
+alias decrypt="openssl des3 -d -in $1 -out $2"

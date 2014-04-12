@@ -10,6 +10,7 @@ ln -s dotfiles/bash_aliases .bash_aliases
 ln -s dotfiles/ackrc .ackrc
 ln -s dotfiles/vimrc .vimrc
 ln -s dotfiles/gitconfig .gitconfig
+ln -s ~/dotfiles/osx/inputrc ~/.inputrc
 
 mkdir -p .vim/autoload
 cp dotfiles/autoload/pathogen.vim .vim/autoload/
