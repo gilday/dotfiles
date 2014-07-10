@@ -34,8 +34,8 @@ if $ubuntu ; then
     alias pbcopy='xclip -selection clipboard'
     alias pbpaste='xclip -selection clipboard -o'
 elif $cygwin ; then
-    alias pcopy='/dev/clipboard'
-    alias pbpaste='/dev/clipboard'
+    alias pbcopy='cat >/dev/clipboard'
+    alias pbpaste='cat /dev/clipboard'
 fi
 
 # BASH History
