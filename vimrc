@@ -85,11 +85,9 @@ if has("gui_running")
   set t_Co=256
   set background=dark
   colorscheme desert
-  " set nonu
 else
-  colorscheme zellner
+  colorscheme solarized
   set background=dark
-  " set nonu
 endif
 
 set encoding=utf8
