@@ -9,6 +9,8 @@ case "`uname`" in
     Darwin*) osx=true; env='osx' ;;
 esac
 
+echo "Install for $env"
+
 # Link dotfiles to $HOME
 # pick environment specific overrides if they exist
 
@@ -31,6 +33,8 @@ if [ ! -d $HOME/dotfiles ] ; then
 fi
 
 
+echo 'Link dotfiles'
+
 link 'bashrc'
 link 'bash_profile'
 link 'bash_aliases'
@@ -39,7 +43,18 @@ link 'vimrc'
 link 'gitconfig'
 link 'inputrc'
 
+if $cygwin && [ ! -e "$HOME/.minttyrc" ]; then
+    echo 'Set color scheme'
+    git clone -q git://github.com/karlin/mintty-colors-solarized "$HOME/dotfiles/packages/mintty-colors-solarized"
+    git clone -q git://github.com/seebi/dircolors-solarized "$HOME/dotfiles/packages/dircolors-solarized"
+    ln -s "$HOME/dotfiles/packages/mintty-colors-solarized/.minttyrc--solarized-dark" "$HOME/.minttyrc"
+    ln -s "$HOME/dotfiles/packages/dircolors-solarized/dircolors.ansi-dark" "$HOME/.dircolors"
+fi
+eval `dircolors ~/.dircolors`
+
 mkdir -p "$HOME/.vim/autoload"
 cp "$HOME/dotfiles/autoload/pathogen.vim" "$HOME/.vim/autoload/"
 
-$HOME/dotfiles/update_bundles
+#$HOME/dotfiles/update_bundles
+
+
