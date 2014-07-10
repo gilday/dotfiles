@@ -4,25 +4,25 @@ cygwin=false;
 mac=false;
 ubuntu=false;
 case "`uname`" in
-  CYGWIN*) cygwin=true ;;
-  Darwin*) mac=true ;;
-  Ubuntu*) ubuntu=true
+    CYGWIN*) cygwin=true ;;
+    Darwin*) mac=true ;;
+    Ubuntu*) ubuntu=true
 esac
 
 # GIT BASH
-if [ $mac ] && [ -f `brew --prefix`/etc/bash_completion ]; then
-  . `brew --prefix`/etc/bash_completion
+if $mac && [ -f `brew --prefix`/etc/bash_completion ]; then
+    . `brew --prefix`/etc/bash_completion
 fi
 PS1="\W\$(__git_ps1) \$ "
 
 # Java
 if $mac ; then
-  export JAVA_HOME=/System/Library/Frameworks/JavaVM.framework/Versions/CurrentJDK/Home
+    export JAVA_HOME=/System/Library/Frameworks/JavaVM.framework/Versions/CurrentJDK/Home
 fi
 
 if $ubuntu ; then
-  export JAVA_HOME=/usr/lib/jvm/jdk1.7.0
-  export ANDROID_HOME=/home/jgilday/devtools/android-sdk-linux
+    export JAVA_HOME=/usr/lib/jvm/jdk1.7.0
+    export ANDROID_HOME=/home/jgilday/devtools/android-sdk-linux
 fi
 
 export MAVEN_OPTS="-Xmx2048m -XX:MaxPermSize=256m -Xss1024k"
@@ -31,8 +31,11 @@ export ANT_HOME="$HOME/devtools/ant"
 
 # pbcopy
 if $ubuntu ; then
-  alias pbcopy='xclip -selection clipboard'
-  alias pbpaste='xclip -selection clipboard -o'
+    alias pbcopy='xclip -selection clipboard'
+    alias pbpaste='xclip -selection clipboard -o'
+elif $cygwin ; then
+    alias pcopy='/dev/clipboard'
+    alias pbpaste='/dev/clipboard'
 fi
 
 # BASH History
@@ -52,12 +55,12 @@ fi
 
 function ancestor()
 {
-  (~/dotfiles/ancestor.rb $1) && cd $(~/dotfiles/ancestor.rb $1)
+    (~/dotfiles/ancestor.rb $1) && cd $(~/dotfiles/ancestor.rb $1)
 }
 
 # PATH
 if $mac ; then
-  export PATH="/usr/local/heroku/bin:$PATH"
+    export PATH="/usr/local/heroku/bin:$PATH"
 fi
 PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
 PATH=$PATH:$HOME/devtools/groovy/bin

@@ -1,0 +1,7 @@
+[user]
+	name = Johnathan Gilday
+	email = me@johnathangilday.com
+[alias]
+	s = status
+[color]
+	ui = true
