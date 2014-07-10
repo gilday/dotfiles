@@ -8,6 +8,7 @@
 git_bundles = %w{
   git://github.com/tpope/vim-markdown.git
   git://github.com/vim-ruby/vim-ruby.git
+  git://github.com/pangloss/vim-javascript.git
   git://github.com/scrooloose/syntastic.git
   git://github.com/groenewege/vim-less.git
 }
