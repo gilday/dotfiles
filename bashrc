@@ -25,6 +25,10 @@ if $ubuntu ; then
     export ANDROID_HOME=/home/jgilday/devtools/android-sdk-linux
 fi
 
+if $cygwin ; then
+    export JAVA_HOME="$HOME/devtools/java"
+fi
+
 export MAVEN_OPTS="-Xmx2048m -XX:MaxPermSize=256m -Xss1024k"
 export GRAILS_HOME="$HOME/devtools/grails/grails-1.3.7/bin"
 export ANT_HOME="$HOME/devtools/ant" 
@@ -70,6 +74,7 @@ PATH=$PATH:$HOME/devtools/jmeter/bin
 PATH=$PATH:$HOME/devtools/sbt/bin
 PATH=$PATH:$HOME/devtools/maven/bin
 PATH=$PATH:$ANT_HOME/bin
+PATH=$PATH:$JAVA_HOME/bin
 PATH=$PATH:$MYSQL_HOME
 PATH=$PATH:/usr/local/lib/node_modules/karma/bin
 
