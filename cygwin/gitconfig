@@ -5,3 +5,11 @@
 	s = status
 [color]
 	ui = true
+[mergetool "kdiff3"]
+    path = "/cygdrive/c/Program Files/KDiff3/kdiff3.exe"
+    keepBackup = false
+    trustExitCode = false
+[merge]
+    tool = kdiff3
+[diff]
+    tool = kdiff3
