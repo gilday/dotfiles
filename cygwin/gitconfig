@@ -13,3 +13,5 @@
     tool = kdiff3
 [diff]
     tool = kdiff3
+[credential]
+	helper = cache
