@@ -9,6 +9,9 @@ case "`uname`" in
     Ubuntu*) ubuntu=true
 esac
 
+# EDITOR
+export EDITOR=vim
+
 # GIT BASH
 if $mac && [ -f `brew --prefix`/etc/bash_completion ]; then
     . `brew --prefix`/etc/bash_completion
