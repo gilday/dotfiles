@@ -21,6 +21,7 @@ PS1="\W\$(__git_ps1) \$ "
 # Java
 if $mac ; then
     export JAVA_HOME=/System/Library/Frameworks/JavaVM.framework/Versions/CurrentJDK/Home
+    export ANDROID_HOME="$HOME/devtools/android-sdk/sdk"
 fi
 
 if $ubuntu ; then
@@ -32,6 +33,7 @@ if $cygwin ; then
     export JAVA_HOME="$HOME/devtools/java"
 fi
 
+export M2_HOME="$HOME/devtools/maven"
 export MAVEN_OPTS="-Xmx2048m -XX:MaxPermSize=256m -Xss1024k"
 export GRAILS_HOME="$HOME/devtools/grails/grails-1.3.7/bin"
 export ANT_HOME="$HOME/devtools/ant" 
@@ -65,6 +67,14 @@ function ancestor()
     (~/dotfiles/ancestor.rb $1) && cd $(~/dotfiles/ancestor.rb $1)
 }
 
+function decrypt() {
+    openssl des3 -d -in $1 -out $2
+}
+
+function encrypt() {
+    openssl des3 -in $1 -out $2
+}
+
 # PATH
 if $mac ; then
     export PATH="/usr/local/heroku/bin:$PATH"
@@ -78,6 +88,7 @@ PATH=$PATH:$HOME/devtools/sbt/bin
 PATH=$PATH:$HOME/devtools/maven/bin
 PATH=$PATH:$ANT_HOME/bin
 PATH=$PATH:$JAVA_HOME/bin
+PATH=$PATH:$ANDROID_HOME/platform-tools
 PATH=$PATH:$MYSQL_HOME
 PATH=$PATH:/usr/local/lib/node_modules/karma/bin
 
