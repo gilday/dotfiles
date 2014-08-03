@@ -21,7 +21,7 @@ PS1="\W\$(__git_ps1) \$ "
 # Java
 if $mac ; then
     export JAVA_HOME=/System/Library/Frameworks/JavaVM.framework/Versions/CurrentJDK/Home
-    export ANDROID_HOME="$HOME/devtools/android-sdk/sdk"
+    export ANDROID_HOME=/Applications/Android\ Studio.app/sdk
 fi
 
 if $ubuntu ; then
