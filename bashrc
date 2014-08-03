@@ -37,6 +37,7 @@ export M2_HOME="$HOME/devtools/maven"
 export MAVEN_OPTS="-Xmx2048m -XX:MaxPermSize=256m -Xss1024k"
 export GRAILS_HOME="$HOME/devtools/grails/grails-1.3.7/bin"
 export ANT_HOME="$HOME/devtools/ant" 
+export GRADLE_HOME="$HOME/devtools/gradle"
 
 # pbcopy
 if $ubuntu ; then
@@ -89,6 +90,7 @@ PATH=$PATH:$HOME/devtools/maven/bin
 PATH=$PATH:$ANT_HOME/bin
 PATH=$PATH:$JAVA_HOME/bin
 PATH=$PATH:$ANDROID_HOME/platform-tools
+PATH=$PATH:$GRADLE_HOME/bin
 PATH=$PATH:$MYSQL_HOME
 PATH=$PATH:/usr/local/lib/node_modules/karma/bin
 
