@@ -56,6 +56,9 @@ fi
 
 mkdir -p "$HOME/.vim/autoload"
 cp "$HOME/dotfiles/autoload/pathogen.vim" "$HOME/.vim/autoload/"
+if [ ! -e "$HOME/.vim/bundle" ]; then
+    ln -s "$dotfiles/bundle" "$HOME/.vim/bundle"
+fi
 
 #$HOME/dotfiles/update_bundles
 

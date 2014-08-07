@@ -1,6 +1,8 @@
 # gilday dotfiles
 
-configures my shell to be awesome. supports OS X Mavericks, Cygwin, and Ubuntu. CentOS coming soon
+configures my shell to be awesome. supports OS X Mavericks, Cygwin, and Ubuntu. CentOS in progress
+
+Requires Vim 7.3 for persistent undo support
 
 ## Mac
 
