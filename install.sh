@@ -50,7 +50,9 @@ if $cygwin && [ ! -e "$HOME/.minttyrc" ]; then
     ln -s "$HOME/dotfiles/packages/mintty-colors-solarized/.minttyrc--solarized-dark" "$HOME/.minttyrc"
     ln -s "$HOME/dotfiles/packages/dircolors-solarized/dircolors.ansi-dark" "$HOME/.dircolors"
 fi
-eval `dircolors ~/.dircolors`
+if $cygwin; then
+    eval `dircolors ~/.dircolors`
+fi
 
 mkdir -p "$HOME/.vim/autoload"
 cp "$HOME/dotfiles/autoload/pathogen.vim" "$HOME/.vim/autoload/"
