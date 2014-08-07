@@ -3,10 +3,12 @@
 cygwin=false;
 mac=false;
 ubuntu=false;
+centos=false;
 case "`uname`" in
     CYGWIN*) cygwin=true ;;
     Darwin*) mac=true ;;
-    Ubuntu*) ubuntu=true
+    Ubuntu*) ubuntu=true;;
+    Linux*) centos=true;; # TODO need a better check for CentOS
 esac
 
 # EDITOR
@@ -15,6 +17,9 @@ export EDITOR=vim
 # GIT BASH
 if $mac && [ -f `brew --prefix`/etc/bash_completion ]; then
     . `brew --prefix`/etc/bash_completion
+fi
+if $centos && [ -f /etc/bash_completion ]; then
+    source /etc/bash_completion
 fi
 PS1="\W\$(__git_ps1) \$ "
 
