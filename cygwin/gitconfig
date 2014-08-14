@@ -14,4 +14,8 @@
 [diff]
     tool = kdiff3
 [credential]
-	helper = cache
+    helper = !'/cygdrive/C/Users/jgilday/AppData/Roaming/GitCredStore/git-credential-winstore.exe'
+[core]
+    ignorecase = false
+[push]
+    default = upstream

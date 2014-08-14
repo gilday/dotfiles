@@ -89,6 +89,7 @@ PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
 PATH=$PATH:$HOME/devtools/groovy/bin
 PATH=$PATH:$GRAILS_HOME
 PATH=$PATH:/usr/local/bin
+PATH=$PATH:$HOME/bin
 PATH=$PATH:$HOME/devtools/jmeter/bin
 PATH=$PATH:$HOME/devtools/sbt/bin
 PATH=$PATH:$HOME/devtools/maven/bin
