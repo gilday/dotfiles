@@ -21,6 +21,9 @@ fi
 if $centos && [ -f /etc/bash_completion ]; then
     source /etc/bash_completion
 fi
+if $cygwin; then
+    source $HOME/dotfiles/git-prompt.sh
+fi
 PS1="\W\$(__git_ps1) \$ "
 
 # Java
@@ -43,6 +46,11 @@ export MAVEN_OPTS="-Xmx2048m -XX:MaxPermSize=256m -Xss1024k"
 export GRAILS_HOME="$HOME/devtools/grails/grails-1.3.7/bin"
 export ANT_HOME="$HOME/devtools/ant" 
 export GRADLE_HOME="$HOME/devtools/gradle"
+
+# ssh
+if $cygwin ; then
+    source $HOME/dotfiles/ssh-agent.sh
+fi
 
 # pbcopy
 if $ubuntu ; then
@@ -79,6 +87,11 @@ function decrypt() {
 
 function encrypt() {
     openssl des3 -in $1 -out $2
+}
+
+# sets up an ssh tunnel for rdp
+function rdp() {
+    ssh -L 33890:localhost:3389 -N $1
 }
 
 # PATH

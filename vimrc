@@ -408,4 +408,7 @@ map <leader>pp :setlocal paste!<cr>
 
 map <leader>bb :cd ..<cr>
 
-
+" Format JSON with python's JSON module
+function! FormatJSON() 
+    :%!python -m json.tool 
+endfunction
