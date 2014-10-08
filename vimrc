@@ -120,8 +120,9 @@ set shiftwidth=4
 set tabstop=4
 set smarttab
 
-" Ruby likes tabstop=2. Set this in case global shiftwidth,tabstop is not 2
+" Ruby + YAML like tabstop=2. Set this in case global shiftwidth,tabstop is not 4
 autocmd FileType rb setlocal shiftwidth=2 tabstop=2
+autocmd FileType yaml setlocal shiftwidth=2 tabstop=2
 
 set lbr
 set tw=500
