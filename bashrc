@@ -47,6 +47,15 @@ export GRAILS_HOME="$HOME/devtools/grails/grails-1.3.7/bin"
 export ANT_HOME="$HOME/devtools/ant" 
 export GRADLE_HOME="$HOME/devtools/gradle"
 
+# X11
+
+if $cygwin ; then
+    # define X11 display, if not already defined
+    if [[ "$DISPLAY" == "" ]] ; then
+        export DISPLAY=127.0.0.1:0.0
+    fi
+fi
+
 # ssh
 if $cygwin ; then
     source $HOME/dotfiles/ssh-agent.sh
