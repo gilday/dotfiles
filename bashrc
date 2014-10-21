@@ -47,18 +47,22 @@ export GRAILS_HOME="$HOME/devtools/grails/grails-1.3.7/bin"
 export ANT_HOME="$HOME/devtools/ant" 
 export GRADLE_HOME="$HOME/devtools/gradle"
 
-# X11
 
 if $cygwin ; then
+# X11
     # define X11 display, if not already defined
     if [[ "$DISPLAY" == "" ]] ; then
         export DISPLAY=127.0.0.1:0.0
     fi
-fi
-
 # ssh
-if $cygwin ; then
-    source $HOME/dotfiles/ssh-agent.sh
+    # note: this requires keychain package
+    # keychain is a daemon that will manage ssh-agent
+    # it's cool because I don't have to re-enter the passphrase for every terminal
+    if [ -e $HOME/.ssh/jdgilda ] ; then
+        eval $(keychain --eval $HOME/.ssh/jdgilda)
+    else
+        eval $(keychain --eval $HOME/.ssh/id_rsa)
+    fi
 fi
 
 # pbcopy
