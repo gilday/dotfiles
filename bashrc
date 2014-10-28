@@ -65,6 +65,15 @@ if $cygwin ; then
     fi
 fi
 
+# ansible on windows
+if $cygwin ; then
+    # do some manual steps from https://servercheck.in/blog/running-ansible-within-windows
+    ANSIBLE=/opt/ansible
+    export PATH=$PATH:$ANSIBLE/bin
+    export PYTHONPATH=$ANSIBLE/lib
+    export ANSIBLE_LIBRARY=$ANSIBLE/library
+fi
+
 # pbcopy
 if $ubuntu ; then
     alias pbcopy='xclip -selection clipboard'
