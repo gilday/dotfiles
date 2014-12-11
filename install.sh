@@ -42,6 +42,7 @@ link 'ackrc'
 link 'vimrc'
 link 'gitconfig'
 link 'inputrc'
+link 'screenrc'
 
 if $cygwin && [ ! -e "$HOME/.minttyrc" ]; then
     echo 'Set color scheme'

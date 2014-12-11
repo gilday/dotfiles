@@ -1,0 +1,2 @@
+# enable scrolling in screen
+termcapinfo xterm* ti@:te@
