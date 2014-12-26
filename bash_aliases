@@ -1,3 +1,9 @@
+# bash_aliases
+
+# enable using aliases with 'sudo' e.g. 'sudo ll'
+# http://askubuntu.com/a/22043
+alias sudo='sudo '
+
 alias android-connect="mtpfs -o allow_other /media/GalaxyNexus"
 alias android-disconnect="fusermount -u /media/GalaxyNexus"
 
