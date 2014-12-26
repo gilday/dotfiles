@@ -95,6 +95,11 @@ shopt -s histappend
 HISTSIZE=1000
 HISTFILESIZE=2000
 
+# updatedb alias for mac
+if $mac ; then
+    alias updatedb='/usr/libexec/locate.updatedb'
+fi
+
 # Load aliases from bash_aliases
 if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
