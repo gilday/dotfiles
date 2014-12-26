@@ -29,12 +29,12 @@ PS1="\W\$(__git_ps1) \$ "
 # Java
 if $mac ; then
     export JAVA_HOME=/System/Library/Frameworks/JavaVM.framework/Versions/CurrentJDK/Home
-    export ANDROID_HOME=/Applications/Android\ Studio.app/sdk
+    export ANDROID_HOME=$HOME/devtools/android-sdk
 fi
 
 if $ubuntu ; then
     export JAVA_HOME=/usr/lib/jvm/jdk1.7.0
-    export ANDROID_HOME=/home/jgilday/devtools/android-sdk-linux
+    export ANDROID_HOME=$HOME/devtools/android-sdk-linux
 fi
 
 if $cygwin ; then
@@ -42,10 +42,12 @@ if $cygwin ; then
 fi
 
 export M2_HOME="$HOME/devtools/maven"
+export M2_REPO="$HOME/.m2/repository"
 export MAVEN_OPTS="-Xmx2048m -XX:MaxPermSize=256m -Xss1024k"
 export GRAILS_HOME="$HOME/devtools/grails/grails-1.3.7/bin"
 export ANT_HOME="$HOME/devtools/ant" 
 export GRADLE_HOME="$HOME/devtools/gradle"
+export JBOSS_HOME="$HOME/devtools/wildfly"
 
 
 if $cygwin ; then
@@ -104,7 +106,11 @@ function ancestor()
 }
 
 function decrypt() {
-    openssl des3 -d -in $1 -out $2
+    if [ $# -lt 2 ]; then
+        echo "usage: decrypt <in> <out>"
+    else
+        openssl des3 -d -in $1 -out $2
+    fi
 }
 
 function encrypt() {
