@@ -108,8 +108,10 @@ set nowb
 set noswapfile
 
 "Persistent undo
-set undodir=~/.vimundo
-set undofile
+if has("persistent_undo")
+    set undodir=~/.vimundo
+    set undofile
+endif
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
