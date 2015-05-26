@@ -60,8 +60,8 @@ if $cygwin ; then
     # note: this requires keychain package
     # keychain is a daemon that will manage ssh-agent
     # it's cool because I don't have to re-enter the passphrase for every terminal
-    if [ -e $HOME/.ssh/jdgilda ] ; then
-        eval $(keychain --eval $HOME/.ssh/jdgilda)
+    if [ -e $HOME/.ssh/$USER ] ; then
+        eval $(keychain --eval $HOME/.ssh/$USER)
     else
         eval $(keychain --eval $HOME/.ssh/id_rsa)
     fi
