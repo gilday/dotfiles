@@ -54,7 +54,7 @@ if $cygwin ; then
 # X11
     # define X11 display, if not already defined
     if [[ "$DISPLAY" == "" ]] ; then
-        export DISPLAY=127.0.0.1:0.0
+        export DISPLAY=:0
     fi
 # ssh
     # note: this requires keychain package
