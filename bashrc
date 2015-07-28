@@ -21,7 +21,8 @@ fi
 if $centos && [ -f /etc/bash_completion ]; then
     source /etc/bash_completion
 fi
-if $cygwin; then
+# if none of those sources worked, source the local copy in this repo
+if [ ! $(command -v __git_ps1) ]; then
     source $HOME/dotfiles/git-prompt.sh
 fi
 PS1="\W\$(__git_ps1) \$ "
