@@ -68,6 +68,14 @@ if $cygwin ; then
     fi
 fi
 
+# Predictable SSH authentication socket location
+SOCK="/tmp/ssh-agent-${USER}"
+if test ${SSH_AUTH_SOCK} && [ ${SSH_AUTH_SOCK} != ${SOCK} ]; then
+    rm -f "/tmp/ssh-agent-${USER}"
+    ln -sf ${SSH_AUTH_SOCK} ${SOCK}
+    export SSH_AUTH_SOCK=${SOCK}
+fi
+
 # ansible on windows
 if $cygwin ; then
     # do some manual steps from https://servercheck.in/blog/running-ansible-within-windows
