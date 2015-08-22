@@ -12,15 +12,23 @@ esac
 echo "Install for $env"
 
 # Link dotfiles to $HOME
-# pick environment specific overrides if they exist
-
+# pick environment specific override if it exists
+# allow an optional second parameter - the "dot directory"
+# if the "dot directory" is present, the link will be "HOME/.directory/file"
+# if the "dot directory" is NOT present, the link will be "HOME/.file"
 link() {
     dotfiles="$HOME/dotfiles"
-    if [ ! -e "$HOME/.$1" ]; then
+    if [ $# -gt 1 ]; then
+        mkdir -p "$HOME/$2"
+        link="$HOME/.$2/$1"
+    else
+        link="$HOME/.$1"
+    fi
+    if [ ! -e "$link" ]; then
         if [ -e "$dotfiles/$env/$1" ]; then
-            ln -s "$dotfiles/$env/$1" "$HOME/.$1"
+            ln -s "$dotfiles/$env/$1" "$link"
         elif [ -e "$dotfiles/$1" ]; then
-            ln -s "$dotfiles/$1" "$HOME/.$1"
+            ln -s "$dotfiles/$1" "$link"
         fi
     fi
 }
@@ -43,6 +51,7 @@ link 'vimrc'
 link 'gitconfig'
 link 'inputrc'
 link 'screenrc'
+link 'gradle.properties' 'gradle'
 
 if $cygwin && [ ! -e "$HOME/.minttyrc" ]; then
     echo 'Set color scheme'
@@ -62,5 +71,4 @@ if [ ! -e "$HOME/.vim/bundle" ]; then
 fi
 
 #$HOME/dotfiles/update_bundles
-
 
