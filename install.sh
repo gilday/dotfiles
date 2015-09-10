@@ -43,15 +43,15 @@ fi
 
 echo 'Link dotfiles'
 
-link 'bashrc'
-link 'bash_profile'
-link 'bash_aliases'
+#link 'bashrc'
+#link 'bash_profile'
+#link 'bash_aliases'
 link 'ackrc'
 link 'vimrc'
-link 'gitconfig'
+#link 'gitconfig'
 link 'inputrc'
-link 'screenrc'
-link 'gradle.properties' 'gradle'
+#link 'screenrc'
+#link 'gradle.properties' 'gradle'
 
 if $cygwin && [ ! -e "$HOME/.minttyrc" ]; then
     echo 'Set color scheme'
@@ -70,5 +70,5 @@ if [ ! -e "$HOME/.vim/bundle" ]; then
     ln -s "$dotfiles/bundle" "$HOME/.vim/bundle"
 fi
 
-#$HOME/dotfiles/update_bundles
+#$HOME/dotfiles/install-bundles.sh
 
