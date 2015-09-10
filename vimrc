@@ -86,6 +86,7 @@ if has("gui_running")
   set background=dark
   colorscheme desert
 else
+  set t_Co=16
   colorscheme solarized
   set background=dark
 endif

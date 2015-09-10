@@ -53,16 +53,17 @@ link 'inputrc'
 #link 'screenrc'
 #link 'gradle.properties' 'gradle'
 
-if $cygwin && [ ! -e "$HOME/.minttyrc" ]; then
-    echo 'Set color scheme'
-    git clone -q git://github.com/karlin/mintty-colors-solarized "$HOME/dotfiles/packages/mintty-colors-solarized"
+echo 'Set color scheme'
+if [ ! -e "$HOME/.dircolors" ]; then
     git clone -q git://github.com/seebi/dircolors-solarized "$HOME/dotfiles/packages/dircolors-solarized"
-    ln -s "$HOME/dotfiles/packages/mintty-colors-solarized/.minttyrc--solarized-dark" "$HOME/.minttyrc"
     ln -s "$HOME/dotfiles/packages/dircolors-solarized/dircolors.ansi-dark" "$HOME/.dircolors"
 fi
-if $cygwin; then
-    eval `dircolors ~/.dircolors`
+if $cygwin && [ ! -e "$HOME/.minttyrc" ]; then
+    git clone -q git://github.com/karlin/mintty-colors-solarized "$HOME/dotfiles/packages/mintty-colors-solarized"
+    ln -s "$HOME/dotfiles/packages/mintty-colors-solarized/.minttyrc--solarized-dark" "$HOME/.minttyrc"
 fi
+eval `dircolors ~/.dircolors`
+
 
 mkdir -p "$HOME/.vim/autoload"
 cp "$HOME/dotfiles/autoload/pathogen.vim" "$HOME/.vim/autoload/"
