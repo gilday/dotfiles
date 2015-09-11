@@ -155,6 +155,12 @@ PATH=$PATH:$GRADLE_HOME/bin
 PATH=$PATH:$MYSQL_HOME
 PATH=$PATH:/usr/local/lib/node_modules/karma/bin
 
+# Source extra bashrc_hook file if it exists. Do not check this file into
+# version control - it is for extra, environment specific stuff
+if [ -f ~/.bashrc_hook ]; then
+    source ~/.bashrc_hook
+fi
+
 # RVM (should be last supposedly)
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
 
