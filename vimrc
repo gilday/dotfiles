@@ -120,18 +120,17 @@ endif
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set expandtab
 set shiftwidth=4
-set tabstop=4
+set tabstop=8
 set smarttab
 
-" Ruby + YAML like tabstop=2. Set this in case global shiftwidth,tabstop is not 4
-autocmd FileType rb setlocal shiftwidth=2 tabstop=2
-autocmd FileType yaml setlocal shiftwidth=2 tabstop=2
+" Ruby + YAML like 2 space indentation
+autocmd FileType rb setlocal shiftwidth=2
+autocmd FileType yaml setlocal shiftwidth=2
 
 set lbr
 set tw=500
 
 set ai "Auto indent
-set si "Smart indet
 set wrap "Wrap lines
 
 
