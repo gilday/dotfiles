@@ -5,7 +5,7 @@
 #  git://github.com/Lokaltog/vim-powerline.git
 # from Github using Pathogen
 
-git_bundles=("tpope/vim-markdown" "vim-ruby/vim-ruby" "pangloss/vim-javascript" "groenewege/vim-less" "altercation/vim-colors-solarized" "scrooloose/syntastic")
+git_bundles=("tpope/vim-markdown" "vim-ruby/vim-ruby" "pangloss/vim-javascript" "groenewege/vim-less" "altercation/vim-colors-solarized" "scrooloose/syntastic" "fatih/vim-go")
 
 dir="$(dirname $0)/bundle"
 rm -rf ${dir}

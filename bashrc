@@ -49,6 +49,7 @@ export GRAILS_HOME="$HOME/devtools/grails/grails-1.3.7/bin"
 export ANT_HOME="$HOME/devtools/ant" 
 export GRADLE_HOME="$HOME/devtools/gradle"
 export JBOSS_HOME="$HOME/devtools/wildfly"
+export GOPATH="$HOME/development/gopath"
 
 
 if $cygwin ; then
@@ -153,6 +154,7 @@ PATH=$PATH:$JAVA_HOME/bin
 PATH=$PATH:$ANDROID_HOME/platform-tools
 PATH=$PATH:$GRADLE_HOME/bin
 PATH=$PATH:$MYSQL_HOME
+PATH=$PATH:/usr/local/go/bin
 PATH=$PATH:/usr/local/lib/node_modules/karma/bin
 
 # Source extra bashrc_hook file if it exists. Do not check this file into
