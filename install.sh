@@ -58,6 +58,11 @@ if [ ! -e "$HOME/.dircolors" ]; then
     git clone -q git://github.com/seebi/dircolors-solarized "$HOME/dotfiles/packages/dircolors-solarized"
     ln -s "$HOME/dotfiles/packages/dircolors-solarized/dircolors.ansi-dark" "$HOME/.dircolors"
 fi
+if $centos && [ ! -e "$HOME/dotfiles/packages/gnome-terminal-colors-solarized" ]; then
+    git clone -q git://github.com/Anthony25/gnome-terminal-colors-solarized "$HOME/dotfiles/packages/gnome-terminal-colors-solarized"
+    echo 'installing shell colors. answer prompts to install colors to gnome terminal profile'
+    $HOME/dotfiles/packages/gnome-terminal-colors-solarized/install.sh
+fi
 if $cygwin && [ ! -e "$HOME/.minttyrc" ]; then
     git clone -q git://github.com/karlin/mintty-colors-solarized "$HOME/dotfiles/packages/mintty-colors-solarized"
     ln -s "$HOME/dotfiles/packages/mintty-colors-solarized/.minttyrc--solarized-dark" "$HOME/.minttyrc"
