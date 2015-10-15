@@ -43,15 +43,15 @@ fi
 
 echo 'Link dotfiles'
 
-#link 'bashrc'
-#link 'bash_profile'
-#link 'bash_aliases'
+link 'bashrc'
+link 'bash_profile'
+link 'bash_aliases'
 link 'ackrc'
 link 'vimrc'
-#link 'gitconfig'
+link 'gitconfig'
 link 'inputrc'
-#link 'screenrc'
-#link 'gradle.properties' 'gradle'
+link 'screenrc'
+link 'gradle.properties' 'gradle'
 
 echo 'Set color scheme'
 if [ ! -e "$HOME/.dircolors" ]; then
