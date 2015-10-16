@@ -1,10 +1,10 @@
 [user]
-	name = Johnathan Gilday
-	email = me@johnathangilday.com
+    name = Johnathan Gilday
+    email = me@johnathangilday.com
 [alias]
-	s = status
+    s = status
 [color]
-	ui = true
+    ui = true
 [push]
     default = simple
 
@@ -13,4 +13,5 @@
 [mergetool "extMerge"]
     cmd = ~/bin/extMerge.sh \"$BASE\" \"$LOCAL\" \"$REMOTE\" -o \"$MERGED\"
 [core]
-	ignorecase = false
+    ignorecase = false
+
