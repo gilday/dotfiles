@@ -415,3 +415,14 @@ map <leader>bb :cd ..<cr>
 function! FormatJSON() 
     :%!python -m json.tool 
 endfunction
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => PROJECT SPECIFIC SETTINGS
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" enable project specific settings (like spaces and tabs) but do not allow
+" project specific vimrc files to do unsafe things
+" http://andrew.stwrt.ca/posts/project-specific-vimrc/
+set exrc
+set secure
+
