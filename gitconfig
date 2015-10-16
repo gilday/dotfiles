@@ -7,11 +7,11 @@
     ui = true
 [push]
     default = simple
-
 [merge]
     tool = extMerge
 [mergetool "extMerge"]
     cmd = ~/bin/extMerge.sh \"$BASE\" \"$LOCAL\" \"$REMOTE\" -o \"$MERGED\"
 [core]
     ignorecase = false
-
+[credential]
+    helper = cache --timeout=300
