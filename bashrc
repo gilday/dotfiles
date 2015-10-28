@@ -155,6 +155,7 @@ PATH=$PATH:$ANDROID_HOME/platform-tools
 PATH=$PATH:$GRADLE_HOME/bin
 PATH=$PATH:$MYSQL_HOME
 PATH=$PATH:/usr/local/go/bin
+PATH=$PATH:$GOPATH/bin
 PATH=$PATH:/usr/local/lib/node_modules/karma/bin
 
 # Source extra bashrc_hook file if it exists. Do not check this file into
