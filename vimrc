@@ -127,6 +127,9 @@ set smarttab
 autocmd FileType rb setlocal shiftwidth=2
 autocmd FileType yaml setlocal shiftwidth=2
 
+" golang uses tabs instead of spaces
+autocmd FileType go setlocal noexpandtab tabstop=4
+
 set lbr
 set tw=500
 
