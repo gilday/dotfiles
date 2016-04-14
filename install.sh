@@ -67,7 +67,9 @@ if $cygwin && [ ! -e "$HOME/.minttyrc" ]; then
     git clone -q git://github.com/karlin/mintty-colors-solarized "$HOME/dotfiles/packages/mintty-colors-solarized"
     ln -s "$HOME/dotfiles/packages/mintty-colors-solarized/.minttyrc--solarized-dark" "$HOME/.minttyrc"
 fi
-eval `dircolors ~/.dircolors`
+if [ $(command -v dircolors &> /dev/null) ]; then
+    eval `dircolors ~/.dircolors`
+fi
 
 
 mkdir -p "$HOME/.vim/autoload"
