@@ -16,5 +16,5 @@ for repo in "${git_bundles[@]}"; do
     `git clone -q git://github.com/${repo}.git`
 done    
 
-find -type d -name ".git" -exec rm -rf {} + 
+find . -type d -name ".git" -exec rm -rf {} +
 
