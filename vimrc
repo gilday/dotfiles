@@ -130,6 +130,11 @@ autocmd FileType yaml setlocal shiftwidth=2
 " golang uses tabs instead of spaces
 autocmd FileType go setlocal noexpandtab tabstop=4
 
+" set text wrap for markdown
+autocmd FileType markdown setlocal textwidth=80
+autocmd FileType md setlocal textwidth=80
+
+
 set lbr
 set tw=500
 
