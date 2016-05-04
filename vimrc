@@ -124,7 +124,7 @@ set tabstop=8
 set smarttab
 
 " Ruby + YAML like 2 space indentation
-autocmd FileType rb setlocal shiftwidth=2
+autocmd FileType ruby setlocal shiftwidth=2
 autocmd FileType yaml setlocal shiftwidth=2
 
 " golang uses tabs instead of spaces
