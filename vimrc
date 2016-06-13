@@ -434,3 +434,9 @@ endfunction
 set exrc
 set secure
 
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => SYNTASTIC CHECKERS
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" set specific language checkers
+let g:syntastic_go_checkers = ['go']
