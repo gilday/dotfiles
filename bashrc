@@ -149,6 +149,7 @@ PATH=$PATH:$HOME/bin
 PATH=$PATH:$HOME/devtools/jmeter/bin
 PATH=$PATH:$HOME/devtools/sbt/bin
 PATH=$PATH:$HOME/devtools/maven/bin
+PATH=$PATH:$HOME/devtools/phantomjs/bin
 PATH=$PATH:$ANT_HOME/bin
 PATH=$PATH:$JAVA_HOME/bin
 PATH=$PATH:$ANDROID_HOME/platform-tools
