@@ -71,12 +71,17 @@ if [ $(command -v dircolors &> /dev/null) ]; then
     eval `dircolors ~/.dircolors`
 fi
 
-
+echo 'install vim pathogen'
 mkdir -p "$HOME/.vim/autoload"
 cp "$HOME/dotfiles/autoload/pathogen.vim" "$HOME/.vim/autoload/"
 if [ ! -e "$HOME/.vim/bundle" ]; then
     ln -s "$dotfiles/bundle" "$HOME/.vim/bundle"
 fi
+
+echo 'install imgls imgcat'
+curl -o "$HOME/bin/imgcat" https://raw.githubusercontent.com/gnachman/iTerm2/master/tests/imgcat
+curl -o "$HOME/bin/imgls" https://raw.githubusercontent.com/gnachman/iTerm2/master/tests/imgls
+chmod ug+rx "$HOME/bin/imgcat" "$HOME/bin/imgls"
 
 #$HOME/dotfiles/install-bundles.sh
 
