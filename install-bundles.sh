@@ -13,7 +13,8 @@ git_bundles=(
 "altercation/vim-colors-solarized"
 "scrooloose/syntastic"
 "fatih/vim-go"
-"tpope/vim-git")
+"tpope/vim-git"
+"mtscout6/syntastic-local-eslint.vim")
 
 dir="$(dirname $0)/bundle"
 rm -rf ${dir}

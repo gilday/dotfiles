@@ -440,3 +440,4 @@ set secure
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " set specific language checkers
 let g:syntastic_go_checkers = ['go']
+let g:syntastic_javascript_checkers = ['eslint']
