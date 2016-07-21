@@ -439,5 +439,5 @@ set secure
 " => SYNTASTIC CHECKERS
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " set specific language checkers
-let g:syntastic_go_checkers = ['go']
+let g:syntastic_go_checkers = ['go', 'golint']
 let g:syntastic_javascript_checkers = ['eslint']
