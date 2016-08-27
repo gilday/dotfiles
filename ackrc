@@ -3,3 +3,4 @@ css=.sass,.scss,.less
 
 --type-set=sass=.scss,.sass
 
+--ignore-dir=node_modules
