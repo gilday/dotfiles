@@ -16,6 +16,7 @@
 [mergetool "kdiff3"]
     path = kdiff3
     trustExitCode = false
+    keepBackup = false
 [mergetool "meld"]
     trustExitCode = false
     cmd = meld $LOCAL $BASE $REMOTE -o $MERGED --auto-merge
