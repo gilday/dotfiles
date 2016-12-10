@@ -15,7 +15,8 @@ git_bundles=(
 "fatih/vim-go"
 "tpope/vim-git"
 "mtscout6/syntastic-local-eslint.vim"
-"othree/html5.vim")
+"othree/html5.vim"
+"lambdatoast/elm.vim")
 
 dir="$(dirname $0)/bundle"
 rm -rf ${dir}
