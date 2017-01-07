@@ -68,13 +68,21 @@ if $cygwin ; then
         eval $(keychain --eval $HOME/.ssh/id_rsa)
     fi
 fi
+if $mac; then
+    # mac ssh-add is integrated with the keychain
+    # prior to macOS sierra, an explicit ssh-add -A was not necessary, but now is
+    # https://openradar.appspot.com/27348363
+    ssh-add -A
+fi
 
 # Predictable SSH authentication socket location
-SOCK="/tmp/ssh-agent-${USER}"
-if test ${SSH_AUTH_SOCK} && [ ${SSH_AUTH_SOCK} != ${SOCK} ]; then
-    rm -f "/tmp/ssh-agent-${USER}"
-    ln -sf ${SSH_AUTH_SOCK} ${SOCK}
-    export SSH_AUTH_SOCK=${SOCK}
+if [ ! $mac ]; then
+    SOCK="/tmp/ssh-agent-${USER}"
+    if test ${SSH_AUTH_SOCK} && [ ${SSH_AUTH_SOCK} != ${SOCK} ]; then
+        rm -f $SOCK
+        ln -sf ${SSH_AUTH_SOCK} ${SOCK}
+        export SSH_AUTH_SOCK=${SOCK}
+    fi
 fi
 
 # ansible on windows
