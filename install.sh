@@ -79,6 +79,7 @@ if [ ! -e "$HOME/.vim/bundle" ]; then
 fi
 
 echo 'install imgls imgcat'
+mkdir -p "$HOME/bin"
 curl -o "$HOME/bin/imgcat" https://raw.githubusercontent.com/gnachman/iTerm2/master/tests/imgcat
 curl -o "$HOME/bin/imgls" https://raw.githubusercontent.com/gnachman/iTerm2/master/tests/imgls
 chmod ug+rx "$HOME/bin/imgcat" "$HOME/bin/imgls"
