@@ -169,10 +169,10 @@ PATH=$PATH:/usr/local/go/bin
 PATH=$PATH:$GOPATH/bin
 PATH=$PATH:$HOME/.npm-global/bin
 
-# Source extra bashrc_hook file if it exists. Do not check this file into
+# Source extra bashrc-hook file if it exists. Do not check this file into
 # version control - it is for extra, environment specific stuff
-if [ -f ~/.bashrc_hook ]; then
-    source ~/.bashrc_hook
+if [ -f ~/.bashrc-hook ]; then
+    source ~/.bashrc-hook
 fi
 
 # RVM (should be last supposedly)
