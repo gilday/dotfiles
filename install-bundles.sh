@@ -20,6 +20,7 @@ git_bundles=(
 "othree/html5.vim"
 "lambdatoast/elm.vim"
 "editorconfig/editorconfig-vim"
+"scrooloose/nerdtree"
 )
 
 dir="$(dirname $0)/bundle"
