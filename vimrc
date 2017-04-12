@@ -436,8 +436,11 @@ set secure
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => SYNTASTIC CHECKERS
+" => SYNTASTIC
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " set specific language checkers
 let g:syntastic_go_checkers = ['go', 'golint']
 let g:syntastic_javascript_checkers = ['standard']
+" set syntastic symbology
+let g:syntastic_error_symbol = "✗"
+let g:syntastic_warning_symbol = "⚠"
