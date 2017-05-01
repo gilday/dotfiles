@@ -94,6 +94,11 @@ if $cygwin ; then
     export ANSIBLE_LIBRARY=$ANSIBLE/library
 fi
 
+# virtualenvwrapper
+if [ -f /usr/local/bin/virtualenvwrapper.sh ]; then
+    source /usr/local/bin/virtualenvwrapper.sh
+fi
+
 # pbcopy
 if $ubuntu ; then
     alias pbcopy='xclip -selection clipboard'
