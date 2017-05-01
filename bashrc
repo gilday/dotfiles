@@ -188,3 +188,7 @@ if [ -d $HOME/.nvm ]; then
     export NVM_DIR="$HOME/.nvm"
     [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
 fi
+
+if [ -f $HOME/.iterm2_shell_integration.`basename $SHELL` ]; then
+    source $HOME/.iterm2_shell_integration.`basename $SHELL`
+fi
