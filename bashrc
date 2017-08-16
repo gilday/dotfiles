@@ -41,6 +41,7 @@ fi
 if $cygwin ; then
     export JAVA_HOME="$HOME/devtools/java"
 fi
+JAVA_TOOL_OPTIONS='-Djava.awt.headless=true' # http://stackoverflow.com/a/17951720/501368
 
 export M2_HOME="$HOME/devtools/maven"
 export M2_REPO="$HOME/.m2/repository"
@@ -192,3 +193,10 @@ fi
 if [ -f $HOME/.iterm2_shell_integration.`basename $SHELL` ]; then
     source $HOME/.iterm2_shell_integration.`basename $SHELL`
 fi
+
+# tabtab source for serverless package
+# uninstall by removing these lines or running `tabtab uninstall serverless`
+[ -f /Users/johnathangilday/development/contrastsecurity/contrast-telemetry/node_modules/tabtab/.completions/serverless.bash ] && . /Users/johnathangilday/development/contrastsecurity/contrast-telemetry/node_modules/tabtab/.completions/serverless.bash
+# tabtab source for sls package
+# uninstall by removing these lines or running `tabtab uninstall sls`
+[ -f /Users/johnathangilday/development/contrastsecurity/contrast-telemetry/node_modules/tabtab/.completions/sls.bash ] && . /Users/johnathangilday/development/contrastsecurity/contrast-telemetry/node_modules/tabtab/.completions/sls.bash
