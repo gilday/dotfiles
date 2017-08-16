@@ -10,6 +10,7 @@ git_bundles=(
 "vim-ruby/vim-ruby"
 "pangloss/vim-javascript"
 "mxw/vim-jsx"
+"leafgarland/typescript-vim"
 "groenewege/vim-less"
 "altercation/vim-colors-solarized"
 "scrooloose/syntastic"
