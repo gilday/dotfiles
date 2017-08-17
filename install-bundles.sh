@@ -6,11 +6,14 @@
 # from Github using Pathogen
 
 git_bundles=(
+"janko-m/vim-test"
 "tpope/vim-markdown"
 "vim-ruby/vim-ruby"
 "pangloss/vim-javascript"
 "mxw/vim-jsx"
 "leafgarland/typescript-vim"
+"Quramy/tsuquyomi"
+"prettier/vim-prettier"
 "groenewege/vim-less"
 "altercation/vim-colors-solarized"
 "scrooloose/syntastic"

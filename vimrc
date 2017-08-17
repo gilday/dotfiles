@@ -406,6 +406,14 @@ set grepprg=/bin/grep\ -nH
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => CODE FORMAT
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:prettier#quickfix_enabled = 0
+let g:prettier#autoformat = 0
+autocmd BufWritePre *.ts PrettierAsync
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => MISC
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Remove the Windows ^M - when the encodings gets messed up
@@ -440,9 +448,13 @@ set secure
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " set specific language checkers
 let g:syntastic_go_checkers = ['go', 'golint']
-let g:syntastic_javascript_checkers = ['standard']
+let g:syntastic_javascript_checkers = ['eslint']
 " customize syntastic symbology
 let g:syntastic_error_symbol = "✗"
 let g:syntastic_warning_symbol = "⚠"
 
-
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => TESTS
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" add typescript to jest pattern
+let test#javascript#jest#file_pattern = '\v(__tests__/.*|(spec|test))\.(js|jsx|coffee|ts)$'
