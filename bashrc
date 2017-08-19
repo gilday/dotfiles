@@ -196,9 +196,3 @@ if [ -f $HOME/.iterm2_shell_integration.`basename $SHELL` ]; then
     source $HOME/.iterm2_shell_integration.`basename $SHELL`
 fi
 
-# tabtab source for serverless package
-# uninstall by removing these lines or running `tabtab uninstall serverless`
-[ -f /Users/johnathangilday/development/contrastsecurity/contrast-telemetry/node_modules/tabtab/.completions/serverless.bash ] && . /Users/johnathangilday/development/contrastsecurity/contrast-telemetry/node_modules/tabtab/.completions/serverless.bash
-# tabtab source for sls package
-# uninstall by removing these lines or running `tabtab uninstall sls`
-[ -f /Users/johnathangilday/development/contrastsecurity/contrast-telemetry/node_modules/tabtab/.completions/sls.bash ] && . /Users/johnathangilday/development/contrastsecurity/contrast-telemetry/node_modules/tabtab/.completions/sls.bash
