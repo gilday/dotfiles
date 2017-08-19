@@ -155,6 +155,8 @@ function rdp() {
 if $mac ; then
     export PATH="/usr/local/heroku/bin:$PATH"
     export PATH="/Applications/kdiff3.app/Contents/MacOS:$PATH"
+    export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
+    export MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
 fi
 PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
 PATH=$PATH:$HOME/devtools/groovy/bin
