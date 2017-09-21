@@ -410,6 +410,8 @@ set grepprg=/bin/grep\ -nH
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:prettier#quickfix_enabled = 0
 let g:prettier#autoformat = 0
+let g:prettier#config#semi = 'false'
+let g:prettier#config#single_quote = 'true'
 autocmd BufWritePre *.ts PrettierAsync
 
 
@@ -452,9 +454,11 @@ let g:syntastic_javascript_checkers = ['eslint']
 " customize syntastic symbology
 let g:syntastic_error_symbol = "✗"
 let g:syntastic_warning_symbol = "⚠"
+let g:tsuquyomi_disable_quickfix = 1
+let g:syntastic_typescript_checkers = ['tsuquyomi']
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => TESTS
+" => TEST
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " add typescript to jest pattern
 let test#javascript#jest#file_pattern = '\v(__tests__/.*|(spec|test))\.(js|jsx|coffee|ts)$'
