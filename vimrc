@@ -456,6 +456,8 @@ let g:syntastic_error_symbol = "✗"
 let g:syntastic_warning_symbol = "⚠"
 let g:tsuquyomi_disable_quickfix = 1
 let g:syntastic_typescript_checkers = ['tsuquyomi']
+" customize tidy checks
+let g:syntastic_html_tidy_ignore_errors = ['proprietary attribute']
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => TEST
