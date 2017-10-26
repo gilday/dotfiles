@@ -410,8 +410,13 @@ set grepprg=/bin/grep\ -nH
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:prettier#quickfix_enabled = 0
 let g:prettier#autoformat = 0
+" vim-prettier does not use prettier defaults, correct this insanity
+let g:prettier#config#bracket_spacing = 'true'
+let g:prettier#config#trailing_comma = 'none'
+" organization prettier overrides
 let g:prettier#config#semi = 'false'
 let g:prettier#config#single_quote = 'true'
+
 autocmd BufWritePre *.ts PrettierAsync
 
 
