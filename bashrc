@@ -190,7 +190,9 @@ fi
 
 if [ -d $HOME/.nvm ]; then
     export NVM_DIR="$HOME/.nvm"
-    [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+    [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm if it is in NVM_DIR
+    [ -f "/usr/local/opt/nvm/nvm.sh" ] && . /usr/local/opt/nvm/nvm.sh # if nvm was installed with brew
+    nvm use default
 fi
 
 if [ -f $HOME/.iterm2_shell_integration.`basename $SHELL` ]; then
