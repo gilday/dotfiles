@@ -25,6 +25,7 @@ git_bundles=(
 "lambdatoast/elm.vim"
 "editorconfig/editorconfig-vim"
 "scrooloose/nerdtree"
+"junegunn/fzf.vim"
 )
 
 dir="$(dirname $0)/bundle"
