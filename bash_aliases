@@ -34,4 +34,4 @@ alias http="python -m SimpleHTTPServer"
 alias tcpd8443="sudo tcpdump -s 0 -A -i lo0 'tcp port 8443 and (((ip[2:2] - ((ip[0]&0xf)<<2)) - ((tcp[12]&0xf0)>>2)) != 0)'"
 
 # rebase current branch with the latest from the main line of development (develop at Contrast)
-alias gitrebase="git stash && git checkout develop && git pull && git checkout - && git rebase develop && git stash pop"
+alias gitrebase="git checkout develop && git pull && git checkout - && git rebase develop"
