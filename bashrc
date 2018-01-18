@@ -90,7 +90,7 @@ fi
 if $cygwin ; then
     # do some manual steps from https://servercheck.in/blog/running-ansible-within-windows
     ANSIBLE=/opt/ansible
-    export PATH=$PATH:$ANSIBLE/bin
+    export PATH=$ANSIBLE/bin
     export PYTHONPATH=$ANSIBLE/lib
     export ANSIBLE_LIBRARY=$ANSIBLE/library
 fi
@@ -159,24 +159,24 @@ if $mac ; then
     export PATH="$PATH:/Applications/Postgres.app/Contents/Versions/latest/bin"
     export MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
 fi
-PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
-PATH=$PATH:$HOME/devtools/groovy/bin
-PATH=$PATH:$GRAILS_HOME
-PATH=$PATH:/usr/local/bin
-PATH=$PATH:/usr/local/sbin
-PATH=$PATH:$HOME/bin
-PATH=$PATH:$HOME/devtools/jmeter/bin
-PATH=$PATH:$HOME/devtools/sbt/bin
-PATH=$PATH:$HOME/devtools/maven/bin
-PATH=$PATH:$HOME/devtools/phantomjs/bin
-PATH=$PATH:$ANT_HOME/bin
-PATH=$PATH:$JAVA_HOME/bin
-PATH=$PATH:$ANDROID_HOME/platform-tools
-PATH=$PATH:$GRADLE_HOME/bin
-PATH=$PATH:$MYSQL_HOME
-PATH=$PATH:/usr/local/go/bin
-PATH=$PATH:$GOPATH/bin
-PATH=$PATH:$HOME/.npm-global/bin
+PATH=/usr/local/go/bin:$PATH
+PATH=$GOPATH/bin:$PATH
+PATH=$HOME/.npm-global/bin:$PATH
+PATH=$HOME/.rvm/bin:$PATH # Add RVM to PATH for scripting
+PATH=/usr/local/bin:$PATH
+PATH=/usr/local/sbin:$PATH
+PATH=$HOME/bin:$PATH
+PATH=$GRAILS_HOME:$PATH
+PATH=$HOME/devtools/groovy/bin:$PATH
+PATH=$HOME/devtools/jmeter/bin:$PATH
+PATH=$HOME/devtools/sbt/bin:$PATH
+PATH=$HOME/devtools/maven/bin:$PATH
+PATH=$HOME/devtools/phantomjs/bin:$PATH
+PATH=$ANT_HOME/bin:$PATH
+PATH=$JAVA_HOME/bin:$PATH
+PATH=$ANDROID_HOME/platform-tools:$PATH
+PATH=$GRADLE_HOME/bin:$PATH
+PATH=$MYSQL_HOME:$PATH
 
 # Source extra bashrc-hook file if it exists. Do not check this file into
 # version control - it is for extra, environment specific stuff
