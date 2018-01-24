@@ -26,6 +26,7 @@ git_bundles=(
 "editorconfig/editorconfig-vim"
 "scrooloose/nerdtree"
 "junegunn/fzf"
+"junegunn/fzf.vim"
 "tpope/vim-commentary"
 )
 
