@@ -127,6 +127,11 @@ set smarttab
 autocmd FileType ruby setlocal shiftwidth=2
 autocmd FileType yaml setlocal shiftwidth=2
 
+" JS 2 space indentation
+autocmd FileType javascript setlocal shiftwidth=2
+autocmd FileType typescript setlocal shiftwidth=2
+autocmd FileType typescript.tsx setlocal shiftwidth=2
+
 " golang uses tabs instead of spaces
 autocmd FileType go setlocal noexpandtab tabstop=4
 
@@ -461,3 +466,4 @@ let g:syntastic_html_tidy_ignore_errors = ['proprietary attribute']
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " add typescript to jest pattern
 let test#javascript#jest#file_pattern = '\v(__tests__/.*|(spec|test))\.(js|jsx|coffee|ts)$'
+let test#python#runner = 'nose'
