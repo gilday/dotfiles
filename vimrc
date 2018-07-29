@@ -92,10 +92,6 @@ else
 endif
 
 set encoding=utf8
-try
-  lang en_US
-catch
-endtry
 
 set ffs=unix,dos,mac "Default file types
 
