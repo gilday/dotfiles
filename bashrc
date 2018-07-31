@@ -51,6 +51,7 @@ export ANT_HOME="$HOME/devtools/ant"
 export GRADLE_HOME="$HOME/devtools/gradle"
 export JBOSS_HOME="$HOME/devtools/wildfly"
 export GOPATH="$HOME/development/gopath"
+export PLAY_HOME="$HOME/devtools/play"
 
 
 if $cygwin ; then
@@ -177,6 +178,7 @@ PATH=$JAVA_HOME/bin:$PATH
 PATH=$ANDROID_HOME/platform-tools:$PATH
 PATH=$GRADLE_HOME/bin:$PATH
 PATH=$MYSQL_HOME:$PATH
+PATH=$PLAY_HOME:$PATH
 
 # Source extra bashrc-hook file if it exists. Do not check this file into
 # version control - it is for extra, environment specific stuff
