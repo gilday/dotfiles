@@ -122,14 +122,16 @@ set smarttab
 " Ruby + YAML like 2 space indentation
 autocmd FileType ruby setlocal shiftwidth=2
 autocmd FileType yaml setlocal shiftwidth=2
+autocmd FileType xml setlocal shiftwidth=2
 
+" golang and make uses tabs instead of spaces
+autocmd FileType go setlocal noexpandtab tabstop=8 shiftwidth=8
+autocmd FileType make setlocal noexpandtab tabstop=8 shiftwidth=8
 " JS 2 space indentation
 autocmd FileType javascript setlocal shiftwidth=2
 autocmd FileType typescript setlocal shiftwidth=2
 autocmd FileType typescript.tsx setlocal shiftwidth=2
 
-" golang uses tabs instead of spaces
-autocmd FileType go setlocal noexpandtab tabstop=4
 
 " set text wrap for markdown
 autocmd FileType markdown setlocal textwidth=80
