@@ -1,6 +1,5 @@
 [user]
-    name = Johnathan Gilday
-    email = me@johnathangilday.com
+    # set in ~/.gitconfig-hook
 [alias]
     s = status
 [color]
@@ -20,3 +19,5 @@
 [mergetool "meld"]
     trustExitCode = false
     cmd = meld $LOCAL $BASE $REMOTE -o $MERGED --auto-merge
+[include]
+    path = ~/.gitconfig-hook
