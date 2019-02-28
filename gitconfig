@@ -2,6 +2,8 @@
     # set in ~/.gitconfig-hook
 [alias]
     s = status
+    force-pull = "!git fetch ; git reset --hard @{u}"
+
 [color]
     ui = true
 [push]
