@@ -98,7 +98,7 @@ fi
 
 # virtualenvwrapper
 if [ -f /usr/local/bin/virtualenvwrapper.sh ]; then
-    source /usr/local/bin/virtualenvwrapper.sh
+    source $HOME/dotfiles/lazy-virtualenvwrapper.sh
 fi
 
 # pbcopy
