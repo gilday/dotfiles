@@ -224,3 +224,7 @@ if [ -f $HOME/.iterm2_shell_integration.`basename $SHELL` ]; then
     source $HOME/.iterm2_shell_integration.`basename $SHELL`
 fi
 
+# z, if installed (checks Homebrew's /usr/local directory)
+if [ -f /usr/local/etc/profile.d/z.sh ]; then
+    source /usr/local/etc/profile.d/z.sh
+fi
