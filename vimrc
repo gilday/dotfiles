@@ -88,7 +88,11 @@ if has("gui_running")
 else
   set t_Co=16
   colorscheme solarized
-  set background=dark
+  if $VIM_BACKGROUND == "light"
+      set background=light
+  else
+      set background=dark
+  endif
 endif
 
 set encoding=utf8
