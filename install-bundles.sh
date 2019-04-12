@@ -11,6 +11,7 @@ git_bundles=(
 "vim-ruby/vim-ruby"
 "pangloss/vim-javascript"
 "mxw/vim-jsx"
+"ianks/vim-tsx"
 "leafgarland/typescript-vim"
 "Quramy/tsuquyomi"
 "prettier/vim-prettier"
