@@ -29,7 +29,7 @@ PS1="\W\$(__git_ps1) \$ "
 
 # Java
 if $mac ; then
-    export JAVA_HOME=$(/usr/libexec/java_home -v 1.8)
+    export JAVA_HOME=$(/usr/libexec/java_home -v 11)
     export ANDROID_HOME=$HOME/devtools/android-sdk
 fi
 
