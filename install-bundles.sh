@@ -29,6 +29,7 @@ git_bundles=(
 "junegunn/fzf"
 "junegunn/fzf.vim"
 "tpope/vim-commentary"
+"tpope/vim-fugitive"
 )
 
 dir="$(dirname $0)/bundle"
