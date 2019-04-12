@@ -157,7 +157,7 @@ function dark() {
     # vimrc has logic that looks for this environment variable when vim starts
     export VIM_BACKGROUND=dark
     # https://coderwall.com/p/s-2_nw/change-iterm2-color-profile-from-the-cli
-    echo -e "\e]1337;SetColors=preset=Solarized Dark\a"
+    echo -e "\x1b]1337;SetColors=preset=Solarized Dark\a"
 }
 
 # switches the terminal and vim to "light" color scheme
@@ -165,12 +165,12 @@ function light() {
     # vimrc has logic that looks for this environment variable when vim starts
     export VIM_BACKGROUND=light
     # https://coderwall.com/p/s-2_nw/change-iterm2-color-profile-from-the-cli
-    echo -e "\e]1337;SetColors=preset=Solarized Light\a"
+    echo -e "\x1b]1337;SetColors=preset=Solarized Light\a"
 }
 
 # On iterm2, sends fireworks shooting off from the cursor. Good for testing iterm2 escape codes
 function fireworks() {
-    echo -e "\e]1337;RequestAttention=fireworks\a"
+    echo -e "\x1b]1337;RequestAttention=fireworks\a"
 }
 
 # PATH
