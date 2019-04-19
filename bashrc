@@ -91,7 +91,7 @@ fi
 if $cygwin ; then
     # do some manual steps from https://servercheck.in/blog/running-ansible-within-windows
     ANSIBLE=/opt/ansible
-    export PATH=$ANSIBLE/bin
+    export PATH="$ANSIBLE/bin:$PATH"
     export PYTHONPATH=$ANSIBLE/lib
     export ANSIBLE_LIBRARY=$ANSIBLE/library
 fi
@@ -175,10 +175,10 @@ function fireworks() {
 
 # PATH
 if $mac ; then
-    export PATH="$PATH:/usr/local/heroku/bin"
-    export PATH="$PATH:/Applications/kdiff3.app/Contents/MacOS"
-    export PATH="$PATH:/usr/local/opt/coreutils/libexec/gnubin"
-    export PATH="$PATH:/Applications/Postgres.app/Contents/Versions/latest/bin"
+    export PATH="/usr/local/heroku/bin:$PATH"
+    export PATH="/Applications/kdiff3.app/Contents/MacOS:$PATH"
+    export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
+    export PATH="/Applications/Postgres.app/Contents/Versions/latest/bin$PATH"
     export MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
 fi
 PATH=/usr/local/go/bin:$PATH
