@@ -14,4 +14,11 @@ Install Cygwin with Git and Ruby packages at the least. Install KDiff3 for windo
 
 ## Install
 
-run ./install.sh
+    ./install.sh
+    ./install-bundles.sh
+
+Configure git user and email by adding `$HOME/.gitconfig-hook` i.e.
+
+    [user]
+        name = Johnathan Gilday
+        email = johnathan.gilday@example.com
