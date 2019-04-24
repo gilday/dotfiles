@@ -1,4 +1,5 @@
 #!/bin/sh
+
 # OS specific support
 cygwin=false;
 mac=false;
@@ -13,6 +14,19 @@ esac
 
 # EDITOR
 export EDITOR=vim
+
+# PROFILING (set-up)
+# from https://www.rosipov.com/blog/profiling-slow-bashrc/
+profile=false
+if $profile; then
+    local date='date'
+    if $mac; then
+        date='gdate'
+    fi
+    PS4='+ $(gdate "+%s.%N")\011 '
+    exec 3>&2 2>/tmp/bashstart.$$.log
+    set -x
+fi
 
 # GIT BASH
 if $mac && [ -f `brew --prefix`/etc/bash_completion ]; then
@@ -227,4 +241,10 @@ fi
 # z, if installed (checks Homebrew's /usr/local directory)
 if [ -f /usr/local/etc/profile.d/z.sh ]; then
     source /usr/local/etc/profile.d/z.sh
+fi
+
+# PROFILING (tear-down)
+if $profile; then
+    set +x
+    exec 2>&3 3>&-
 fi
