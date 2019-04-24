@@ -6,6 +6,7 @@
 # from Github using Pathogen
 
 git_bundles=(
+"w0rp/ale"
 "janko-m/vim-test"
 "tpope/vim-markdown"
 "vim-ruby/vim-ruby"
@@ -17,11 +18,8 @@ git_bundles=(
 "prettier/vim-prettier"
 "groenewege/vim-less"
 "altercation/vim-colors-solarized"
-"scrooloose/syntastic"
 "fatih/vim-go"
 "tpope/vim-git"
-"mtscout6/syntastic-local-eslint.vim"
-"gilday/syntastic-local-standard.vim"
 "othree/html5.vim"
 "lambdatoast/elm.vim"
 "editorconfig/editorconfig-vim"

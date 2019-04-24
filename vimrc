@@ -450,18 +450,10 @@ set secure
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => SYNTASTIC
+" => ALE
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" set specific language checkers
-let g:syntastic_go_checkers = ['go', 'golint']
-let g:syntastic_javascript_checkers = ['eslint']
-" customize syntastic symbology
-let g:syntastic_error_symbol = "✗"
-let g:syntastic_warning_symbol = "⚠"
-let g:tsuquyomi_disable_quickfix = 1
-let g:syntastic_typescript_checkers = ['tsuquyomi']
-" customize tidy checks
-let g:syntastic_html_tidy_ignore_errors = ['proprietary attribute']
+
+
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => TEST
