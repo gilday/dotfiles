@@ -87,6 +87,8 @@ chmod ug+rx "$HOME/bin/imgcat" "$HOME/bin/imgls"
 if $macos; then
     echo 'install iTerm shell integration'
     curl -L https://iterm2.com/misc/`basename $SHELL`_startup.in -o ~/.iterm2_shell_integration.`basename $SHELL`
+    echo 'install toggle-dark-mode automator service'
+    ln -s $HOME/dotfiles/macos/toggle-dark-mode.workflow $HOME/Library/Services/toggle-dark-mode.workflow
 fi
 
 #$HOME/dotfiles/install-bundles.sh
