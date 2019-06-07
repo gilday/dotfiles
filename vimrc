@@ -87,13 +87,35 @@ if has("gui_running")
   colorscheme desert
 else
   set t_Co=16
+  set background=dark
   colorscheme solarized
-  if $VIM_BACKGROUND == "light"
-      set background=light
-  else
-      set background=dark
-  endif
 endif
+
+" SyncDarkMode function detects if the environment is using dark mode and
+" configures vim to match. Schedule the function to run periodically to keep
+" vim's colors in sync with the environment
+function! SyncDarkMode(...)
+    let s:new_bg = "dark"
+    if $TERM_PROGRAM ==? "iTerm.app"
+        let s:mode = systemlist("defaults read -g AppleInterfaceStyle")[0]
+        if s:mode ==? "Dark"
+            let s:new_bg = "dark"
+        else
+            let s:new_bg = "light"
+        endif
+    else
+        if $VIM_BACKGROUND ==? "dark"
+            let s:new_bg = "dark"
+        else
+            let s:new_bg = "light"
+        endif
+    endif
+    if &background !=? s:new_bg
+        let &background = s:new_bg
+    endif
+endfunction
+call SyncDarkMode()
+call timer_start(3000, "SyncDarkMode", {"repeat": -1})
 
 set encoding=utf8
 
