@@ -1,0 +1,45 @@
+---
+- name: Link inputrc
+  file:
+    state: link
+    src: "{{ ansible_user_dir }}/dotfiles/macos/inputrc"
+    dest: "{{ ansible_user_dir }}/.inputrc"
+
+- name: iTerm2 imgls and imgcat
+  get_url: 
+    url: "https://raw.githubusercontent.com/gnachman/iTerm2/master/tests/{{ item }}"
+    dest: "{{ ansible_user_dir }}/bin/{{ item }}"
+    mode: 0755
+  with_items:
+    - imgcat
+    - imgls
+
+- name: iTerm2 shell integration
+  get_url:
+    url: https://iterm2.com/misc/bash_startup.in
+    dest: "{{ ansible_user_dir }}/.iterm2_shell_integration.bash"
+
+- name: Install toggle-dark-mode automator service
+  file:
+    src: "{{ ansible_user_dir }}/dotfiles/macos/toggle-dark-mode.workflow"
+    dest: "{{ ansible_user_dir }}/Library/Services/toggle-dark-mode.workflow"
+    state: link
+
+- name: Core Brew Packages
+  homebrew:
+    name: 
+      - bash-completion
+      - coreutils
+      - curl
+      - dos2unix
+      - fzf
+      - gnu-sed
+      - gnu-tar
+      - jq
+      - lastpass-cli
+      - ripgrep
+      - tree
+      - vim
+      - watch
+      - wget
+      - z

@@ -1,0 +1,14 @@
+---
+- hosts: localhost
+  connection: local
+  tasks:
+    - include_tasks: "{{ item }}"
+      with_items:
+        - core.yml
+        - vim.yml
+    - include_tasks: "{{ item }}"
+      when: "{{ ansible_distribution == 'MacOSX' }}"
+      with_items:
+        - macos/core.yml
+        - macos/java.yml
+

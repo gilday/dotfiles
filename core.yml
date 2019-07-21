@@ -1,0 +1,26 @@
+---
+- name: User bin
+  file:
+    path: "{{ ansible_user_dir}}/bin"
+    state: directory
+
+- name: Link dotfiles
+  file:
+    state: link
+    src: "{{ ansible_user_dir }}/dotfiles/{{ item }}"
+    dest: "{{ ansible_user_dir }}/.{{ item }}"
+    force: yes
+  with_items:
+    - ackrc
+    - bash_aliases
+    - bashrc
+    - bash_profile
+    - gitconfig
+    - screenrc
+    - vimrc
+
+- name: Set Terminal Directory Color Scheme
+  git:
+    repo: git://github.com/seebi/dircolors-solarized
+    dest: "{{ ansible_user_dir }}/.dircolors"
+    depth: 1

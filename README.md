@@ -6,8 +6,9 @@ heavily towards macOS.
 
 ## Install
 
-    ./install.sh
-    ./install-bundles.sh
+Install Ansible, then run the provision.yml playbook
+
+    ansible-playbook provision.yml
 
 Configure git user and email by adding `$HOME/.gitconfig-hook` i.e.
 

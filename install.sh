@@ -2,11 +2,9 @@
 
 # Environment support
 cygwin=false;
-macos=false;
 env='linux';
 case "`uname`" in 
     CYGWIN*) cygwin=true; env='cygwin' ;;
-    Darwin*) macos=true; env='macos' ;;
 esac
 
 echo "Install for $env"
@@ -77,19 +75,3 @@ cp "$HOME/dotfiles/autoload/pathogen.vim" "$HOME/.vim/autoload/"
 if [ ! -e "$HOME/.vim/bundle" ]; then
     ln -s "$dotfiles/bundle" "$HOME/.vim/bundle"
 fi
-
-echo 'install imgls imgcat'
-mkdir -p "$HOME/bin"
-curl -o "$HOME/bin/imgcat" https://raw.githubusercontent.com/gnachman/iTerm2/master/tests/imgcat
-curl -o "$HOME/bin/imgls" https://raw.githubusercontent.com/gnachman/iTerm2/master/tests/imgls
-chmod ug+rx "$HOME/bin/imgcat" "$HOME/bin/imgls"
-
-if $macos; then
-    echo 'install iTerm shell integration'
-    curl -L https://iterm2.com/misc/`basename $SHELL`_startup.in -o ~/.iterm2_shell_integration.`basename $SHELL`
-    echo 'install toggle-dark-mode automator service'
-    ln -s $HOME/dotfiles/macos/toggle-dark-mode.workflow $HOME/Library/Services/toggle-dark-mode.workflow
-fi
-
-#$HOME/dotfiles/install-bundles.sh
-
