@@ -1,13 +1,6 @@
 #!/bin/bash
 
 # Environment support
-cygwin=false;
-env='linux';
-case "`uname`" in 
-    CYGWIN*) cygwin=true; env='cygwin' ;;
-esac
-
-echo "Install for $env"
 
 # Link dotfiles to $HOME
 # pick environment specific override if it exists
@@ -60,10 +53,6 @@ if $centos && [ ! -e "$HOME/dotfiles/packages/gnome-terminal-colors-solarized" ]
     git clone -q git://github.com/Anthony25/gnome-terminal-colors-solarized "$HOME/dotfiles/packages/gnome-terminal-colors-solarized"
     echo 'installing shell colors. answer prompts to install colors to gnome terminal profile'
     $HOME/dotfiles/packages/gnome-terminal-colors-solarized/install.sh
-fi
-if $cygwin && [ ! -e "$HOME/.minttyrc" ]; then
-    git clone -q git://github.com/karlin/mintty-colors-solarized "$HOME/dotfiles/packages/mintty-colors-solarized"
-    ln -s "$HOME/dotfiles/packages/mintty-colors-solarized/.minttyrc--solarized-dark" "$HOME/.minttyrc"
 fi
 if [ $(command -v dircolors &> /dev/null) ]; then
     eval `dircolors ~/.dircolors`

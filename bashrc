@@ -1,12 +1,10 @@
 #!/bin/sh
 
 # OS specific support
-cygwin=false;
 mac=false;
 ubuntu=false;
 centos=false;
 case "`uname`" in
-    CYGWIN*) cygwin=true ;;
     Darwin*) mac=true ;;
     Ubuntu*) ubuntu=true;;
     Linux*) centos=true;; # TODO need a better check for CentOS
@@ -52,9 +50,6 @@ if $ubuntu ; then
     export ANDROID_HOME=$HOME/devtools/android-sdk-linux
 fi
 
-if $cygwin ; then
-    export JAVA_HOME="$HOME/devtools/java"
-fi
 JAVA_TOOL_OPTIONS='-Djava.awt.headless=true' # http://stackoverflow.com/a/17951720/501368
 
 export M2_HOME="$HOME/devtools/maven"
@@ -68,22 +63,6 @@ export GOPATH="$HOME/development/gopath"
 export PLAY_HOME="$HOME/devtools/play"
 
 
-if $cygwin ; then
-# X11
-    # define X11 display, if not already defined
-    if [[ "$DISPLAY" == "" ]] ; then
-        export DISPLAY=:0
-    fi
-# ssh
-    # note: this requires keychain package
-    # keychain is a daemon that will manage ssh-agent
-    # it's cool because I don't have to re-enter the passphrase for every terminal
-    if [ -e $HOME/.ssh/$USER ] ; then
-        eval $(keychain --eval $HOME/.ssh/$USER)
-    else
-        eval $(keychain --eval $HOME/.ssh/id_rsa)
-    fi
-fi
 if $mac; then
     # mac ssh-add is integrated with the keychain
     # prior to macOS sierra, an explicit ssh-add -A was not necessary, but now is
@@ -101,15 +80,6 @@ if [ ! $mac ]; then
     fi
 fi
 
-# ansible on windows
-if $cygwin ; then
-    # do some manual steps from https://servercheck.in/blog/running-ansible-within-windows
-    ANSIBLE=/opt/ansible
-    export PATH="$ANSIBLE/bin:$PATH"
-    export PYTHONPATH=$ANSIBLE/lib
-    export ANSIBLE_LIBRARY=$ANSIBLE/library
-fi
-
 # virtualenvwrapper
 if [ -f /usr/local/bin/virtualenvwrapper.sh ]; then
     source $HOME/dotfiles/lazy-virtualenvwrapper.sh
@@ -119,9 +89,6 @@ fi
 if $ubuntu ; then
     alias pbcopy='xclip -selection clipboard'
     alias pbpaste='xclip -selection clipboard -o'
-elif $cygwin ; then
-    alias pbcopy='cat >/dev/clipboard'
-    alias pbpaste='cat /dev/clipboard'
 fi
 
 # BASH History

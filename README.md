@@ -1,8 +1,10 @@
 # gilday dotfiles
 
-Configures my shell to be awesome. Supports macOS, Cygwin, CentOS, and Ubuntu. I
-have been developing exclusively on a mac for a couple of years, so it leans
-heavily towards macOS.
+Configures my shell to be awesome. Supports macOS, CentOS, and Ubuntu. I have
+been developing exclusively on a mac for a couple of years, so it leans heavily
+towards macOS. I removed support for Cygwin: I have not developed on Windows in
+a while, and I expect to make use of the new Windows Subsystem for Linux next
+time I do.
 
 ## Install
 
@@ -48,8 +50,3 @@ polls the current system settings and adjusts IntelliJ's theme accordingly.
 1. Update configure vim background job for syncing theme (see [vimrc](./vimrc))
 1. Install IntelliJ [macOS Dark Mode
    Sync](https://plugins.jetbrains.com/plugin/12515-macos-dark-mode-sync) plugin
-
-## Cygwin
-
-Install Cygwin with Git and Ruby packages at the least. Install KDiff3 for
-windows
