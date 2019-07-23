@@ -19,3 +19,8 @@ Icon
 .Spotlight-V100
 .Trashes
 
+
+# Vagrant
+
+.vagrant/
+
