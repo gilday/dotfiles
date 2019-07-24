@@ -5,21 +5,15 @@
     src: "{{ ansible_user_dir }}/dotfiles/vimrc"
     dest: "{{ ansible_user_dir}}/.vimrc"
 
-- name: Create vim autoload Dir
+- name: Create vim packages directory
   file:
     state: directory
-    path: "{{ ansible_user_dir }}/.vim/autoload"
+    path: "{{ ansible_user_dir }}/.vim/pack/vendor/start"
 
-- name: Install vim pathogen
-  file:
-    state: link
-    src: "{{ ansible_user_dir }}/dotfiles/autoload/pathogen.vim"
-    dest: "{{ ansible_user_dir }}/.vim/autoload/pathogen.vim"
-
-- name: Install vim pathogen bundles
+- name: Install vim packages
   git:
     repo: "git://github.com/{{ item.org }}/{{ item.repo }}"
-    dest: "{{ ansible_user_dir}}/.vim/bundle/{{ item.repo }}"
+    dest: "{{ ansible_user_dir}}/.vim/pack/vendor/start/{{ item.repo }}"
     depth: 1
   async: 20
   poll: 0
