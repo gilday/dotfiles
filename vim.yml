@@ -24,23 +24,11 @@
   async: 20
   poll: 0
   with_items:
-    - org: Quramy
-      repo: tsuquyomi
-
     - org: altercation
       repo: vim-colors-solarized
 
     - org: editorconfig
       repo: editorconfig-vim
-
-    - org: fatih
-      repo: vim-go
-
-    - org: groenewege
-      repo: vim-less
-
-    - org: ianks
-      repo: vim-tsx
 
     - org: janko-m
       repo: vim-test
@@ -51,26 +39,8 @@
     - org: junegunn
       repo: fzf.vim
 
-    - org: lambdatoast
-      repo: elm.vim
-
-    - org: leafgarland
-      repo: typescript-vim
-
-    - org: mxw
-      repo: vim-jsx
-
-    - org: othree
-      repo: html5.vim
-
-    - org: pangloss
-      repo: vim-javascript
-
     - org: prettier
       repo: vim-prettier
-
-    - org: scrooloose
-      repo: nerdtree
 
     - org: tpope
       repo: vim-commentary
@@ -83,9 +53,3 @@
 
     - org: tpope
       repo: vim-markdown
-
-    - org: vim-ruby
-      repo: vim-ruby
-
-    - org: w0rp
-      repo: ale
