@@ -149,10 +149,11 @@ fi
 PATH=/usr/local/go/bin:$PATH
 PATH=$GOPATH/bin:$PATH
 PATH=$HOME/.npm-global/bin:$PATH
-PATH=$HOME/.rvm/bin:$PATH # Add RVM to PATH for scripting
 PATH=/usr/local/bin:$PATH
 PATH=/usr/local/sbin:$PATH
 PATH=/usr/local/opt/python/libexec/bin:$PATH
+PATH=/usr/local/opt/ruby/bin:$PATH
+PATH=/usr/local/lib/ruby/gems/2.6.0/bin:$PATH
 PATH=$HOME/Library/Python/3.7/bin:$PATH
 PATH=$HOME/bin:$PATH
 PATH=$GRAILS_HOME:$PATH
@@ -173,10 +174,6 @@ PATH=$PLAY_HOME:$PATH
 if [ -f ~/.bashrc-hook ]; then
     source ~/.bashrc-hook
 fi
-
-# RVM (should be last supposedly)
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
-
 
 if [ -d $HOME/.nvm ]; then
     export NVM_DIR="$HOME/.nvm"
