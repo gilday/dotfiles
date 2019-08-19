@@ -73,7 +73,7 @@ colorscheme solarized
 function! SyncDarkMode(...)
     let s:new_bg = "dark"
     if $TERM_PROGRAM ==? "iTerm.app"
-        let s:mode = systemlist("defaults read -g AppleInterfaceStyle")[0]
+        let s:mode = trim(system("defaults read -g AppleInterfaceStyle"))
         if s:mode ==? "Dark"
             let s:new_bg = "dark"
         else
