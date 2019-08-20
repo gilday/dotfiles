@@ -13,13 +13,14 @@
 - name: Install vim packages
   git:
     repo: "git://github.com/{{ item.org }}/{{ item.repo }}"
-    dest: "{{ ansible_user_dir}}/.vim/pack/vendor/start/{{ item.repo }}"
+    dest: "{{ ansible_user_dir}}/.vim/pack/vendor/{{ item.dir | default('start') }}/{{ item.repo }}"
     depth: 1
   async: 20
   poll: 0
   with_items:
-    - org: altercation
-      repo: vim-colors-solarized
+    - org: lifepillar
+      repo: vim-solarized8
+      dir: opt
 
     - org: editorconfig
       repo: editorconfig-vim

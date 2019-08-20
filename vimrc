@@ -63,9 +63,9 @@ set timeoutlen=500
 syntax enable "Enable syntax hl
 
 " Theme
-set t_Co=16
+set termguicolors
 set background=dark
-colorscheme solarized
+colorscheme solarized8
 
 " SyncDarkMode function detects if the environment is using dark mode and
 " configures vim to match. Schedule the function to run periodically to keep
