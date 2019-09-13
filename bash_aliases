@@ -35,3 +35,6 @@ alias tcpd8443="sudo tcpdump -s 0 -A -i lo0 'tcp port 8443 and (((ip[2:2] - ((ip
 
 # rebase current branch with the latest from the main line of development (develop at Contrast)
 alias gitrebase="git checkout develop && git pull && git checkout - && git rebase develop"
+
+# map "vim" to "nvim" because I'm lazy
+alias vim='nvim'
