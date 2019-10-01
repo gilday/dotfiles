@@ -19,6 +19,20 @@
     - screenrc
     - vimrc
 
+- name: Bin Scripts Dir
+  file:
+    state: directory
+    path: "{{ ansible_user_dir }}/bin"
+
+- name: Bin Scripts
+  file:
+    state: link
+    src: "{{ ansible_user_dir }}/dotfiles/bin/{{ item }}"
+    dest: "{{ ansible_user_dir }}/bin/{{ item }}"
+  with_items:
+    - echo-server.py
+    - tcp-proxy.sh
+
 - name: Set Terminal Directory Color Scheme
   git:
     repo: git://github.com/seebi/dircolors-solarized

@@ -36,7 +36,7 @@ PATH=$PATH:/usr/local/lib/node_modules/karma/bin
 
 function ancestor()
 {
-  (~/dotfiles/ancestor.rb $1) && cd $(~/dotfiles/ancestor.rb $1)
+  (~/bin/ancestor.rb $1) && cd $(~/bin/ancestor.rb $1)
 }
 
 
