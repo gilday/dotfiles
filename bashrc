@@ -11,7 +11,7 @@ case "`uname`" in
 esac
 
 # EDITOR
-export EDITOR=vim
+export EDITOR=nvim
 
 # PROFILING (set-up)
 # from https://www.rosipov.com/blog/profiling-slow-bashrc/
