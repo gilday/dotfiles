@@ -10,14 +10,10 @@
     src: "{{ ansible_user_dir }}/dotfiles/{{ item }}"
     dest: "{{ ansible_user_dir }}/.{{ item }}"
     force: yes
-  with_items:
+  loop:
     - ackrc
-    - bash_aliases
-    - bashrc
-    - bash_profile
     - gitconfig
     - screenrc
-    - vimrc
 
 - name: Bin Scripts Dir
   file:
@@ -29,7 +25,7 @@
     state: link
     src: "{{ ansible_user_dir }}/dotfiles/bin/{{ item }}"
     dest: "{{ ansible_user_dir }}/bin/{{ item }}"
-  with_items:
+  loop:
     - echo-server.py
     - tcp-proxy.sh
 

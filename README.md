@@ -1,10 +1,11 @@
 # gilday dotfiles
 
-Configures my shell to be awesome. Supports macOS, CentOS, and Ubuntu. I have
-been developing exclusively on a mac for a couple of years, so it leans heavily
-towards macOS. I removed support for Cygwin: I have not developed on Windows in
-a while, and I expect to make use of the new Windows Subsystem for Linux next
-time I do.
+Configures my shell (zsh) to be awesome. I have been developing exclusively on a
+mac for a couple of years, so it leans heavily towards macOS. Next time I
+develop on a Linux desktop, I will update support for that system. I removed
+support for Cygwin: I have not developed on Windows in a while, and I expect to
+make use of the new Windows Subsystem for Linux next time I do.
+
 
 ## Install
 
@@ -18,12 +19,6 @@ Configure git user and email by adding `$HOME/.gitconfig-hook` i.e.
         name = Johnathan Gilday
         email = me@johnathangilday.com
 
-## Mac
-
-First, install git and its bash-completion from Homebrew to get the git bash
-prompt and tab completion to work
-
-    brew install git bash-completion
 
 ### macOS Dark Mode Toggle
 

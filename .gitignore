@@ -1,8 +1,3 @@
-# Ignore all the bundles because the update_bundles script can just go get them from GitHub
-bundle
-# Ignore 3rd party packages downloaded during installation
-packages
-
 # OSX
 
 .DS_Store

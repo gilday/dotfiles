@@ -1,0 +1,18 @@
+---
+- name: Tap AdoptOpenJDK Cask
+  homebrew_tap:
+    name: AdoptOpenJDK/openjdk
+  when: ansible_distribution == 'MacOSX'
+
+- name: Install OpenJDK 1.8 and 11
+  homebrew_cask:
+    name:
+      - adoptopenjdk/openjdk/adoptopenjdk8
+      - adoptopenjdk/openjdk/adoptopenjdk11
+  when: ansible_distribution == 'MacOSX'
+
+- name: Link Java Zsh Configuration
+  file:
+    state: link
+    src: "{{ ansible_user_dir }}/dotfiles/java/java.zsh"
+    dest: "{{ ansible_user_dir }}/.oh-my-zsh/custom/java.zsh"

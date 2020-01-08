@@ -10,25 +10,24 @@
     url: "https://raw.githubusercontent.com/gnachman/iTerm2/master/tests/{{ item }}"
     dest: "{{ ansible_user_dir }}/bin/{{ item }}"
     mode: 0755
-  with_items:
+  loop:
     - imgcat
     - imgls
 
-- name: iTerm2 shell integration
+- name: iTerm2 Shell Integration
   get_url:
-    url: https://iterm2.com/misc/bash_startup.in
-    dest: "{{ ansible_user_dir }}/.iterm2_shell_integration.bash"
+    url: https://iterm2.com/shell_integration/zsh
+    dest: "{{ ansible_user_dir }}/.oh-my-zsh/custom/iterm2-shell-integration.zsh"
 
 - name: Install toggle-dark-mode automator service
   file:
+    state: link
     src: "{{ ansible_user_dir }}/dotfiles/macos/toggle-dark-mode.workflow"
     dest: "{{ ansible_user_dir }}/Library/Services/toggle-dark-mode.workflow"
-    state: link
 
 - name: Core Brew Packages
   homebrew:
     name: 
-      - bash-completion
       - coreutils
       - curl
       - dos2unix

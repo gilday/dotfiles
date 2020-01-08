@@ -2,7 +2,7 @@
 - name: Install vimrc
   file:
     state: link
-    src: "{{ ansible_user_dir }}/dotfiles/vimrc"
+    src: "{{ ansible_user_dir }}/dotfiles/vim/vimrc"
     dest: "{{ ansible_user_dir}}/.vimrc"
 
 - name: Create vim packages directory
@@ -17,7 +17,7 @@
     depth: 1
   async: 20
   poll: 0
-  with_items:
+  loop:
     - org: lifepillar
       repo: vim-solarized8
       dir: opt
@@ -50,7 +50,7 @@
       repo: vim-markdown
 
 - name: Install Neovim
-  when: "{{ ansible_distribution == 'MacOSX' }}"
+  when: ansible_distribution == 'MacOSX'
   homebrew:
     name: neovim
 
