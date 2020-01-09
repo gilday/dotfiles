@@ -13,9 +13,12 @@ DISABLE_UNTRACKED_FILES_DIRTY="true"
 # ISO 8601 dates in history
 HIST_STAMPS="yyyy-mm-dd"
 
+# Enable correcting commands
+ENABLE_CORRECTION="true"
+
 # Standard plugins can be found in ~/.oh-my-zsh/plugins/*
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
-plugins=(git ssh-agent)
+plugins=(git ssh-agent vi-mode)
 
 # enable tmux friendly ssh forwarding auth socket
 # this setting does not actually enable agent forwarding
@@ -31,3 +34,19 @@ export EDITOR=nvim
 # unique entries in path array
 typeset -U path
 path+=$HOME/bin
+
+
+# ZSH Line Editor
+# macbook keyboard delete button
+bindkey '^[[3~' delete-char
+
+
+# HISTORY
+# share history across multiple zsh sessions
+setopt SHARE_HISTORY
+# append to history
+setopt APPEND_HISTORY
+# adds commands as they are typed, not at shell exit
+setopt INC_APPEND_HISTORY
+# removes blank lines from history
+setopt HIST_REDUCE_BLANKS
