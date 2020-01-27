@@ -38,10 +38,7 @@ IntelliJ uses the same polling mechanism as vim: the IntelliJ plugin [macOS Dark
 Mode Sync](https://plugins.jetbrains.com/plugin/12515-macos-dark-mode-sync)
 polls the current system settings and adjusts IntelliJ's theme accordingly.
 
-1. Import Automator Quick Action service
-   [toggle-dark-mode](./macos/toggle-dark-mode) by copying it to
-   `~/Library/Services`
-1. Create keyboard shortcut for the Automator service. I use ⌘⇧L
-1. Update configure vim background job for syncing theme (see [vimrc](./vimrc))
+1. Create keyboard shortcut for the Automator service "toggle-dark-mode"
+   (installed by Ansible in previous steps). I use ⌘⇧L
 1. Install IntelliJ [macOS Dark Mode
    Sync](https://plugins.jetbrains.com/plugin/12515-macos-dark-mode-sync) plugin
