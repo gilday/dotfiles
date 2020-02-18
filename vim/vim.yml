@@ -25,6 +25,9 @@
     - org: editorconfig
       repo: editorconfig-vim
 
+    - org: hashivim
+      repo: vim-terraform
+
     - org: janko-m
       repo: vim-test
 
