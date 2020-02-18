@@ -13,9 +13,6 @@ DISABLE_UNTRACKED_FILES_DIRTY="true"
 # ISO 8601 dates in history
 HIST_STAMPS="yyyy-mm-dd"
 
-# Enable correcting commands
-ENABLE_CORRECTION="true"
-
 # Standard plugins can be found in ~/.oh-my-zsh/plugins/*
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 plugins=(git ssh-agent vi-mode)
