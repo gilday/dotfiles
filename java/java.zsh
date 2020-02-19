@@ -3,6 +3,13 @@ if [[ "$OSTYPE" == darwin* ]]; then
     export JAVA_HOME=$(/usr/libexec/java_home -v 1.8)
     path+=$JAVA_HOME/bin
 fi
+# automatic java_home switch when .java-version detected
+function chpwd() {
+  if [[ "$OSTYPE" == darwin* && -f $PWD/.java-version ]]; then
+    version=$(cat $PWD/.java-version)
+    export JAVA_HOME=$(/usr/libexec/java_home -v $version)
+  fi
+}
 
 # ANDROID
 export ANDROID_HOME=$HOME/devtools/android-sdk
