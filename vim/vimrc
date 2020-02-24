@@ -207,6 +207,12 @@ let test#python#runner = 'nose'
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => TERRAFORM
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:terraform_fmt_on_save=1
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => PROJECT SPECIFIC SETTINGS
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " enable project specific settings (like spaces and tabs) but do not allow
