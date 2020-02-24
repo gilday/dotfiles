@@ -3,6 +3,7 @@
 [alias]
     s = status
     force-pull = "!git fetch ; git reset --hard @{u}"
+    yeet = push --force-with-lease
 
 [color]
     ui = true
