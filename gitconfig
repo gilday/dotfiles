@@ -1,8 +1,9 @@
 [user]
     # set in ~/.gitconfig-hook
 [alias]
-    s = status
+    amend = commit --amend --no-edit
     force-pull = "!git fetch ; git reset --hard @{u}"
+    s = status
     yeet = push --force-with-lease
 
 [color]
