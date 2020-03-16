@@ -25,6 +25,12 @@
     src: "{{ ansible_user_dir }}/dotfiles/macos/toggle-dark-mode.workflow"
     dest: "{{ ansible_user_dir }}/Library/Services/toggle-dark-mode.workflow"
 
+- name: macOS Specific ZSH Config
+  file:
+    state: link
+    src: "{{ ansible_user_dir }}/dotfiles/macos/macos.zsh"
+    dest: "{{ ansible_user_dir }}/.oh-my-zsh/custom/macos.zsh"
+
 - name: Core Brew Packages
   homebrew:
     name: 
