@@ -1,4 +1,21 @@
 ---
+- name: Install toggle-dark-mode automator service
+  file:
+    state: link
+    src: "{{ ansible_user_dir }}/dotfiles/macos/toggle-dark-mode.workflow"
+    dest: "{{ ansible_user_dir }}/Library/Services/toggle-dark-mode.workflow"
+
+- name: Create Dedicated Screenshots Directory
+  file:
+    path: "{{ ansible_user_dir }}/Desktop/sshots"
+    state: directory
+
+- name: Save Screenshots to Dedicated Directory
+  osx_defaults:
+    domain: com.apple.screencapture
+    key: location
+    value: "{{ ansible_user_dir }}/Desktop/sshots"
+
 - name: Link inputrc
   file:
     state: link
@@ -18,12 +35,6 @@
   get_url:
     url: https://iterm2.com/shell_integration/zsh
     dest: "{{ ansible_user_dir }}/.oh-my-zsh/custom/iterm2-shell-integration.zsh"
-
-- name: Install toggle-dark-mode automator service
-  file:
-    state: link
-    src: "{{ ansible_user_dir }}/dotfiles/macos/toggle-dark-mode.workflow"
-    dest: "{{ ansible_user_dir }}/Library/Services/toggle-dark-mode.workflow"
 
 - name: macOS Specific ZSH Config
   file:
