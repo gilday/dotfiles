@@ -1,0 +1,11 @@
+---
+- name: Install User Local Ruby
+  homebrew:
+    name: ruby
+  when: ansible_distribution == 'MacOSX'
+
+- name: Link Ruby Zsh Configuration
+  file:
+    state: link
+    src: "{{ ansible_user_dir }}/dotfiles/ruby/ruby.zsh"
+    dest: "{{ ansible_user_dir }}/.oh-my-zsh/custom/ruby.zsh"
