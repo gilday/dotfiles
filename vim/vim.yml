@@ -18,6 +18,12 @@
   async: 20
   poll: 0
   loop:
+    - org: leafgarland
+      repo: typescript-vim
+
+    - org: peitalin
+      repo: vim-jsx-typescript
+
     - org: lifepillar
       repo: vim-solarized8
       dir: opt
