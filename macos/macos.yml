@@ -53,6 +53,7 @@
       - gnu-tar
       - jq
       - lastpass-cli
+      - p7zip
       - ripgrep
       - tree
       - vim
