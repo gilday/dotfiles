@@ -1,6 +1,7 @@
 # JAVA_HOME
 if [[ "$OSTYPE" == darwin* ]]; then
     export JAVA_HOME=$(/usr/libexec/java_home -v 11)
+    export LATEST_JDK_HOME=$(/usr/libexec/java_home -v 15)
     path+=$JAVA_HOME/bin
 fi
 # automatic java_home switch when .java-version detected

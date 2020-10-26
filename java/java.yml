@@ -9,6 +9,7 @@
     name:
       - adoptopenjdk/openjdk/adoptopenjdk8
       - adoptopenjdk/openjdk/adoptopenjdk11
+      - adoptopenjdk/openjdk/adoptopenjdk15
   when: ansible_distribution == 'MacOSX'
 
 - name: Link Java Zsh Configuration
