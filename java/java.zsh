@@ -1,14 +1,20 @@
 # JAVA_HOME
+
+function setjdk() {
+  unset JAVA_HOME # https://developer.apple.com/forums/thread/666681
+  export JAVA_HOME=$(/usr/libexec/java_home -v $1)
+}
+
 if [[ "$OSTYPE" == darwin* ]]; then
-    export JAVA_HOME=$(/usr/libexec/java_home -v 11)
-    export LATEST_JDK_HOME=$(/usr/libexec/java_home -v 15)
-    path+=$JAVA_HOME/bin
+  setjdk 11
+  export LATEST_JDK_HOME=$(/usr/libexec/java_home -v 15)
+  path+=$JAVA_HOME/bin
 fi
 # automatic java_home switch when .java-version detected
 function chpwd() {
   if [[ "$OSTYPE" == darwin* && -f $PWD/.java-version ]]; then
     version=$(cat $PWD/.java-version)
-    export JAVA_HOME=$(/usr/libexec/java_home -v $version)
+    setjdk $version
   fi
 }
 
