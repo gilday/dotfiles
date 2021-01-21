@@ -26,3 +26,5 @@
     cmd = meld $LOCAL $BASE $REMOTE -o $MERGED --auto-merge
 [include]
     path = ~/.gitconfig-hook
+[pull]
+	rebase = true
