@@ -4,6 +4,7 @@
     path: "{{ ansible_user_dir}}/bin"
     state: directory
 
+
 - name: Link dotfiles
   file:
     state: link
@@ -15,10 +16,12 @@
     - gitconfig
     - screenrc
 
+
 - name: Bin Scripts Dir
   file:
     state: directory
     path: "{{ ansible_user_dir }}/bin"
+
 
 - name: Bin Scripts
   file:
@@ -29,8 +32,23 @@
     - echo-server.py
     - tcp-proxy.sh
 
+
 - name: Set Terminal Directory Color Scheme
   git:
     repo: git://github.com/seebi/dircolors-solarized
     dest: "{{ ansible_user_dir }}/.dircolors"
     depth: 1
+
+
+# Allows other playbooks to more easily add SSH configuration
+- name: SSH Configuration Directory
+  file:
+    path: "{{ ansible_user_dir }}/.ssh/config.d"
+    state: directory
+
+
+- name: SSH Configuration
+  copy:
+    src: ssh.config
+    dest: "{{ ansible_user_dir }}/.ssh/config"
+    mode: 0600

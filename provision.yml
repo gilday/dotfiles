@@ -2,11 +2,12 @@
 - hosts: localhost
   connection: local
   tasks:
-    - include_tasks: core.yml
+    - include_tasks: core/core.yml
     - include_tasks: zsh/zsh.yml
     - include_tasks: java/java.yml
     - include_tasks: node/node.yml
     - include_tasks: ruby/ruby.yml
     - include_tasks: vim/vim.yml
     - include_tasks: macos/macos.yml
+    - include_tasks: aws/aws.yml
       when: ansible_distribution == 'MacOSX'

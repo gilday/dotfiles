@@ -1,0 +1,4 @@
+Host i-* mi-*
+  IdentityFile ~/.ssh/id_rsa
+  ProxyCommand ~/devtools/aws-ssm-ec2-proxy-command/aws-ssm-ec2-proxy-command.sh %h %r %p ~/.ssh/id_rsa.pub
+  StrictHostKeyChecking no
