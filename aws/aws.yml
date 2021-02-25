@@ -23,3 +23,10 @@
     src: ec2-ssm
     dest: "{{ ansible_user_dir }}/.ssh/config.d/ec2-ssm"
     mode: 0600
+
+
+- name: Link AWS ZSH Configuration
+  file:
+    state: link
+    src: "{{ ansible_user_dir }}/dotfiles/aws/aws.zsh"
+    dest: "{{ ansible_user_dir }}/.oh-my-zsh/custom/aws.zsh"
