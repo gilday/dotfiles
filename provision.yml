@@ -1,6 +1,8 @@
 ---
 - hosts: localhost
   connection: local
+  vars:
+    docuum_threshold: "50 GB"
   tasks:
     - include_tasks: core/core.yml
     - include_tasks: zsh/zsh.yml
@@ -9,5 +11,7 @@
     - include_tasks: ruby/ruby.yml
     - include_tasks: vim/vim.yml
     - include_tasks: macos/macos.yml
+      when: ansible_distribution == 'MacOSX'
     - include_tasks: aws/aws.yml
       when: ansible_distribution == 'MacOSX'
+    - include_tasks: docuum/docuum.yml
