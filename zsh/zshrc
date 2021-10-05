@@ -15,7 +15,7 @@ HIST_STAMPS="yyyy-mm-dd"
 
 # Standard plugins can be found in ~/.oh-my-zsh/plugins/*
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
-plugins=(git ssh-agent vi-mode)
+plugins=(git ssh-agent vi-mode pyenv)
 
 # enable tmux friendly ssh forwarding auth socket
 # this setting does not actually enable agent forwarding

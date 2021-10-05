@@ -4,17 +4,27 @@
     repo: https://github.com/ohmyzsh/ohmyzsh.git
     dest: "{{ ansible_user_dir }}/.oh-my-zsh"
 
+
 - name: Link zshrc
   file:
     state: link
     src: "{{ ansible_user_dir }}/dotfiles/zsh/zshrc"
     dest: "{{ ansible_user_dir }}/.zshrc"
 
+
+- name: Link zprofile
+  file:
+    state: link
+    src: "{{ ansible_user_dir }}/dotfiles/zsh/zprofile"
+    dest: "{{ ansible_user_dir }}/.zprofile"
+
+
 - name: Link Aliases and Functions
   file:
     state: link
     src: "{{ ansible_user_dir }}/dotfiles/zsh/aliases.zsh"
     dest: "{{ ansible_user_dir }}/.oh-my-zsh/custom/aliases.zsh"
+
 
 - name: Link Theme
   file:
