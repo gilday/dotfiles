@@ -1,15 +1,15 @@
 ---
-- name: Tap AdoptOpenJDK Cask
+- name: Tap Cask Versions to Install Older LTS
   homebrew_tap:
-    name: AdoptOpenJDK/openjdk
+    name: homebrew/cask-versions
   when: ansible_distribution == 'MacOSX'
 
-- name: Install OpenJDK 1.8 and 11
+- name: Install OpenJDK LTS
   homebrew_cask:
     name:
-      - adoptopenjdk/openjdk/adoptopenjdk8
-      - adoptopenjdk/openjdk/adoptopenjdk11
-      - adoptopenjdk/openjdk/adoptopenjdk15
+      - temurin8
+      - temurin11
+      - temurin
   when: ansible_distribution == 'MacOSX'
 
 - name: Link Java Zsh Configuration
