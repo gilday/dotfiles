@@ -17,3 +17,4 @@
 - name: Enable doccum launchd Service
   command: "launchctl load {{ ansible_user_dir}}/Library/LaunchAgents/com.github.stepchowfun.docuum.plist"
   become: yes
+  when: ansible_distribution == 'MacOSX'
