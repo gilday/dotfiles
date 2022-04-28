@@ -28,8 +28,6 @@ alias android-disconnect="fusermount -u /media/GalaxyNexus"
 # MAVEN
 export M2_REPO="$HOME/.m2/repository"
 export MAVEN_OPTS='-Djava.awt.headless=true' # http://stackoverflow.com/a/17951720/501368
-export MAVEN_OPTS="-Xmx2048m -XX:MaxPermSize=256m -Xss1024k $MAVEN_OPTS"
-alias mvnci="mvn clean install"
 
 
 # JBOSS
