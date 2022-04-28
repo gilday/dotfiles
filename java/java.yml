@@ -9,6 +9,7 @@
     name:
       - temurin8
       - temurin11
+      - temurin17
       - temurin
   when: ansible_distribution == 'MacOSX'
 
