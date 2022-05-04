@@ -1,4 +1,17 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Plugins
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+call plug#begin()
+Plug 'lifepillar/vim-solarized8'
+Plug 'editorconfig/editorconfig-vim'
+Plug 'junegunn/fzf'
+Plug 'junegunn/fzf.vim'
+Plug 'prettier/vim-prettier'
+Plug 'tpope/vim-markdown'
+Plug 'dracula/vim'
+call plug#end()
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => General
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set encoding=utf8
@@ -64,7 +77,7 @@ syntax enable "Enable syntax hl
 
 " Theme
 set termguicolors
-set background=dark
+set background=light
 colorscheme solarized8
 
 " SyncDarkMode function detects if the environment is using dark mode and
@@ -88,10 +101,17 @@ function! SyncDarkMode(...)
     endif
     if &background !=? s:new_bg
         let &background = s:new_bg
+        if s:new_bg == "dark"
+          colorscheme dracula
+        else
+          colorscheme solarized8
+        endif
     endif
 endfunction
 call SyncDarkMode()
-call timer_start(3000, "SyncDarkMode", {"repeat": -1})
+" TODO replace this polling, because it can cause UI issues in vim (but not
+" neovim)
+" call timer_start(3000, "SyncDarkMode", {"repeat": -1})
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""

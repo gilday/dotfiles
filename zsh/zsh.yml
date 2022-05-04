@@ -31,3 +31,22 @@
     state: link
     src: "{{ ansible_user_dir }}/dotfiles/zsh/gilday.zsh-theme"
     dest: "{{ ansible_user_dir }}/.oh-my-zsh/custom/gilday.zsh-theme"
+
+
+- name: Install zsh-autosuggestions
+  git:
+    repo: https://github.com/zsh-users/zsh-autosuggestions
+    dest: "{{ ansible_user_dir }}/.oh-my-zsh/custom/plugins/zsh-autosuggestions"
+
+
+- name: Download Dracula Theme
+  git:
+    repo: https://github.com/dracula/zsh.git
+    dest: "{{ ansible_user_dir }}/.dracula"
+
+
+- name: Install Dracula Theme
+  file:
+    path: "{{ ansible_user_dir }}/.oh-my-zsh/themes/dracula.zsh-theme"
+    state: link
+    src: "{{ ansible_user_dir }}/.dracula/dracula.zsh-theme"

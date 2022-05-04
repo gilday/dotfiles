@@ -5,70 +5,15 @@
     src: "{{ ansible_user_dir }}/dotfiles/vim/vimrc"
     dest: "{{ ansible_user_dir}}/.vimrc"
 
-- name: Create vim packages directory
+
+- name: Create ~/.vim/autoload Directory
   file:
-    state: directory
-    path: "{{ ansible_user_dir }}/.vim/pack/vendor/start"
-
-- name: Install vim packages
-  git:
-    repo: "git://github.com/{{ item.org }}/{{ item.repo }}"
-    dest: "{{ ansible_user_dir}}/.vim/pack/vendor/{{ item.dir | default('start') }}/{{ item.repo }}"
-    depth: 1
-  async: 20
-  poll: 0
-  loop:
-    - org: leafgarland
-      repo: typescript-vim
-
-    - org: peitalin
-      repo: vim-jsx-typescript
-
-    - org: lifepillar
-      repo: vim-solarized8
-      dir: opt
-
-    - org: editorconfig
-      repo: editorconfig-vim
-
-    - org: hashivim
-      repo: vim-terraform
-
-    - org: janko-m
-      repo: vim-test
-
-    - org: junegunn
-      repo: fzf
-
-    - org: junegunn
-      repo: fzf.vim
-
-    - org: prettier
-      repo: vim-prettier
-
-    - org: tpope
-      repo: vim-commentary
-
-    - org: tpope
-      repo: vim-fugitive
-
-    - org: tpope
-      repo: vim-git
-
-    - org: tpope
-      repo: vim-markdown
-
-- name: Install Neovim
-  when: ansible_distribution == 'MacOSX'
-  homebrew:
-    name: neovim
-
-- name: Configure Neovim 1/2
-  file:
-    path: "{{ ansible_user_dir }}/.config/nvim"
+    path: "{{ ansible_user_dir }}/.vim/autoload"
     state: directory
 
-- name: Config Neovim 2/2
-  copy:
-    src: init.vim
-    dest: "{{ ansible_user_dir }}/.config/nvim/init.vim"
+
+- name: Install vim plug
+  get_url:
+    url: https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    dest: "{{ ansible_user_dir }}/.vim/autoload/plug.vim"
+

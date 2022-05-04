@@ -146,7 +146,7 @@
 				<key>ActionParameters</key>
 				<dict>
 					<key>source</key>
-					<string>tell application "System Events"	set the dark_mode to get dark mode of appearance preferencesend tellif dark_mode then	set new_theme to "Solarized Dark"else	set new_theme to "Solarized Light"end iftell application "iTerm"	set color preset of session of tabs of windows to new_themeend tellif dark_mode then	return "dark"else	return "light"end if</string>
+					<string>tell application "System Events"	set the dark_mode to get dark mode of appearance preferencesend tellif dark_mode then	set new_theme to "Dracula"else	set new_theme to "Solarized Light"end iftell application "iTerm"	set color preset of session of tabs of windows to new_themeend tellif dark_mode then	return "dark"else	return "light"end if</string>
 				</dict>
 				<key>BundleIdentifier</key>
 				<string>com.apple.Automator.RunScript</string>
@@ -709,47 +709,47 @@ end run</string>
 	</array>
 	<key>connectors</key>
 	<dict>
-		<key>752D59A5-F7D9-4D12-895B-BCBD3B53917E</key>
-		<dict>
-			<key>from</key>
-			<string>876F7C52-ADE9-4B0A-B40C-B3AA3C98E4FE - 876F7C52-ADE9-4B0A-B40C-B3AA3C98E4FE</string>
-			<key>to</key>
-			<string>74A1E799-5B54-45C2-AEAE-478D05229746 - 74A1E799-5B54-45C2-AEAE-478D05229746</string>
-		</dict>
-		<key>75E3C5D8-735F-44C4-9B5A-C0383CC9DFDC</key>
-		<dict>
-			<key>from</key>
-			<string>74A1E799-5B54-45C2-AEAE-478D05229746 - 74A1E799-5B54-45C2-AEAE-478D05229746</string>
-			<key>to</key>
-			<string>FB1DF4C5-1237-48F9-A55C-154F5B11DA87 - FB1DF4C5-1237-48F9-A55C-154F5B11DA87</string>
-		</dict>
-		<key>A4FC0E1A-C99E-48DD-A4E9-5B044BF5A450</key>
-		<dict>
-			<key>from</key>
-			<string>AE02C6D7-EDD6-4059-A71C-664E09422C0B - AE02C6D7-EDD6-4059-A71C-664E09422C0B</string>
-			<key>to</key>
-			<string>876F7C52-ADE9-4B0A-B40C-B3AA3C98E4FE - 876F7C52-ADE9-4B0A-B40C-B3AA3C98E4FE</string>
-		</dict>
-		<key>C1F88C6D-A2C8-4D71-A1F2-8C0354DE6F93</key>
-		<dict>
-			<key>from</key>
-			<string>FB1DF4C5-1237-48F9-A55C-154F5B11DA87 - FB1DF4C5-1237-48F9-A55C-154F5B11DA87</string>
-			<key>to</key>
-			<string>E13F7DB8-914E-4783-9612-2CCF419F6735 - E13F7DB8-914E-4783-9612-2CCF419F6735</string>
-		</dict>
-		<key>DDEE4DBA-678F-4682-8FFD-D0E9F4FA3055</key>
+		<key>518A77F0-42D1-4EB3-B434-C1CE191E13B3</key>
 		<dict>
 			<key>from</key>
 			<string>53DAB327-BFAA-4BD1-B7E5-B8DB19121410 - 53DAB327-BFAA-4BD1-B7E5-B8DB19121410</string>
 			<key>to</key>
 			<string>C0F846C9-8B4E-4C42-B28C-23F11AC5346D - C0F846C9-8B4E-4C42-B28C-23F11AC5346D</string>
 		</dict>
-		<key>FF092DC2-2C50-4871-A820-349E9783679B</key>
+		<key>6C24BCF3-6491-42A4-A923-0EED99F3DB90</key>
+		<dict>
+			<key>from</key>
+			<string>74A1E799-5B54-45C2-AEAE-478D05229746 - 74A1E799-5B54-45C2-AEAE-478D05229746</string>
+			<key>to</key>
+			<string>FB1DF4C5-1237-48F9-A55C-154F5B11DA87 - FB1DF4C5-1237-48F9-A55C-154F5B11DA87</string>
+		</dict>
+		<key>6DB1DF83-B193-484E-9187-42DAFB6E46E6</key>
+		<dict>
+			<key>from</key>
+			<string>FB1DF4C5-1237-48F9-A55C-154F5B11DA87 - FB1DF4C5-1237-48F9-A55C-154F5B11DA87</string>
+			<key>to</key>
+			<string>E13F7DB8-914E-4783-9612-2CCF419F6735 - E13F7DB8-914E-4783-9612-2CCF419F6735</string>
+		</dict>
+		<key>A642F51C-57BD-45EA-BCD2-7D2860984990</key>
 		<dict>
 			<key>from</key>
 			<string>C0F846C9-8B4E-4C42-B28C-23F11AC5346D - C0F846C9-8B4E-4C42-B28C-23F11AC5346D</string>
 			<key>to</key>
 			<string>AE02C6D7-EDD6-4059-A71C-664E09422C0B - AE02C6D7-EDD6-4059-A71C-664E09422C0B</string>
+		</dict>
+		<key>CFB1DBE1-EC69-4FD7-95C6-BD0A1ABF2794</key>
+		<dict>
+			<key>from</key>
+			<string>876F7C52-ADE9-4B0A-B40C-B3AA3C98E4FE - 876F7C52-ADE9-4B0A-B40C-B3AA3C98E4FE</string>
+			<key>to</key>
+			<string>74A1E799-5B54-45C2-AEAE-478D05229746 - 74A1E799-5B54-45C2-AEAE-478D05229746</string>
+		</dict>
+		<key>F2EDC3F0-6351-427B-95F7-321D2E923FC4</key>
+		<dict>
+			<key>from</key>
+			<string>AE02C6D7-EDD6-4059-A71C-664E09422C0B - AE02C6D7-EDD6-4059-A71C-664E09422C0B</string>
+			<key>to</key>
+			<string>876F7C52-ADE9-4B0A-B40C-B3AA3C98E4FE - 876F7C52-ADE9-4B0A-B40C-B3AA3C98E4FE</string>
 		</dict>
 	</dict>
 	<key>variables</key>
