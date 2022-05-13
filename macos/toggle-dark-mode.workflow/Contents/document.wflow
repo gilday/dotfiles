@@ -452,9 +452,11 @@ end run</string>
 				<dict>
 					<key>Container</key>
 					<string>List</string>
+					<key>Optional</key>
+					<true/>
 					<key>Types</key>
 					<array>
-						<string>*</string>
+						<string>com.apple.applescript.object</string>
 					</array>
 				</dict>
 				<key>AMRequiredResources</key>
@@ -706,50 +708,230 @@ end run</string>
 			<key>isViewVisible</key>
 			<integer>1</integer>
 		</dict>
+		<dict>
+			<key>action</key>
+			<dict>
+				<key>AMAccepts</key>
+				<dict>
+					<key>Container</key>
+					<string>List</string>
+					<key>Optional</key>
+					<true/>
+					<key>Types</key>
+					<array>
+						<string>com.apple.cocoa.string</string>
+					</array>
+				</dict>
+				<key>AMActionVersion</key>
+				<string>2.0.3</string>
+				<key>AMApplication</key>
+				<array>
+					<string>Automator</string>
+				</array>
+				<key>AMParameterProperties</key>
+				<dict>
+					<key>COMMAND_STRING</key>
+					<dict/>
+					<key>CheckedForUserDefaultShell</key>
+					<dict/>
+					<key>inputMethod</key>
+					<dict/>
+					<key>shell</key>
+					<dict/>
+					<key>source</key>
+					<dict/>
+				</dict>
+				<key>AMProvides</key>
+				<dict>
+					<key>Container</key>
+					<string>List</string>
+					<key>Types</key>
+					<array>
+						<string>com.apple.cocoa.string</string>
+					</array>
+				</dict>
+				<key>ActionBundlePath</key>
+				<string>/System/Library/Automator/Run Shell Script.action</string>
+				<key>ActionName</key>
+				<string>Run Shell Script</string>
+				<key>ActionParameters</key>
+				<dict>
+					<key>COMMAND_STRING</key>
+					<string>for pid in $(pgrep vim); do
+	kill -SIGUSR1 $pid
+done</string>
+					<key>CheckedForUserDefaultShell</key>
+					<true/>
+					<key>inputMethod</key>
+					<integer>0</integer>
+					<key>shell</key>
+					<string>/bin/zsh</string>
+					<key>source</key>
+					<string></string>
+				</dict>
+				<key>BundleIdentifier</key>
+				<string>com.apple.RunShellScript</string>
+				<key>CFBundleVersion</key>
+				<string>2.0.3</string>
+				<key>CanShowSelectedItemsWhenRun</key>
+				<false/>
+				<key>CanShowWhenRun</key>
+				<true/>
+				<key>Category</key>
+				<array>
+					<string>AMCategoryUtilities</string>
+				</array>
+				<key>Class Name</key>
+				<string>RunShellScriptAction</string>
+				<key>InputUUID</key>
+				<string>4A2196AC-50C0-45E4-B393-06B4E7903958</string>
+				<key>Keywords</key>
+				<array>
+					<string>Shell</string>
+					<string>Script</string>
+					<string>Command</string>
+					<string>Run</string>
+					<string>Unix</string>
+				</array>
+				<key>OutputUUID</key>
+				<string>F7758B5F-D705-4086-89A1-EAE69320CDED</string>
+				<key>UUID</key>
+				<string>14A6E937-BDAF-4F9A-9D0F-4556DCBCA966</string>
+				<key>UnlocalizedApplications</key>
+				<array>
+					<string>Automator</string>
+				</array>
+				<key>arguments</key>
+				<dict>
+					<key>0</key>
+					<dict>
+						<key>default value</key>
+						<integer>0</integer>
+						<key>name</key>
+						<string>inputMethod</string>
+						<key>required</key>
+						<string>0</string>
+						<key>type</key>
+						<string>0</string>
+						<key>uuid</key>
+						<string>0</string>
+					</dict>
+					<key>1</key>
+					<dict>
+						<key>default value</key>
+						<false/>
+						<key>name</key>
+						<string>CheckedForUserDefaultShell</string>
+						<key>required</key>
+						<string>0</string>
+						<key>type</key>
+						<string>0</string>
+						<key>uuid</key>
+						<string>1</string>
+					</dict>
+					<key>2</key>
+					<dict>
+						<key>default value</key>
+						<string></string>
+						<key>name</key>
+						<string>source</string>
+						<key>required</key>
+						<string>0</string>
+						<key>type</key>
+						<string>0</string>
+						<key>uuid</key>
+						<string>2</string>
+					</dict>
+					<key>3</key>
+					<dict>
+						<key>default value</key>
+						<string></string>
+						<key>name</key>
+						<string>COMMAND_STRING</string>
+						<key>required</key>
+						<string>0</string>
+						<key>type</key>
+						<string>0</string>
+						<key>uuid</key>
+						<string>3</string>
+					</dict>
+					<key>4</key>
+					<dict>
+						<key>default value</key>
+						<string>/bin/sh</string>
+						<key>name</key>
+						<string>shell</string>
+						<key>required</key>
+						<string>0</string>
+						<key>type</key>
+						<string>0</string>
+						<key>uuid</key>
+						<string>4</string>
+					</dict>
+				</dict>
+				<key>conversionLabel</key>
+				<integer>0</integer>
+				<key>isViewVisible</key>
+				<integer>1</integer>
+				<key>location</key>
+				<string>309.000000:1402.000000</string>
+				<key>nibPath</key>
+				<string>/System/Library/Automator/Run Shell Script.action/Contents/Resources/Base.lproj/main.nib</string>
+			</dict>
+			<key>isViewVisible</key>
+			<integer>1</integer>
+		</dict>
 	</array>
 	<key>connectors</key>
 	<dict>
-		<key>518A77F0-42D1-4EB3-B434-C1CE191E13B3</key>
+		<key>147C9C4E-F6C7-4137-9A97-7CCE71AF01AD</key>
+		<dict>
+			<key>from</key>
+			<string>876F7C52-ADE9-4B0A-B40C-B3AA3C98E4FE - 876F7C52-ADE9-4B0A-B40C-B3AA3C98E4FE</string>
+			<key>to</key>
+			<string>74A1E799-5B54-45C2-AEAE-478D05229746 - 74A1E799-5B54-45C2-AEAE-478D05229746</string>
+		</dict>
+		<key>19A693E4-D428-4ADC-B1D3-CD5790CE5813</key>
 		<dict>
 			<key>from</key>
 			<string>53DAB327-BFAA-4BD1-B7E5-B8DB19121410 - 53DAB327-BFAA-4BD1-B7E5-B8DB19121410</string>
 			<key>to</key>
 			<string>C0F846C9-8B4E-4C42-B28C-23F11AC5346D - C0F846C9-8B4E-4C42-B28C-23F11AC5346D</string>
 		</dict>
-		<key>6C24BCF3-6491-42A4-A923-0EED99F3DB90</key>
-		<dict>
-			<key>from</key>
-			<string>74A1E799-5B54-45C2-AEAE-478D05229746 - 74A1E799-5B54-45C2-AEAE-478D05229746</string>
-			<key>to</key>
-			<string>FB1DF4C5-1237-48F9-A55C-154F5B11DA87 - FB1DF4C5-1237-48F9-A55C-154F5B11DA87</string>
-		</dict>
-		<key>6DB1DF83-B193-484E-9187-42DAFB6E46E6</key>
-		<dict>
-			<key>from</key>
-			<string>FB1DF4C5-1237-48F9-A55C-154F5B11DA87 - FB1DF4C5-1237-48F9-A55C-154F5B11DA87</string>
-			<key>to</key>
-			<string>E13F7DB8-914E-4783-9612-2CCF419F6735 - E13F7DB8-914E-4783-9612-2CCF419F6735</string>
-		</dict>
-		<key>A642F51C-57BD-45EA-BCD2-7D2860984990</key>
+		<key>3340E8BB-C8AF-4AC1-A27D-D3C191715E2C</key>
 		<dict>
 			<key>from</key>
 			<string>C0F846C9-8B4E-4C42-B28C-23F11AC5346D - C0F846C9-8B4E-4C42-B28C-23F11AC5346D</string>
 			<key>to</key>
 			<string>AE02C6D7-EDD6-4059-A71C-664E09422C0B - AE02C6D7-EDD6-4059-A71C-664E09422C0B</string>
 		</dict>
-		<key>CFB1DBE1-EC69-4FD7-95C6-BD0A1ABF2794</key>
+		<key>414AA010-EE08-4BB0-B1FF-8F0408B68BE4</key>
 		<dict>
 			<key>from</key>
-			<string>876F7C52-ADE9-4B0A-B40C-B3AA3C98E4FE - 876F7C52-ADE9-4B0A-B40C-B3AA3C98E4FE</string>
+			<string>E13F7DB8-914E-4783-9612-2CCF419F6735 - E13F7DB8-914E-4783-9612-2CCF419F6735</string>
 			<key>to</key>
-			<string>74A1E799-5B54-45C2-AEAE-478D05229746 - 74A1E799-5B54-45C2-AEAE-478D05229746</string>
+			<string>14A6E937-BDAF-4F9A-9D0F-4556DCBCA966 - 14A6E937-BDAF-4F9A-9D0F-4556DCBCA966</string>
 		</dict>
-		<key>F2EDC3F0-6351-427B-95F7-321D2E923FC4</key>
+		<key>7FCE4F3E-7EB2-4C36-8B94-F29637D2A4F2</key>
 		<dict>
 			<key>from</key>
 			<string>AE02C6D7-EDD6-4059-A71C-664E09422C0B - AE02C6D7-EDD6-4059-A71C-664E09422C0B</string>
 			<key>to</key>
 			<string>876F7C52-ADE9-4B0A-B40C-B3AA3C98E4FE - 876F7C52-ADE9-4B0A-B40C-B3AA3C98E4FE</string>
+		</dict>
+		<key>EC7CE3D9-E9C6-4626-A8FF-9BC9D4B8281F</key>
+		<dict>
+			<key>from</key>
+			<string>FB1DF4C5-1237-48F9-A55C-154F5B11DA87 - FB1DF4C5-1237-48F9-A55C-154F5B11DA87</string>
+			<key>to</key>
+			<string>E13F7DB8-914E-4783-9612-2CCF419F6735 - E13F7DB8-914E-4783-9612-2CCF419F6735</string>
+		</dict>
+		<key>EF0E9F85-FB2A-4AD8-A650-85641215720A</key>
+		<dict>
+			<key>from</key>
+			<string>74A1E799-5B54-45C2-AEAE-478D05229746 - 74A1E799-5B54-45C2-AEAE-478D05229746</string>
+			<key>to</key>
+			<string>FB1DF4C5-1237-48F9-A55C-154F5B11DA87 - FB1DF4C5-1237-48F9-A55C-154F5B11DA87</string>
 		</dict>
 	</dict>
 	<key>variables</key>

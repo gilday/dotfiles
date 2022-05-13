@@ -109,6 +109,9 @@ function! SyncDarkMode(...)
     endif
 endfunction
 call SyncDarkMode()
+" change the color scheme if we receive a SigUSR1
+" https://arslan.io/2021/02/15/automatic-dark-mode-for-terminal-applications/
+autocmd SigUSR1 * call SyncDarkMode()
 " TODO replace this polling, because it can cause UI issues in vim (but not
 " neovim)
 " call timer_start(3000, "SyncDarkMode", {"repeat": -1})
