@@ -1,7 +1,7 @@
 ---
 - name: Install User Local Node
   homebrew:
-    name: node@12
+    name: node
   when: ansible_distribution == 'MacOSX'
 
 
