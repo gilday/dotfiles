@@ -30,7 +30,7 @@ source $ZSH/oh-my-zsh.sh
 
 
 # EDITOR
-export EDITOR=nvim
+export EDITOR=vim
 
 
 # PATH
