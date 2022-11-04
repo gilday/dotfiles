@@ -27,6 +27,7 @@ plugins=(
 # enable tmux friendly ssh forwarding auth socket
 # this setting does not actually enable agent forwarding
 zstyle :omz:plugins:ssh-agent agent-forwarding on
+zstyle :omz:plugins:ssh-agent lazy yes
 source $ZSH/oh-my-zsh.sh
 
 
