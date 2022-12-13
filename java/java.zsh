@@ -6,8 +6,7 @@ function setjdk() {
 }
 
 if [[ "$OSTYPE" == darwin* ]]; then
-  setjdk 11
-  export LATEST_JDK_HOME=$(/usr/libexec/java_home -v 17)
+  setjdk 17
   path+=$JAVA_HOME/bin
 fi
 # automatic java_home switch when .java-version detected
