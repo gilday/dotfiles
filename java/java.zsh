@@ -39,5 +39,5 @@ export PLAY_HOME="$HOME/devtools/play"
 path+=$PLAY_HOME/bin
 
 # ORACLE JDEVELOPER
-export JDEVELOPER_HOME="$HOME/devtoos/jdeveloper"
+export JDEVELOPER_HOME="$HOME/devtools/jdeveloper"
 path+=$JDEVELOPER_HOME/jdev/bin
