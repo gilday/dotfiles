@@ -22,6 +22,7 @@ plugins=(
   vi-mode
   pyenv
   zsh-autosuggestions
+  1password
 )
 
 # enable tmux friendly ssh forwarding auth socket
