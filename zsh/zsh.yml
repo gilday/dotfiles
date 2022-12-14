@@ -39,14 +39,21 @@
     dest: "{{ ansible_user_dir }}/.oh-my-zsh/custom/plugins/zsh-autosuggestions"
 
 
+- name: Create Dracula Dir If Not Exists
+  file:
+    path: "{{ ansible_user_dir }}/dracula"
+    state: directory
+    mode: 0755
+
+
 - name: Download Dracula Theme
   git:
     repo: https://github.com/dracula/zsh.git
-    dest: "{{ ansible_user_dir }}/.dracula"
+    dest: "{{ ansible_user_dir }}/dracula/zsh"
 
 
 - name: Install Dracula Theme
   file:
     path: "{{ ansible_user_dir }}/.oh-my-zsh/themes/dracula.zsh-theme"
     state: link
-    src: "{{ ansible_user_dir }}/.dracula/dracula.zsh-theme"
+    src: "{{ ansible_user_dir }}/dracula/zsh/dracula.zsh-theme"
