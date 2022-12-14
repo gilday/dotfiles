@@ -6,6 +6,13 @@
   when: ansible_distribution == 'MacOSX'
 
 
+- name: Add LaunchAgents if not exists
+  file:
+    path: "{{ ansible_user_dir }}/Library/LaunchAgents"
+    state: directory
+    mode: 0755
+
+
 - name: Configure docuum Launch Agent
   template:
     src: com.github.stepchowfun.docuum.plist.j2
