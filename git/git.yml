@@ -1,0 +1,13 @@
+---
+- name: Link gitconfig
+  file:
+    state: link
+    src: "{{ ansible_user_dir }}/dotfiles/gitconfig"
+    dest: "{{ ansible_user_dir }}/.gitconfig"
+    force: yes
+
+
+- name: Install gitmoji
+  homebrew:
+    name: gitmoji
+  when: ansible_distribution == 'MacOSX'

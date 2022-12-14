@@ -1,0 +1,5 @@
+---
+- name: Install pyenv
+  homebrew:
+    name: pyenv
+  when: ansible_distribution == 'MacOSX'
