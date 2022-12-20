@@ -2,9 +2,12 @@
 - name: Link gitconfig
   file:
     state: link
-    src: "{{ ansible_user_dir }}/dotfiles/gitconfig"
-    dest: "{{ ansible_user_dir }}/.gitconfig"
+    src: "{{ ansible_user_dir }}/dotfiles/{{ item }}"
+    dest: "{{ ansible_user_dir }}/.{{ item }}"
     force: yes
+  loop:
+    - gitconfig
+    - gitconfig-pixee
 
 
 - name: Install gitmoji

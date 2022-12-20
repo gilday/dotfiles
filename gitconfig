@@ -1,37 +1,40 @@
 [user]
-    # set in ~/.gitconfig-hook
+	name = Johnathan Gilday
+	email = me@johnathangilday.com
 [alias]
-    amend = commit --amend --no-edit
-    force-pull = "!git fetch ; git reset --hard @{u}"
-    s = status
-    yeet = push --force-with-lease
+	amend = commit --amend --no-edit
+	force-pull = "!git fetch ; git reset --hard @{u}"
+	s = status
+	yeet = push --force-with-lease
 
 [color]
-    ui = true
+	ui = true
 
 [push]
-    default = simple
+	default = simple
 
 [core]
-    ignorecase = false
+	ignorecase = false
 
 [credential]
-    helper = cache --timeout=300
+	helper = cache --timeout=300
 
 [merge]
-    tool = kdiff3
+	tool = kdiff3
 
 [mergetool "kdiff3"]
-    path = kdiff3
-    trustExitCode = false
-    keepBackup = false
+	path = kdiff3
+	trustExitCode = false
+	keepBackup = false
 
 [mergetool "meld"]
-    trustExitCode = false
-    cmd = meld $LOCAL $BASE $REMOTE -o $MERGED --auto-merge
+	trustExitCode = false
+	cmd = meld $LOCAL $BASE $REMOTE -o $MERGED --auto-merge
 
-[include]
-    path = ~/.gitconfig-hook
+[includeIf "gitdir:github/openpixee/"]
+	path = ~/.gitconfig-pixee
+[includeIf "gitdir:github/pixeeworks/"]
+	path = ~/.gitconfig-pixee
 
 [pull]
 	rebase = true
@@ -43,12 +46,12 @@
 # signed commits
 
 [gpg]
-  format = ssh
+	format = ssh
 
 [gpg "ssh"]
-  program = "/Applications/1Password.app/Contents/MacOS/op-ssh-sign"
-  allowedSignersFile = ~/.ssh/allowed_signers
+	program = "/Applications/1Password.app/Contents/MacOS/op-ssh-sign"
+	allowedSignersFile = ~/.ssh/allowed_signers
 
 [commit]
-  gpgsign = true
+	gpgsign = true
 
