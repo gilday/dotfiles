@@ -29,6 +29,11 @@ export M2_REPO="$HOME/.m2/repository"
 export MAVEN_OPTS='-Djava.awt.headless=true' # http://stackoverflow.com/a/17951720/501368
 
 
+# GRAALVM
+export GRAALVM_HOME="$(/usr/libexec/java_home -v 17 -V 2>&1 | grep 'GraalVM' | egrep -o '((\/\S+)+)$')"
+path+=$GRAALVM_HOME/bin
+
+
 # JBOSS
 export JBOSS_HOME="$HOME/devtools/wildfly"
 path+=$JBOSS_HOME/bin
