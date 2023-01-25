@@ -32,8 +32,9 @@
 	cmd = meld $LOCAL $BASE $REMOTE -o $MERGED --auto-merge
 
 [includeIf "gitdir:github/openpixee/"]
+
 	path = ~/.gitconfig-pixee
-[includeIf "gitdir:github/pixeeworks/"]
+[includeIf "gitdir:github/pixee/"]
 	path = ~/.gitconfig-pixee
 
 [pull]
