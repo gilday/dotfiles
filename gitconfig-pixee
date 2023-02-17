@@ -1,4 +1,5 @@
 [user]
-    name = Johnathan Gilday
-    email = johnathan.gilday@pixee.ai
+	name = Johnathan Gilday
+	email = johnathan.gilday@pixee.ai
+	signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIpV586f+B6C8dgdZiLitKmyijmhUGVA1DbKteHDufgi
 

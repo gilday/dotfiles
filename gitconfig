@@ -1,6 +1,7 @@
 [user]
 	name = Johnathan Gilday
 	email = me@johnathangilday.com
+	signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAID0+jzHG64Byg89pgWUclzk12nmMwRxCNWnhVWhOx4Og
 [alias]
 	amend = commit --amend --no-edit
 	force-pull = "!git fetch ; git reset --hard @{u}"
@@ -31,12 +32,6 @@
 	trustExitCode = false
 	cmd = meld $LOCAL $BASE $REMOTE -o $MERGED --auto-merge
 
-[includeIf "gitdir:github/openpixee/"]
-
-	path = ~/.gitconfig-pixee
-[includeIf "gitdir:github/pixee/"]
-	path = ~/.gitconfig-pixee
-
 [pull]
 	rebase = true
 
@@ -55,4 +50,10 @@
 
 [commit]
 	gpgsign = true
+
+
+[includeIf "gitdir:github/openpixee/"]
+	path = ~/.gitconfig-pixee
+[includeIf "gitdir:github/pixee/"]
+	path = ~/.gitconfig-pixee
 
