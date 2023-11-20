@@ -4,6 +4,7 @@
     name: homebrew/cask-versions
   when: ansible_distribution == 'MacOSX'
 
+
 - name: Install OpenJDK LTS
   homebrew_cask:
     name:
@@ -12,6 +13,19 @@
       - temurin17
       - temurin
   when: ansible_distribution == 'MacOSX'
+
+
+- name: Tap GNG
+  homebrew_tap:
+    name: gdubw/gng
+  when: ansible_distribution == 'MacOSX'
+
+
+- name: Install GNG
+  homebrew:
+    name: gng
+  when: ansible_distribution == 'MacOSX'
+
 
 - name: Link Java Zsh Configuration
   file:
