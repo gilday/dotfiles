@@ -3,3 +3,17 @@
   homebrew:
     name: pyenv
   when: ansible_distribution == 'MacOSX'
+
+
+- name: Install pipx
+  homebrew:
+    name: pipx
+  when: ansible_distribution == 'MacOSX'
+
+
+- name: Link Python Zsh Configuration
+  file:
+    state: link
+    src: "{{ ansible_user_dir }}/dotfiles/python/python.zsh"
+    dest: "{{ ansible_user_dir }}/.oh-my-zsh/custom/python.zsh"
+
