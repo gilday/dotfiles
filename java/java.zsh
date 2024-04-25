@@ -6,7 +6,7 @@ function setjdk() {
 }
 
 if [[ "$OSTYPE" == darwin* ]]; then
-  setjdk 17
+  setjdk 21
   path+=$JAVA_HOME/bin
 fi
 # automatic java_home switch when .java-version detected
