@@ -8,9 +8,9 @@
 - name: Install OpenJDK LTS
   homebrew_cask:
     name:
-      - temurin8
-      - temurin11
-      - temurin17
+      - temurin@11
+      - temurin@17
+      - temurin@21
       - temurin
   when: ansible_distribution == 'MacOSX'
 
