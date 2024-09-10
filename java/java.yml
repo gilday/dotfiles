@@ -15,6 +15,20 @@
   when: ansible_distribution == 'MacOSX'
 
 
+- name: Install Maven
+  unarchive:
+    remote_src: yes
+    src: https://dlcdn.apache.org/maven/maven-3/3.9.9/binaries/apache-maven-3.9.9-bin.zip
+    dest: "{{ ansible_user_dir }}/devtools"
+
+
+- name: Link Maven
+  file:
+    path: "{{ ansible_user_dir }}/devtools/maven"
+    state: link
+    src: "apache-maven-3.9.9"
+
+
 - name: Tap GNG
   homebrew_tap:
     name: gdubw/gng
