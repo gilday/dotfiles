@@ -37,7 +37,7 @@
 	rebase = true
 
 [init]
-	defaultBranch = main
+        defaultBranch = main
 
 
 # signed commits
@@ -52,9 +52,13 @@
 [commit]
 	gpgsign = true
 
-
-[includeIf "gitdir:github/openpixee/"]
+[includeIf "gitdir:experiments/"]
 	path = ~/.gitconfig-pixee
-[includeIf "gitdir:github/pixee/"]
+[includeIf "gitdir:github/"]
 	path = ~/.gitconfig-pixee
-
+[includeIf "gitdir:azdo/"]
+	path = ~/.gitconfig-pixee
+[includeIf "gitdir:investigations/"]
+	path = ~/.gitconfig-pixee
+[includeIf "gitdir:dotfiles/"]
+	path = ~/.gitconfig-personal
