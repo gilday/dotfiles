@@ -12,6 +12,7 @@
     - include_tasks: node/node.yml
     - include_tasks: ruby/ruby.yml
     - include_tasks: vim/vim.yml
+    - include_tasks: vscode/vscode.yml
     - include_tasks: macos/macos.yml
       when: ansible_distribution == 'MacOSX'
     - include_tasks: aws/aws.yml
