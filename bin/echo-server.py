@@ -1,37 +1,39 @@
-#!/usr/bin/env python
-# Example of simple echo server
-# www.solusipse.net
+#!/usr/bin/env python3
+# A web server to echo back a request's headers and data.
 
-import socket
+from http.server import HTTPServer, BaseHTTPRequestHandler
+from sys import argv
 
-def listen():
-    print('listening on port 5555')
-    connection = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    connection.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
-    connection.bind(('0.0.0.0', 5555))
-    connection.listen(10)
-    while True:
-        current_connection, address = connection.accept()
-        while True:
-            data = current_connection.recv(2048)
-
-            if data == 'quit\r\n':
-                current_connection.shutdown(1)
-                current_connection.close()
-                break
-
-            elif data == 'stop\r\n':
-                current_connection.shutdown(1)
-                current_connection.close()
-                exit()
-
-            elif data:
-                current_connection.send(data)
-                print(data)
+BIND_HOST = "localhost"
+PORT = 5555
 
 
-if __name__ == "__main__":
-    try:
-        listen()
-    except KeyboardInterrupt:
-        pass
+class SimpleHTTPRequestHandler(BaseHTTPRequestHandler):
+    def do_GET(self):
+        self.write_response(b"")
+
+    def do_POST(self):
+        content_length = int(self.headers.get("content-length", 0))
+        body = self.rfile.read(content_length)
+
+        self.write_response(body)
+
+    def write_response(self, content):
+        self.send_response(200)
+        self.end_headers()
+        self.wfile.write(content)
+
+        print(self.headers)
+        print(content.decode("utf-8"))
+
+
+if len(argv) > 1:
+    arg = argv[1].split(":")
+    BIND_HOST = arg[0]
+    PORT = int(arg[1])
+
+print(f"Listening on http://{BIND_HOST}:{PORT}\n")
+
+httpd = HTTPServer((BIND_HOST, PORT), SimpleHTTPRequestHandler)
+httpd.serve_forever()
+
