@@ -7,14 +7,14 @@
 
 - name: Install aws-ssm-ec2-proxy-command
   git:
-    repo: git@github.com:qoomon/aws-ssm-ec2-proxy-command.git
-    dest: "{{ ansible_user_dir }}/devtools/aws-ssm-ec2-proxy-command"
+    repo: git@github.com:qoomon/aws-ssm-ssh-proxy-command.git
+    dest: "{{ ansible_user_dir }}/devtools/aws-ssm-ssh-proxy-command"
     depth: 1
 
 
 - name: Make aws-ssm-ec2-proxy-command Executable
   file:
-    path: "{{ ansible_user_dir }}/devtools/aws-ssm-ec2-proxy-command/aws-ssm-ec2-proxy-command.sh"
+    path: "{{ ansible_user_dir }}/devtools/aws-ssm-ssh-proxy-command/aws-ssm-ssh-proxy-command.sh"
     mode: 0750
 
 
