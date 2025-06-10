@@ -84,9 +84,9 @@ colorscheme solarized8
 " configures vim to match. Schedule the function to run periodically to keep
 " vim's colors in sync with the environment
 function! SyncDarkMode(...)
-    let s:new_bg = "dark"
-    if $TERM_PROGRAM ==? "iTerm.app"
-        let s:mode = trim(system("defaults read -g AppleInterfaceStyle"))
+    let s:new_bg = "light"
+    if $TERM_PROGRAM ==? "iTerm.app" || $TERM_PROGRAM ==? "ghostty"
+        let s:mode = trim(system("defaults read -g AppleInterfaceStyle 2>/dev/null || echo Light"))
         if s:mode ==? "Dark"
             let s:new_bg = "dark"
         else
