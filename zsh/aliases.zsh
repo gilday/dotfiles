@@ -50,3 +50,22 @@ function rdp() {
 function fireworks() {
     echo -e "\x1b]1337;RequestAttention=fireworks\a"
 }
+
+# Clean up all testcontainers containers
+function testcontainers-cleanup() {
+    local containers=$(docker ps -q --filter "label=org.testcontainers")
+    if [[ -n "$containers" ]]; then
+        echo "Killing running testcontainers..."
+        docker kill $containers
+    fi
+
+    local all_containers=$(docker ps -qa --filter "label=org.testcontainers")
+    if [[ -n "$all_containers" ]]; then
+        echo "Removing testcontainers..."
+        docker rm $all_containers
+    fi
+
+    if [[ -z "$containers" && -z "$all_containers" ]]; then
+        echo "No testcontainers found to clean up."
+    fi
+}
