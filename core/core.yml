@@ -52,3 +52,10 @@
     src: ssh.config
     dest: "{{ ansible_user_dir }}/.ssh/config"
     mode: 0600
+
+
+- name: SSH Allowed Signers
+  copy:
+    src: allowed_signers
+    dest: "{{ ansible_user_dir }}/.ssh/allowed_signers"
+    mode: 0600
