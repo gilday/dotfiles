@@ -1,10 +1,4 @@
 ---
-- name: Tap Cask Versions to Install Older LTS
-  homebrew_tap:
-    name: homebrew/cask-versions
-  when: ansible_distribution == 'MacOSX'
-
-
 - name: Install OpenJDK LTS
   homebrew_cask:
     name:
@@ -26,7 +20,7 @@
   file:
     path: "{{ ansible_user_dir }}/devtools/maven"
     state: link
-    src: "apache-maven-3.9.9"
+    src: "apache-maven-3.9.10"
 
 
 - name: Tap GNG
