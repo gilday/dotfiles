@@ -2,44 +2,70 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
+## Claude Code Limitations
+
+**Important:** The provisioning playbook requires interactive password prompts that cannot be handled in Claude Code's environment. When assisting with provisioning:
+1. Make necessary edits to the playbook files
+2. Prompt the user to run `ansible-playbook provision.yml` in their terminal
+3. Review any errors the user reports and make corrections
+4. Do NOT attempt to run the playbook directly from Claude Code
+
 ## Commands
 
-**Setup/Installation:**
 ```bash
+# Basic provisioning
 ansible-playbook provision.yml
-```
 
-**Configuration Management:**
-- Main configuration file: `provision.yml` (Ansible playbook)
-- Manages dotfiles linking and tool installation across macOS and Linux
-- Creates symbolic links from dotfiles directory to canonical locations in `$HOME`
+# With sudo access (required for Java, some Homebrew casks)
+ansible-playbook provision.yml --ask-become-pass
+```
 
 ## Architecture
 
-This is a dotfiles repository using Ansible for configuration management. The architecture follows a modular design:
+This is a dotfiles repository using Ansible for configuration management:
 
-**Core Structure:**
-- `provision.yml`: Main playbook that orchestrates all configuration tasks
-- Each tool/service has its own directory with `.yml` playbook and config files
-- Symlinks are created from dotfiles to canonical locations (`~/.gitconfig`, `~/.vimrc`, etc.)
+- **Main playbook**: `provision.yml` orchestrates all configuration tasks
+- **Module structure**: Each tool has its own directory with:
+  - `<module>.yml`: Ansible playbook
+  - Configuration files (e.g., `.vimrc`, `.gitconfig`)
+  - Optional `.zsh` files for shell configuration
+- **Linking strategy**: Files are symlinked with `force: yes` for live editing
 
-**Module Organization:**
-- `/core`: Base system configuration, SSH, and essential tools
-- `/zsh`: Shell configuration with Oh My Zsh, custom theme, and plugins
-- `/git`: Git configuration with gitmoji support
-- `/vim`: Vim/Neovim configuration with vim-plug
-- `/macos`: macOS-specific settings, dark mode toggle, and Homebrew packages
-- `/vscode`: VS Code configuration and extensions
-- `/aws`, `/java`, `/node`, `/python`, `/ruby`: Language and tool-specific configurations
-- `/1password`: 1Password CLI and SSH agent integration
-- `/bin`: Custom utility scripts (echo-server.py, tcp-proxy.sh, ancestor.rb)
+## Module Organization & Dependencies
 
-**Key Features:**
-- Cross-platform support (macOS primary, Linux secondary)
-- Dark mode synchronization across iTerm2, Vim, and IntelliJ
-- SSH configuration with modular include system (`~/.ssh/config.d/`)
-- Automated Homebrew package management
-- Oh My Zsh with Dracula theme and autosuggestions
+**Execution Order Matters:**
+1. `/core`: Base configuration, SSH setup, creates `~/devtools` directory
+2. `/zsh`: Oh My Zsh installation (must run before modules that use `~/.oh-my-zsh/custom`)
+3. Other modules in any order:
+   - `/git`: Git config with SSH signing and conditional work/personal includes
+   - `/vim`: Vim with vim-plug package manager
+   - `/aws`: AWS CLI, ECR credential helper, SSM SSH proxy
+   - `/java`: OpenJDK, Maven, GNG (requires sudo)
+   - `/python`, `/node`, `/ruby`: Language environments
+   - `/1password`: CLI and SSH agent integration
+   - `/macos`: macOS-specific settings, dark mode, Homebrew packages
+   - `/vscode`: VS Code configuration
+   - `/bin`: Custom utility scripts
 
-**Linking Strategy:**
-Most configuration files are symlinked rather than copied, allowing direct editing of files in the repository with immediate effect in the system.
+## Post-Provisioning Manual Steps
+
+1. **Vim plugins**: Run `:PlugInstall` in vim
+2. **ECR Docker config**: Add credential helpers to `~/.docker/config.json`:
+   ```json
+   {
+     "credHelpers": {
+       "public.ecr.aws": "ecr-login",
+       "<account>.dkr.ecr.<region>.amazonaws.com": "ecr-login"
+     }
+   }
+   ```
+3. **1Password SSH**: Configure agent TOML and ensure signing key in `gitconfig` matches a 1Password vault key
+
+## Key Features
+
+- Cross-platform (macOS primary, Linux secondary)
+- Dark mode sync across iTerm2, Vim, IntelliJ (⌘⇧L)
+- Modular SSH config (`~/.ssh/config.d/`)
+- Git SSH commit signing via 1Password
+- Homebrew package automation
+- Oh My Zsh with Dracula theme
