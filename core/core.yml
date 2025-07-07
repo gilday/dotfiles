@@ -5,6 +5,12 @@
     state: directory
 
 
+- name: Development Tools Directory
+  file:
+    path: "{{ ansible_user_dir }}/devtools"
+    state: directory
+
+
 - name: Link dotfiles
   file:
     state: link
