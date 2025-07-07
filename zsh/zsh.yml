@@ -17,6 +17,7 @@
     state: link
     src: "{{ ansible_user_dir }}/dotfiles/zsh/zprofile"
     dest: "{{ ansible_user_dir }}/.zprofile"
+    force: yes
 
 
 - name: Link Aliases and Functions
