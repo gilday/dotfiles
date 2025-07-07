@@ -11,6 +11,12 @@
   when: ansible_distribution == 'MacOSX'
 
 
+- name: Install uv
+  homebrew:
+    name: uv
+  when: ansible_distribution == 'MacOSX'
+
+
 - name: Link Python Zsh Configuration
   file:
     state: link
