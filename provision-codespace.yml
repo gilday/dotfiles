@@ -1,0 +1,28 @@
+---
+# Ansible playbook for GitHub Codespaces configuration
+# This playbook only includes configuration tasks that don't require:
+# - Package installations
+# - Sudo access
+# - Interactive prompts
+- hosts: localhost
+  connection: local
+  tasks:
+    # Core configuration - directory setup and basic dotfiles
+    - include_tasks: core/core.yml
+
+    # Zsh configuration - only if zsh is already available
+    - name: Check if zsh is available
+      command: which zsh
+      register: zsh_check
+      failed_when: false
+      changed_when: false
+
+    - include_tasks: zsh/zsh.yml
+      when: zsh_check.rc == 0
+
+    # Vim configuration - vimrc and vim-plug setup
+    - include_tasks: vim/vim.yml
+
+    # VS Code shell integration (minimal config)
+    - include_tasks: vscode/vscode.yml
+      tags: [config]

@@ -1,17 +1,16 @@
 ---
+# Core configuration module - basic directories and dotfiles
 - name: User bin
   file:
     path: "{{ ansible_user_dir}}/bin"
     state: directory
-
 
 - name: Development Tools Directory
   file:
     path: "{{ ansible_user_dir }}/devtools"
     state: directory
 
-
-- name: Link dotfiles
+- name: Link basic dotfiles
   file:
     state: link
     src: "{{ ansible_user_dir }}/dotfiles/{{ item }}"
@@ -19,15 +18,12 @@
     force: yes
   loop:
     - ackrc
-    - gitconfig
     - screenrc
-
 
 - name: Bin Scripts Dir
   file:
     state: directory
     path: "{{ ansible_user_dir }}/bin"
-
 
 - name: Bin Scripts
   file:
@@ -38,30 +34,9 @@
     - echo-server.py
     - tcp-proxy.sh
 
-
 - name: Set Terminal Directory Color Scheme
   git:
     repo: https://github.com/seebi/dircolors-solarized
     dest: "{{ ansible_user_dir }}/.dircolors"
     depth: 1
-
-
-# Allows other playbooks to more easily add SSH configuration
-- name: SSH Configuration Directory
-  file:
-    path: "{{ ansible_user_dir }}/.ssh/config.d"
-    state: directory
-
-
-- name: SSH Configuration
-  copy:
-    src: ssh.config
-    dest: "{{ ansible_user_dir }}/.ssh/config"
-    mode: 0600
-
-
-- name: SSH Allowed Signers
-  copy:
-    src: allowed_signers
-    dest: "{{ ansible_user_dir }}/.ssh/allowed_signers"
-    mode: 0600
+  tags: [config]
