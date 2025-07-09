@@ -1,4 +1,18 @@
 ---
+- name: Check if .zshrc exists
+  stat:
+    path: "{{ ansible_user_dir }}/.zshrc"
+  register: zshrc_stat
+
+- name: Backup existing .zshrc in Codespaces
+  copy:
+    src: "{{ ansible_user_dir }}/.zshrc"
+    dest: "{{ ansible_user_dir }}/.zshrc.codespaces-backup"
+    remote_src: yes
+  when: 
+    - zshrc_stat.stat.exists
+    - lookup('env', 'CODESPACES') == 'true'
+
 - name: Install Oh My ZSH
   git:
     repo: https://github.com/ohmyzsh/ohmyzsh.git
@@ -10,6 +24,7 @@
     state: link
     src: "{{ dotfiles_dir }}/zsh/zshrc"
     dest: "{{ ansible_user_dir }}/.zshrc"
+    force: yes
 
 
 - name: Link zprofile
