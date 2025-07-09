@@ -12,6 +12,9 @@
     # Core configuration - directory setup and basic dotfiles
     - include_tasks: core/core.yml
 
+    # Git configuration - aliases and safe settings only
+    - include_tasks: git/git.yml
+
     # Zsh configuration - only if zsh is already available
     - name: Check if zsh is available
       command: which zsh

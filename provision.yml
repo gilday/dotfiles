@@ -8,6 +8,7 @@
     - include_tasks: core/core.yml
     - include_tasks: ssh/ssh.yml
     - include_tasks: git/git.yml
+    - include_tasks: git-identity/git-identity.yml
     - include_tasks: zsh/zsh.yml
     - include_tasks: python/python.yml
     - include_tasks: java/java.yml

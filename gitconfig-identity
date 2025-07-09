@@ -1,0 +1,25 @@
+[user]
+	name = Johnathan Gilday
+	email = me@johnathangilday.com
+	signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAID0+jzHG64Byg89pgWUclzk12nmMwRxCNWnhVWhOx4Og
+
+# signed commits
+[gpg]
+	format = ssh
+
+[gpg "ssh"]
+	allowedSignersFile = ~/.ssh/allowed_signers
+
+[commit]
+	gpgsign = true
+
+[includeIf "gitdir:experiments/"]
+	path = ~/.gitconfig-pixee
+[includeIf "gitdir:github/"]
+	path = ~/.gitconfig-pixee
+[includeIf "gitdir:azdo/"]
+	path = ~/.gitconfig-pixee
+[includeIf "gitdir:investigations/"]
+	path = ~/.gitconfig-pixee
+[includeIf "gitdir:dotfiles/"]
+	path = ~/.gitconfig-personal

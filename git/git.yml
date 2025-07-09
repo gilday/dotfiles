@@ -1,14 +1,18 @@
 ---
+# Git configuration (safe for all environments)
 - name: Link gitconfig
   file:
     state: link
-    src: "{{ dotfiles_dir }}/{{ item }}"
-    dest: "{{ ansible_user_dir }}/.{{ item }}"
+    src: "{{ dotfiles_dir }}/git/gitconfig"
+    dest: "{{ ansible_user_dir }}/.gitconfig"
     force: yes
-  loop:
-    - gitconfig
-    - gitconfig-pixee
 
+- name: Link gitconfig-pixee
+  file:
+    state: link
+    src: "{{ dotfiles_dir }}/gitconfig-pixee"
+    dest: "{{ ansible_user_dir }}/.gitconfig-pixee"
+    force: yes
 
 - name: Install gitmoji
   homebrew:
