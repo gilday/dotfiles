@@ -13,7 +13,7 @@
 - name: Link basic dotfiles
   file:
     state: link
-    src: "{{ ansible_user_dir }}/dotfiles/{{ item }}"
+    src: "{{ dotfiles_dir }}/{{ item }}"
     dest: "{{ ansible_user_dir }}/.{{ item }}"
     force: yes
   loop:
@@ -28,7 +28,7 @@
 - name: Bin Scripts
   file:
     state: link
-    src: "{{ ansible_user_dir }}/dotfiles/bin/{{ item }}"
+    src: "{{ dotfiles_dir }}/bin/{{ item }}"
     dest: "{{ ansible_user_dir }}/bin/{{ item }}"
   loop:
     - echo-server.py

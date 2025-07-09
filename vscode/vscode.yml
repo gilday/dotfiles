@@ -2,6 +2,6 @@
 - name: Link Visual Studio Code Zsh Configuration
   file:
     state: link
-    src: "{{ ansible_user_dir }}/dotfiles/vscode/vscode.zsh"
+    src: "{{ dotfiles_dir }}/vscode/vscode.zsh"
     dest: "{{ ansible_user_dir }}/.oh-my-zsh/custom/vscode.zsh"
 

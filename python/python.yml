@@ -20,6 +20,6 @@
 - name: Link Python Zsh Configuration
   file:
     state: link
-    src: "{{ ansible_user_dir }}/dotfiles/python/python.zsh"
+    src: "{{ dotfiles_dir }}/python/python.zsh"
     dest: "{{ ansible_user_dir }}/.oh-my-zsh/custom/python.zsh"
 

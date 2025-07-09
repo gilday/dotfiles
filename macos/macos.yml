@@ -2,7 +2,7 @@
 - name: Install toggle-dark-mode automator service
   file:
     state: link
-    src: "{{ ansible_user_dir }}/dotfiles/macos/toggle-dark-mode.workflow"
+    src: "{{ dotfiles_dir }}/macos/toggle-dark-mode.workflow"
     dest: "{{ ansible_user_dir }}/Library/Services/toggle-dark-mode.workflow"
 
 
@@ -22,7 +22,7 @@
 - name: Link inputrc
   file:
     state: link
-    src: "{{ ansible_user_dir }}/dotfiles/macos/inputrc"
+    src: "{{ dotfiles_dir }}/macos/inputrc"
     dest: "{{ ansible_user_dir }}/.inputrc"
 
 
@@ -58,7 +58,7 @@
 - name: macOS Specific ZSH Config
   file:
     state: link
-    src: "{{ ansible_user_dir }}/dotfiles/macos/macos.zsh"
+    src: "{{ dotfiles_dir }}/macos/macos.zsh"
     dest: "{{ ansible_user_dir }}/.oh-my-zsh/custom/macos.zsh"
 
 

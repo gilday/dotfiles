@@ -2,6 +2,7 @@
 - hosts: localhost
   connection: local
   vars:
+    dotfiles_dir: "{{ playbook_dir }}"
     docuum_threshold: "50 GB"
   tasks:
     - include_tasks: core/core.yml

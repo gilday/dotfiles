@@ -8,7 +8,7 @@
 - name: Link Node Zsh Configuration
   file:
     state: link
-    src: "{{ ansible_user_dir }}/dotfiles/node/node.zsh"
+    src: "{{ dotfiles_dir }}/node/node.zsh"
     dest: "{{ ansible_user_dir }}/.oh-my-zsh/custom/node.zsh"
 
 

@@ -8,14 +8,14 @@
 - name: Link zshrc
   file:
     state: link
-    src: "{{ ansible_user_dir }}/dotfiles/zsh/zshrc"
+    src: "{{ dotfiles_dir }}/zsh/zshrc"
     dest: "{{ ansible_user_dir }}/.zshrc"
 
 
 - name: Link zprofile
   file:
     state: link
-    src: "{{ ansible_user_dir }}/dotfiles/zsh/zprofile"
+    src: "{{ dotfiles_dir }}/zsh/zprofile"
     dest: "{{ ansible_user_dir }}/.zprofile"
     force: yes
 
@@ -23,14 +23,14 @@
 - name: Link Aliases and Functions
   file:
     state: link
-    src: "{{ ansible_user_dir }}/dotfiles/zsh/aliases.zsh"
+    src: "{{ dotfiles_dir }}/zsh/aliases.zsh"
     dest: "{{ ansible_user_dir }}/.oh-my-zsh/custom/aliases.zsh"
 
 
 - name: Link Theme
   file:
     state: link
-    src: "{{ ansible_user_dir }}/dotfiles/zsh/gilday.zsh-theme"
+    src: "{{ dotfiles_dir }}/zsh/gilday.zsh-theme"
     dest: "{{ ansible_user_dir }}/.oh-my-zsh/custom/gilday.zsh-theme"
 
 

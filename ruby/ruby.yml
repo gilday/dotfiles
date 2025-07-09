@@ -7,5 +7,5 @@
 - name: Link Ruby Zsh Configuration
   file:
     state: link
-    src: "{{ ansible_user_dir }}/dotfiles/ruby/ruby.zsh"
+    src: "{{ dotfiles_dir }}/ruby/ruby.zsh"
     dest: "{{ ansible_user_dir }}/.oh-my-zsh/custom/ruby.zsh"

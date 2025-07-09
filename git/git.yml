@@ -2,7 +2,7 @@
 - name: Link gitconfig
   file:
     state: link
-    src: "{{ ansible_user_dir }}/dotfiles/{{ item }}"
+    src: "{{ dotfiles_dir }}/{{ item }}"
     dest: "{{ ansible_user_dir }}/.{{ item }}"
     force: yes
   loop:

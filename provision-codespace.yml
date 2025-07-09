@@ -6,6 +6,8 @@
 # - Interactive prompts
 - hosts: localhost
   connection: local
+  vars:
+    dotfiles_dir: "{{ playbook_dir }}"
   tasks:
     # Core configuration - directory setup and basic dotfiles
     - include_tasks: core/core.yml

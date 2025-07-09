@@ -38,5 +38,5 @@
 - name: Link Java Zsh Configuration
   file:
     state: link
-    src: "{{ ansible_user_dir }}/dotfiles/java/java.zsh"
+    src: "{{ dotfiles_dir }}/java/java.zsh"
     dest: "{{ ansible_user_dir }}/.oh-my-zsh/custom/java.zsh"

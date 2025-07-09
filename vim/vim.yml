@@ -2,7 +2,7 @@
 - name: Install vimrc
   file:
     state: link
-    src: "{{ ansible_user_dir }}/dotfiles/vim/vimrc"
+    src: "{{ dotfiles_dir }}/vim/vimrc"
     dest: "{{ ansible_user_dir}}/.vimrc"
   register: vimrc_result
 
