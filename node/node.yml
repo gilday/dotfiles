@@ -4,6 +4,11 @@
     name: node@20
   when: ansible_distribution == 'MacOSX'
 
+- name: Install Bun
+  homebrew:
+    name: oven-sh/bun/bun
+  when: ansible_distribution == 'MacOSX'
+
 
 - name: Link Node Zsh Configuration
   file:
