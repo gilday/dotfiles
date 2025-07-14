@@ -1,0 +1,13 @@
+---
+- name: Install GitHub CLI
+  homebrew:
+    name: gh
+  when: ansible_distribution == 'MacOSX'
+
+
+- name: Configure SSH for GitHub Codespaces
+  copy:
+    src: codespaces
+    dest: "{{ ansible_user_dir }}/.ssh/config.d/codespaces"
+    mode: 0600
+

@@ -2,6 +2,14 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
+## Code Formatting
+
+Follow the formatting rules defined in `.editorconfig`:
+- Use LF line endings for all files
+- Ensure all files end with a newline
+- Use tabs for indentation in gitconfig files
+- For other files, follow existing indentation patterns
+
 ## Claude Code Limitations
 
 **Important:** The provisioning playbook requires interactive password prompts that cannot be handled in Claude Code's environment. When assisting with provisioning:

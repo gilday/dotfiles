@@ -1,0 +1,10 @@
+# GitHub Codespaces - Usage: ssh cs.<codespace-name>
+Host cs.*
+        User vscode
+        ProxyCommand sh -c 'gh cs ssh -c ${1#cs.} --stdio -- -i $HOME/.ssh/codespaces.auto' _ %h
+        UserKnownHostsFile=/dev/null
+        StrictHostKeyChecking no
+        LogLevel quiet
+        ControlMaster auto
+        IdentityFile $HOME/.ssh/codespaces.auto
+
