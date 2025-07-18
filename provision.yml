@@ -22,3 +22,4 @@
     - include_tasks: github/github.yml
     - include_tasks: docuum/docuum.yml
     - include_tasks: 1password/1password.yml
+    - include_tasks: ghostty/ghostty.yml
