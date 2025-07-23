@@ -18,3 +18,8 @@
   homebrew:
     name: gitmoji
   when: ansible_distribution == 'MacOSX'
+
+- name: Install git-absorb
+  homebrew:
+    name: git-absorb
+  when: ansible_distribution == 'MacOSX'
