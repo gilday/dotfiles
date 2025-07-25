@@ -77,44 +77,8 @@ syntax enable "Enable syntax hl
 
 " Theme
 set termguicolors
-set background=light
-colorscheme solarized8
-
-" SyncDarkMode function detects if the environment is using dark mode and
-" configures vim to match. Schedule the function to run periodically to keep
-" vim's colors in sync with the environment
-function! SyncDarkMode(...)
-    let s:new_bg = "light"
-    if $TERM_PROGRAM ==? "iTerm.app" || $TERM_PROGRAM ==? "ghostty"
-        let s:mode = trim(system("defaults read -g AppleInterfaceStyle 2>/dev/null || echo Light"))
-        if s:mode ==? "Dark"
-            let s:new_bg = "dark"
-        else
-            let s:new_bg = "light"
-        endif
-    else
-        if $VIM_BACKGROUND ==? "dark"
-            let s:new_bg = "dark"
-        else
-            let s:new_bg = "light"
-        endif
-    endif
-    if &background !=? s:new_bg
-        let &background = s:new_bg
-        if s:new_bg == "dark"
-          colorscheme dracula
-        else
-          colorscheme solarized8
-        endif
-    endif
-endfunction
-call SyncDarkMode()
-" change the color scheme if we receive a SigUSR1
-" https://arslan.io/2021/02/15/automatic-dark-mode-for-terminal-applications/
-autocmd SigUSR1 * call SyncDarkMode()
-" TODO replace this polling, because it can cause UI issues in vim (but not
-" neovim)
-" call timer_start(3000, "SyncDarkMode", {"repeat": -1})
+set background=dark
+colorscheme dracula
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""

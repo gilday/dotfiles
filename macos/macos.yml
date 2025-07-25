@@ -1,11 +1,4 @@
 ---
-- name: Install toggle-dark-mode automator service
-  file:
-    state: link
-    src: "{{ dotfiles_dir }}/macos/toggle-dark-mode.workflow"
-    dest: "{{ ansible_user_dir }}/Library/Services/toggle-dark-mode.workflow"
-
-
 - name: Create Dedicated Screenshots Directory
   file:
     path: "{{ ansible_user_dir }}/Desktop/sshots"
