@@ -72,7 +72,7 @@ This is a dotfiles repository using Ansible for configuration management:
 ## Key Features
 
 - Cross-platform (macOS primary, Linux secondary)
-- Dark mode sync across iTerm2, Vim, IntelliJ (⌘⇧L)
+- Dark mode sync across Ghostty, Vim, IntelliJ (⌘⇧L)
 - Modular SSH config (`~/.ssh/config.d/`)
 - Git SSH commit signing via 1Password
 - Homebrew package automation

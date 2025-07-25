@@ -48,10 +48,6 @@ function rdp() {
     ssh -L 33890:localhost:3389 -N $1
 }
 
-# On iterm2, sends fireworks shooting off from the cursor. Good for testing iterm2 escape codes
-function fireworks() {
-    echo -e "\x1b]1337;RequestAttention=fireworks\a"
-}
 
 # Clean up all testcontainers containers
 function testcontainers-cleanup() {

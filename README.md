@@ -29,7 +29,7 @@ https://stefan.sofa-rockers.org/2018/10/23/macos-dark-mode-terminal-vim/
 
 The Automator Quick Action service
 [toggle-dark-mode.workflow](./macos/toggle-dark-mode.workflow) toggles the macOS
-Dark Mode, then runs an Apple Script to update iTerm's color scheme.
+Dark Mode.
 
 A scheduled vim function reads the current environment and updates the vim color
 scheme accordingly.
