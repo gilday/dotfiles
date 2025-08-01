@@ -34,9 +34,17 @@
     - echo-server.py
     - tcp-proxy.sh
 
-- name: Set Terminal Directory Color Scheme
+- name: Download Nord Dircolors
   git:
-    repo: https://github.com/seebi/dircolors-solarized
-    dest: "{{ ansible_user_dir }}/.dircolors"
+    repo: https://github.com/nordtheme/dircolors.git
+    dest: "{{ ansible_user_dir }}/.dircolors-nord"
     depth: 1
   tags: [config]
+
+- name: Set Nord Directory Color Scheme
+  file:
+    path: "{{ ansible_user_dir }}/.dir_colors"
+    state: link
+    src: "{{ ansible_user_dir }}/.dircolors-nord/src/dir_colors"
+  tags: [config]
+

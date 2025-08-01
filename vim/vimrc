@@ -8,7 +8,7 @@ Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
 Plug 'prettier/vim-prettier'
 Plug 'tpope/vim-markdown'
-Plug 'dracula/vim'
+Plug 'casonadams/nord.vim'  " Includes both nord and nord-light themes
 call plug#end()
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -77,8 +77,58 @@ syntax enable "Enable syntax hl
 
 " Theme
 set termguicolors
-set background=dark
-colorscheme dracula
+
+" Auto-detect macOS dark mode and set appropriate theme
+function! SetBackgroundMode(...)
+    let s:new_bg = "light"
+    let s:new_theme = "nord-light"
+    " Check macOS dark mode setting
+    let s:mode = system("defaults read -g AppleInterfaceStyle 2>/dev/null")
+    if s:mode =~? "Dark"
+        let s:new_bg = "dark"
+        let s:new_theme = "nord"
+    endif
+    " Only update if changed
+    if &background !=? s:new_bg
+        let &background = s:new_bg
+        " Set colorscheme based on background
+        try
+            execute 'colorscheme ' . s:new_theme
+        catch
+            colorscheme default
+        endtry
+    endif
+endfunction
+
+" Set initial background
+call SetBackgroundMode()
+
+" Check every 5 seconds for system theme changes
+if has('timers')
+    call timer_start(5000, "SetBackgroundMode", {"repeat": -1})
+endif
+
+" Manual toggle command
+command! ToggleBg call ToggleBackground()
+
+function! ToggleBackground()
+    if &background == "dark"
+        set background=light
+        try
+            colorscheme nord-light
+        catch
+            colorscheme default
+        endtry
+    else
+        set background=dark
+        try
+            colorscheme nord
+        catch
+            colorscheme default
+        endtry
+    endif
+endfunction
+
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""

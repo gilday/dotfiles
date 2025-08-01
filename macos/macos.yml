@@ -18,14 +18,10 @@
     src: "{{ dotfiles_dir }}/macos/inputrc"
     dest: "{{ ansible_user_dir }}/.inputrc"
 
+# Note: iTerm2 support has been removed. 
+# Ghostty themes are configured directly in ghostty/config
 
 
-
-- name: Create Dracula Dir If Not Exists
-  file:
-    path: "{{ ansible_user_dir }}/dracula"
-    state: directory
-    mode: 0755
 
 
 

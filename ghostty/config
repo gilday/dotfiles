@@ -5,6 +5,6 @@
 # shell-integration = zsh
 
 # Other useful Ghostty settings you might want:
-# theme = dracula
+theme = nord
 # font-family = "MesloLGS NF"
 # font-size = 14
