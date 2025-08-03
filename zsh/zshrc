@@ -19,6 +19,7 @@ plugins=(
   aws
   docker
   git
+  gitignore
   vi-mode
   pyenv
   zsh-autosuggestions
