@@ -18,6 +18,7 @@ HIST_STAMPS="yyyy-mm-dd"
 plugins=(
   aws
   docker
+  dotenv
   git
   gitignore
   vi-mode
