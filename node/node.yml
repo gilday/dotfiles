@@ -4,6 +4,10 @@
     name: node@20
   when: ansible_distribution == 'MacOSX'
 
+- name: Install Bun Tap
+  homebrew_tap:
+    name: oven-sh/bun
+
 - name: Install Bun
   homebrew:
     name: oven-sh/bun/bun
