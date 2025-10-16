@@ -16,11 +16,12 @@
 
 [includeIf "gitdir:experiments/"]
 	path = ~/.gitconfig-pixee
-[includeIf "gitdir:github/"]
-	path = ~/.gitconfig-pixee
 [includeIf "gitdir:azdo/"]
 	path = ~/.gitconfig-pixee
 [includeIf "gitdir:investigations/"]
 	path = ~/.gitconfig-pixee
 [includeIf "gitdir:dotfiles/"]
 	path = ~/.gitconfig-personal
+[includeIf "gitdir:pixee"]
+        path = ~/.gitconfig-pixee
+
