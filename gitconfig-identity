@@ -22,6 +22,6 @@
 	path = ~/.gitconfig-pixee
 [includeIf "gitdir:dotfiles/"]
 	path = ~/.gitconfig-personal
-[includeIf "gitdir:pixee"]
+[includeIf "gitdir:**/pixee/**"]
         path = ~/.gitconfig-pixee
 
