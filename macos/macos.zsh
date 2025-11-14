@@ -1,4 +1,5 @@
 path+=/Applications/kdiff3.app/Contents/MacOS
+path+=/Applications/Postgres.app/Contents/Versions/17/bin
 path+=/usr/local/opt/coreutils/libexec/gnubin
 export MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
 
