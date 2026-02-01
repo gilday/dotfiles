@@ -35,12 +35,16 @@ function decrypt() {
     if [ $# -lt 2 ]; then
         echo "usage: decrypt <in> <out>"
     else
-        openssl aes-256-ecb -d -in $1 -out $2
+        openssl aes-256-cbc -d -pbkdf2 -md sha256 -in "$1" -out "$2"
     fi
 }
 
 function encrypt() {
-    openssl aes-256-ecb -in $1 -out $2
+    if [ $# -lt 2 ]; then
+        echo "usage: encrypt <in> <out>"
+    else
+        openssl aes-256-cbc -pbkdf2 -md sha256 -in "$1" -out "$2"
+    fi
 }
 
 # sets up an ssh tunnel for rdp
