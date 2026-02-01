@@ -8,3 +8,4 @@
 # theme = dracula
 # font-family = "MesloLGS NF"
 # font-size = 14
+keybind = shift+enter=text:\x1b\r
