@@ -38,5 +38,7 @@ sandbox:
     - "{{ script.path }}:*"
 {% endfor %}
   network:
+    allowedDomains:
+      - "registry.npmjs.org"
     allowUnixSockets:
       - "{{ lookup('env', 'SSH_AUTH_SOCK') }}"
