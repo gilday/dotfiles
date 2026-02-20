@@ -30,8 +30,8 @@ permissions:
 sandbox:
   enabled: true
   autoAllowBashIfSandboxed: true
+  excludedCommands:
+    - gh
   network:
-    allowedDomains:
-      - api.github.com
     allowUnixSockets:
       - "{{ lookup('env', 'SSH_AUTH_SOCK') }}"
