@@ -24,3 +24,4 @@
     - include_tasks: 1password/1password.yml
     - include_tasks: ghostty/ghostty.yml
     - include_tasks: just/just.yml
+    - include_tasks: claude/claude.yml

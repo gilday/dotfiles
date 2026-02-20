@@ -1,0 +1,29 @@
+---
+- name: Ensure Claude config directory exists
+  file:
+    path: "{{ ansible_user_dir }}/.claude"
+    state: directory
+    mode: '0755'
+
+- name: Ensure Claude settings file exists
+  copy:
+    content: "{}\n"
+    dest: "{{ ansible_user_dir }}/.claude/settings.json"
+    force: no
+
+- name: Read existing Claude settings
+  slurp:
+    src: "{{ ansible_user_dir }}/.claude/settings.json"
+  register: claude_settings_raw
+
+- name: Merge managed settings into existing
+  set_fact:
+    claude_merged: >-
+      {{ (claude_settings_raw.content | b64decode | from_json)
+         | combine(lookup('template', dotfiles_dir + '/claude/managed-settings.yml.j2') | from_yaml,
+                   recursive=True, list_merge='append_rp') }}
+
+- name: Apply managed Claude settings
+  copy:
+    content: "{{ claude_merged | to_nice_json(indent=2) }}\n"
+    dest: "{{ ansible_user_dir }}/.claude/settings.json"
