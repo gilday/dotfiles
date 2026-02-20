@@ -26,12 +26,17 @@ statusLine:
 permissions:
   allow:
     - "Bash(ntfy:*)"
+    - "Read(~/.claude/skills/reviewing-pull-requests/TONE.md)"
 
 sandbox:
   enabled: true
   autoAllowBashIfSandboxed: true
   excludedCommands:
     - gh
+    - ~/.claude/skills/reviewing-pull-requests/list-review-requests.sh
+    - ~/.claude/skills/reviewing-pull-requests/pr-review-history.sh
+    - ~/.claude/skills/reviewing-pull-requests/post-pending-comment.sh
+    - ~/.claude/skills/reviewing-pull-requests/edit-pending-comment.sh
   network:
     allowUnixSockets:
       - "{{ lookup('env', 'SSH_AUTH_SOCK') }}"
