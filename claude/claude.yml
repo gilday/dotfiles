@@ -11,6 +11,15 @@
     dest: "{{ ansible_user_dir }}/.claude/settings.json"
     force: no
 
+- name: Find Claude skill scripts to exclude from sandbox
+  find:
+    paths:
+      - "{{ ansible_user_dir }}/.claude/skills"
+      - "{{ ansible_user_dir }}/.claude/plugins/cache/pixee-internal-claude-plugins"
+    patterns: "*.sh"
+    recurse: yes
+  register: claude_sandbox_scripts
+
 - name: Read existing Claude settings
   slurp:
     src: "{{ ansible_user_dir }}/.claude/settings.json"
