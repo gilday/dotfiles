@@ -21,6 +21,7 @@ plugins=(
   dotenv
   git
   gitignore
+  logcli
   vi-mode
   pyenv
   zsh-autosuggestions

@@ -49,6 +49,13 @@
     dest: "{{ ansible_user_dir }}/.oh-my-zsh/custom/gilday.zsh-theme"
 
 
+- name: Install logcli plugin
+  file:
+    state: link
+    src: "{{ dotfiles_dir }}/zsh/plugins/logcli"
+    dest: "{{ ansible_user_dir }}/.oh-my-zsh/custom/plugins/logcli"
+
+
 - name: Install zsh-autosuggestions
   git:
     repo: https://github.com/zsh-users/zsh-autosuggestions
