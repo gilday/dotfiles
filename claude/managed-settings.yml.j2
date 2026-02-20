@@ -33,6 +33,7 @@ sandbox:
   autoAllowBashIfSandboxed: true
   excludedCommands:
     - "gh:*"
+    - "git:*"
 {% for script in claude_sandbox_scripts.files %}
     - "{{ script.path }}:*"
 {% endfor %}
