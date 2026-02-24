@@ -35,7 +35,7 @@ sandbox:
     - "gh:*"
     - "git:*"
 {% for script in claude_sandbox_scripts.files %}
-    - "{{ script.path }}:*"
+    - "{{ script.path | replace(ansible_user_dir, '~') }}:*"
 {% endfor %}
   network:
     allowedDomains:
