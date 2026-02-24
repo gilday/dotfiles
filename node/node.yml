@@ -1,12 +1,12 @@
 ---
 - name: Install User Local Node
   homebrew:
-    name: node@20
+    name: node@24
   when: ansible_distribution == 'MacOSX'
 
-- name: Link Node 20 as Default Runtime
+- name: Link Node 24 as Default Runtime
   homebrew:
-    name: node@20
+    name: node@24
     state: linked
     install_options:
       - force
