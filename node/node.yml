@@ -5,12 +5,9 @@
   when: ansible_distribution == 'MacOSX'
 
 - name: Link Node 24 as Default Runtime
-  homebrew:
-    name: node@24
-    state: linked
-    install_options:
-      - force
-      - overwrite
+  command: brew link node@24 --force --overwrite
+  register: link_result
+  changed_when: "'symlinks created' in link_result.stdout"
   when: ansible_distribution == 'MacOSX'
 
 - name: Install Bun Tap
