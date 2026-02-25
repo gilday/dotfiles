@@ -1,11 +1,3 @@
-# Ghostty Configuration
-
-# Shell integration is automatic for zsh
-# But you can explicitly set it if needed:
-# shell-integration = zsh
-
-# Other useful Ghostty settings you might want:
-# theme = dracula
-# font-family = "MesloLGS NF"
-# font-size = 14
-keybind = shift+enter=text:\x1b\r
+theme = dark:Dracula,light:Nord Light
+keybind = shift+enter=text:\n
+font-family = JetBrains Mono

@@ -2,7 +2,7 @@
 " => Plugins
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 call plug#begin()
-Plug 'lifepillar/vim-solarized8'
+Plug 'casonadams/nord.vim'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
@@ -75,10 +75,28 @@ set timeoutlen=500
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 syntax enable "Enable syntax hl
 
-" Theme
+" Theme - auto-switch based on macOS appearance
 set termguicolors
-set background=dark
-colorscheme dracula
+
+function! SyncThemeWithOS(...)
+    let l:mode = system("defaults read -g AppleInterfaceStyle 2>/dev/null")
+    if l:mode =~? "Dark"
+        let l:new_bg = "dark"
+        let l:new_scheme = "dracula"
+    else
+        let l:new_bg = "light"
+        let l:new_scheme = "nord-light"
+    endif
+    if &background !=? l:new_bg
+        let &background = l:new_bg
+        execute 'colorscheme ' . l:new_scheme
+    endif
+endfunction
+
+call SyncThemeWithOS()
+if has('timers')
+    call timer_start(5000, "SyncThemeWithOS", {"repeat": -1})
+endif
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
