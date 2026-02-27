@@ -39,6 +39,7 @@ sandbox:
     - "gh:*"
     - "git:*"
     - "npx:*"
+    - "ntfy:*"
 {% for script in claude_sandbox_scripts.files %}
     - "{{ script.path | replace(ansible_user_dir, '~') }}:*"
 {% endfor %}
