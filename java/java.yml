@@ -14,6 +14,12 @@
   when: ansible_distribution == 'MacOSX'
 
 
+- name: Install Eclipse JDT Language Server
+  homebrew:
+    name: jdtls
+  when: ansible_distribution == 'MacOSX'
+
+
 - name: Tap GNG
   homebrew_tap:
     name: gdubw/gng
