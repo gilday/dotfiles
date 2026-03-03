@@ -45,6 +45,8 @@ sandbox:
 {% endfor %}
   network:
     allowedDomains:
+      - "api.github.com"
+      - "github.com"
       - "registry.npmjs.org"
     allowUnixSockets:
       - "{{ lookup('env', 'SSH_AUTH_SOCK') }}"
