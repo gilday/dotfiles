@@ -43,10 +43,15 @@ sandbox:
 {% for script in claude_sandbox_scripts.files %}
     - "{{ script.path | replace(ansible_user_dir, '~') }}:*"
 {% endfor %}
+  filesystem:
+    allowWrite:
+      - "~/.gradle"
   network:
+    allowLocalBinding: true
     allowedDomains:
       - "api.github.com"
       - "github.com"
       - "registry.npmjs.org"
+      - "services.gradle.org"
     allowUnixSockets:
       - "{{ lookup('env', 'SSH_AUTH_SOCK') }}"
