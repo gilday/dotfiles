@@ -1,3 +1,4 @@
 theme = dark:Dracula,light:Nord Light
 keybind = shift+enter=text:\n
 font-family = JetBrains Mono
+auto-update-channel = tip
