@@ -5,4 +5,4 @@ check:
 
 # Run the provisioning playbook
 provision:
-    ansible-playbook provision.yml
+    ansible-playbook --ask-become-pass provision.yml
