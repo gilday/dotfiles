@@ -1,19 +1,19 @@
 ---
 # SSH configuration module
 - name: SSH Configuration Directory
-  file:
-    path: "{{ ansible_user_dir }}/.ssh/config.d"
+  ansible.builtin.file:
+    path: "{{ ansible_facts.user_dir }}/.ssh/config.d"
     state: directory
     mode: 0700
 
 - name: SSH Configuration
-  copy:
+  ansible.builtin.copy:
     src: ssh.config
-    dest: "{{ ansible_user_dir }}/.ssh/config"
+    dest: "{{ ansible_facts.user_dir }}/.ssh/config"
     mode: 0600
 
 - name: SSH Allowed Signers
-  copy:
+  ansible.builtin.copy:
     src: allowed_signers
-    dest: "{{ ansible_user_dir }}/.ssh/allowed_signers"
+    dest: "{{ ansible_facts.user_dir }}/.ssh/allowed_signers"
     mode: 0600

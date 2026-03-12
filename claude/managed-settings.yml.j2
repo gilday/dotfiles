@@ -41,7 +41,7 @@ sandbox:
     - "npx:*"
     - "ntfy:*"
 {% for script in claude_sandbox_scripts.files %}
-    - "{{ script.path | replace(ansible_user_dir, '~') }}:*"
+    - "{{ script.path | replace(ansible_facts.user_dir, '~') }}:*"
 {% endfor %}
   filesystem:
     allowWrite:

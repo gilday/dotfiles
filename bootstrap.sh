@@ -68,6 +68,11 @@ fi
 ansible_version=$(ansible-playbook --version | head -n1)
 print_info "Using $ansible_version"
 
+# Install Ansible collection dependencies
+print_info "Installing Ansible collection dependencies..."
+ansible-galaxy collection install -r requirements.yml
+print_success "Ansible collections installed"
+
 # Run the Codespace-specific provisioning playbook
 print_info "Running Codespace provisioning playbook..."
 ansible-playbook provision-codespace.yml

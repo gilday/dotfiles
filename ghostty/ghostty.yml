@@ -2,20 +2,20 @@
 - name: Configure Ghostty terminal
   block:
     - name: Ensure Ghostty config directory exists
-      file:
-        path: "{{ ansible_env.HOME }}/Library/Application Support/com.mitchellh.ghostty"
+      ansible.builtin.file:
+        path: "{{ ansible_facts.env.HOME }}/Library/Application Support/com.mitchellh.ghostty"
         state: directory
         mode: '0755'
 
     - name: Check if Ghostty config exists
-      stat:
+      ansible.builtin.stat:
         path: "{{ dotfiles_dir }}/ghostty/config"
       register: ghostty_config_file
 
     - name: Link Ghostty configuration
-      file:
+      ansible.builtin.file:
         src: "{{ dotfiles_dir }}/ghostty/config"
-        dest: "{{ ansible_env.HOME }}/Library/Application Support/com.mitchellh.ghostty/config"
+        dest: "{{ ansible_facts.env.HOME }}/Library/Application Support/com.mitchellh.ghostty/config"
         state: link
         force: yes
       when: ghostty_config_file.stat.exists

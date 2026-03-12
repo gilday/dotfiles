@@ -13,9 +13,9 @@
             <string>{{ docuum_threshold }}</string>
         </array>
         <key>StandardOutPath</key>
-        <string>{{ ansible_user_dir }}/Library/Logs/docuum.log</string>
+        <string>{{ ansible_facts.user_dir }}/Library/Logs/docuum.log</string>
         <key>StandardErrorPath</key>
-        <string>{{ ansible_user_dir }}/Library/Logs/docuum.log</string>
+        <string>{{ ansible_facts.user_dir }}/Library/Logs/docuum.log</string>
         <key>EnvironmentVariables</key>
         <dict>
             <key>PATH</key>

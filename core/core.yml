@@ -1,42 +1,41 @@
 ---
 # Core configuration module - basic directories and dotfiles
 - name: User bin
-  file:
-    path: "{{ ansible_user_dir}}/bin"
+  ansible.builtin.file:
+    path: "{{ ansible_facts.user_dir}}/bin"
     state: directory
 
 - name: Development Tools Directory
-  file:
-    path: "{{ ansible_user_dir }}/devtools"
+  ansible.builtin.file:
+    path: "{{ ansible_facts.user_dir }}/devtools"
     state: directory
 
 - name: Link basic dotfiles
-  file:
+  ansible.builtin.file:
     state: link
     src: "{{ dotfiles_dir }}/{{ item }}"
-    dest: "{{ ansible_user_dir }}/.{{ item }}"
+    dest: "{{ ansible_facts.user_dir }}/.{{ item }}"
     force: yes
   loop:
     - ackrc
     - screenrc
 
 - name: Bin Scripts Dir
-  file:
+  ansible.builtin.file:
     state: directory
-    path: "{{ ansible_user_dir }}/bin"
+    path: "{{ ansible_facts.user_dir }}/bin"
 
 - name: Bin Scripts
-  file:
+  ansible.builtin.file:
     state: link
     src: "{{ dotfiles_dir }}/bin/{{ item }}"
-    dest: "{{ ansible_user_dir }}/bin/{{ item }}"
+    dest: "{{ ansible_facts.user_dir }}/bin/{{ item }}"
   loop:
     - echo-server.py
     - tcp-proxy.sh
 
 - name: Set Terminal Directory Color Scheme
-  git:
+  ansible.builtin.git:
     repo: https://github.com/seebi/dircolors-solarized
-    dest: "{{ ansible_user_dir }}/.dircolors"
+    dest: "{{ ansible_facts.user_dir }}/.dircolors"
     depth: 1
-  tags: [config]

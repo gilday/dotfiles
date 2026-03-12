@@ -1,8 +1,8 @@
 ---
 # Git identity and signing configuration
 - name: Link gitconfig-identity
-  file:
+  ansible.builtin.file:
     state: link
     src: "{{ dotfiles_dir }}/gitconfig-identity"
-    dest: "{{ ansible_user_dir }}/.gitconfig-identity"
+    dest: "{{ ansible_facts.user_dir }}/.gitconfig-identity"
     force: yes

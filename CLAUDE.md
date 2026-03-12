@@ -21,11 +21,20 @@ Follow the formatting rules defined in `.editorconfig`:
 ## Commands
 
 ```bash
+# Install collection dependencies (required before first run)
+ansible-galaxy collection install -r requirements.yml
+
 # Basic provisioning
 ansible-playbook provision.yml
 
 # With sudo access (required for Java, some Homebrew casks)
 ansible-playbook provision.yml --ask-become-pass
+
+# Run a specific module
+ansible-playbook provision.yml --tags git
+
+# Lint and syntax check
+just check
 ```
 
 ## Architecture

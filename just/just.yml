@@ -1,12 +1,12 @@
 ---
 - name: Install just
-  homebrew:
+  community.general.homebrew:
     name: just
-  when: ansible_distribution == 'MacOSX'
+  when: ansible_facts.distribution == 'MacOSX'
 
 
 - name: Link just ZSH completions
-  file:
+  ansible.builtin.file:
     state: link
     src: "{{ dotfiles_dir }}/just/just.zsh"
-    dest: "{{ ansible_user_dir }}/.oh-my-zsh/custom/just.zsh"
+    dest: "{{ ansible_facts.user_dir }}/.oh-my-zsh/custom/just.zsh"

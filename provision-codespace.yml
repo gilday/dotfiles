@@ -10,24 +10,28 @@
     dotfiles_dir: "{{ playbook_dir }}"
   tasks:
     # Core configuration - directory setup and basic dotfiles
-    - include_tasks: core/core.yml
+    - ansible.builtin.include_tasks: core/core.yml
+      tags: [core]
 
     # Git configuration - aliases and safe settings only
-    - include_tasks: git/git.yml
+    - ansible.builtin.include_tasks: git/git.yml
+      tags: [git]
 
     # Zsh configuration - only if zsh is already available
     - name: Check if zsh is available
-      command: which zsh
+      ansible.builtin.command: which zsh
       register: zsh_check
       failed_when: false
       changed_when: false
 
-    - include_tasks: zsh/zsh.yml
+    - ansible.builtin.include_tasks: zsh/zsh.yml
       when: zsh_check.rc == 0
+      tags: [zsh]
 
     # Vim configuration - vimrc and vim-plug setup
-    - include_tasks: vim/vim.yml
+    - ansible.builtin.include_tasks: vim/vim.yml
+      tags: [vim]
 
     # VS Code shell integration (minimal config)
-    - include_tasks: vscode/vscode.yml
-      tags: [config]
+    - ansible.builtin.include_tasks: vscode/vscode.yml
+      tags: [vscode]

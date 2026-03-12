@@ -1,58 +1,58 @@
 ---
 - name: Install AWS CLI
-  homebrew:
+  community.general.homebrew:
     name: awscli
-  when: ansible_distribution == 'MacOSX'
+  when: ansible_facts.distribution == 'MacOSX'
 
 
 - name: Install Amazon ECR Docker Credential Helper
-  homebrew:
+  community.general.homebrew:
     name: docker-credential-helper-ecr
-  when: ansible_distribution == 'MacOSX'
+  when: ansible_facts.distribution == 'MacOSX'
   register: ecr_helper_result
 
 
 - name: ECR Docker Configuration Instructions
-  debug:
+  ansible.builtin.debug:
     msg: |
       ⚠️  Amazon ECR Docker Credential Helper installed!
-      
+
       To use it with your AWS ECR registries, add the following to ~/.docker/config.json:
-      
+
       {
         "credHelpers": {
           "public.ecr.aws": "ecr-login",
           "<aws_account_id>.dkr.ecr.<region>.amazonaws.com": "ecr-login"
         }
       }
-      
+
       Replace <aws_account_id> and <region> with your actual values.
       You can configure multiple ECR registries by adding more entries.
   when: ecr_helper_result.changed
 
 
 - name: Install aws-ssm-ec2-proxy-command
-  git:
+  ansible.builtin.git:
     repo: https://github.com/qoomon/aws-ssm-ssh-proxy-command.git
-    dest: "{{ ansible_user_dir }}/devtools/aws-ssm-ssh-proxy-command"
+    dest: "{{ ansible_facts.user_dir }}/devtools/aws-ssm-ssh-proxy-command"
     depth: 1
 
 
 - name: Make aws-ssm-ec2-proxy-command Executable
-  file:
-    path: "{{ ansible_user_dir }}/devtools/aws-ssm-ssh-proxy-command/aws-ssm-ssh-proxy-command.sh"
+  ansible.builtin.file:
+    path: "{{ ansible_facts.user_dir }}/devtools/aws-ssm-ssh-proxy-command/aws-ssm-ssh-proxy-command.sh"
     mode: 0750
 
 
 - name: Configure SSH
-  copy:
+  ansible.builtin.copy:
     src: ec2-ssm
-    dest: "{{ ansible_user_dir }}/.ssh/config.d/ec2-ssm"
+    dest: "{{ ansible_facts.user_dir }}/.ssh/config.d/ec2-ssm"
     mode: 0600
 
 
 - name: Link AWS ZSH Configuration
-  file:
+  ansible.builtin.file:
     state: link
     src: "{{ dotfiles_dir }}/aws/aws.zsh"
-    dest: "{{ ansible_user_dir }}/.oh-my-zsh/custom/aws.zsh"
+    dest: "{{ ansible_facts.user_dir }}/.oh-my-zsh/custom/aws.zsh"

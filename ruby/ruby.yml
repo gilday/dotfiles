@@ -1,11 +1,11 @@
 ---
 - name: Install User Local Ruby
-  homebrew:
+  community.general.homebrew:
     name: ruby
-  when: ansible_distribution == 'MacOSX'
+  when: ansible_facts.distribution == 'MacOSX'
 
 - name: Link Ruby Zsh Configuration
-  file:
+  ansible.builtin.file:
     state: link
     src: "{{ dotfiles_dir }}/ruby/ruby.zsh"
-    dest: "{{ ansible_user_dir }}/.oh-my-zsh/custom/ruby.zsh"
+    dest: "{{ ansible_facts.user_dir }}/.oh-my-zsh/custom/ruby.zsh"

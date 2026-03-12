@@ -1,33 +1,33 @@
 ---
 - name: Install User Local Node
-  homebrew:
+  community.general.homebrew:
     name: node@24
-  when: ansible_distribution == 'MacOSX'
+  when: ansible_facts.distribution == 'MacOSX'
 
 - name: Link Node 24 as Default Runtime
-  command: brew link node@24 --force --overwrite
+  ansible.builtin.command: brew link node@24 --force --overwrite
   register: link_result
   changed_when: "'symlinks created' in link_result.stdout"
-  when: ansible_distribution == 'MacOSX'
+  when: ansible_facts.distribution == 'MacOSX'
 
 - name: Install Bun Tap
-  homebrew_tap:
+  community.general.homebrew_tap:
     name: oven-sh/bun
 
 - name: Install Bun
-  homebrew:
+  community.general.homebrew:
     name: oven-sh/bun/bun
-  when: ansible_distribution == 'MacOSX'
+  when: ansible_facts.distribution == 'MacOSX'
 
 
 - name: Link Node Zsh Configuration
-  file:
+  ansible.builtin.file:
     state: link
     src: "{{ dotfiles_dir }}/node/node.zsh"
-    dest: "{{ ansible_user_dir }}/.oh-my-zsh/custom/node.zsh"
+    dest: "{{ ansible_facts.user_dir }}/.oh-my-zsh/custom/node.zsh"
 
 
 - name: Install yarn
-  npm:
+  community.general.npm:
     name: yarn
     global: yes

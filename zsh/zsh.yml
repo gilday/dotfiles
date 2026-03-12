@@ -1,82 +1,82 @@
 ---
 - name: Check if .zshrc exists
-  stat:
-    path: "{{ ansible_user_dir }}/.zshrc"
+  ansible.builtin.stat:
+    path: "{{ ansible_facts.user_dir }}/.zshrc"
   register: zshrc_stat
 
 - name: Backup existing .zshrc in Codespaces
-  copy:
-    src: "{{ ansible_user_dir }}/.zshrc"
-    dest: "{{ ansible_user_dir }}/.zshrc.codespaces-backup"
+  ansible.builtin.copy:
+    src: "{{ ansible_facts.user_dir }}/.zshrc"
+    dest: "{{ ansible_facts.user_dir }}/.zshrc.codespaces-backup"
     remote_src: yes
-  when: 
+  when:
     - zshrc_stat.stat.exists
     - lookup('env', 'CODESPACES') == 'true'
 
 - name: Install Oh My ZSH
-  git:
+  ansible.builtin.git:
     repo: https://github.com/ohmyzsh/ohmyzsh.git
-    dest: "{{ ansible_user_dir }}/.oh-my-zsh"
+    dest: "{{ ansible_facts.user_dir }}/.oh-my-zsh"
 
 
 - name: Link zshrc
-  file:
+  ansible.builtin.file:
     state: link
     src: "{{ dotfiles_dir }}/zsh/zshrc"
-    dest: "{{ ansible_user_dir }}/.zshrc"
+    dest: "{{ ansible_facts.user_dir }}/.zshrc"
     force: yes
 
 
 - name: Link zprofile
-  file:
+  ansible.builtin.file:
     state: link
     src: "{{ dotfiles_dir }}/zsh/zprofile"
-    dest: "{{ ansible_user_dir }}/.zprofile"
+    dest: "{{ ansible_facts.user_dir }}/.zprofile"
     force: yes
 
 
 - name: Link Aliases and Functions
-  file:
+  ansible.builtin.file:
     state: link
     src: "{{ dotfiles_dir }}/zsh/aliases.zsh"
-    dest: "{{ ansible_user_dir }}/.oh-my-zsh/custom/aliases.zsh"
+    dest: "{{ ansible_facts.user_dir }}/.oh-my-zsh/custom/aliases.zsh"
 
 
 - name: Link Theme
-  file:
+  ansible.builtin.file:
     state: link
     src: "{{ dotfiles_dir }}/zsh/gilday.zsh-theme"
-    dest: "{{ ansible_user_dir }}/.oh-my-zsh/custom/gilday.zsh-theme"
+    dest: "{{ ansible_facts.user_dir }}/.oh-my-zsh/custom/gilday.zsh-theme"
 
 
 - name: Install logcli plugin
-  file:
+  ansible.builtin.file:
     state: link
     src: "{{ dotfiles_dir }}/zsh/plugins/logcli"
-    dest: "{{ ansible_user_dir }}/.oh-my-zsh/custom/plugins/logcli"
+    dest: "{{ ansible_facts.user_dir }}/.oh-my-zsh/custom/plugins/logcli"
 
 
 - name: Install zsh-autosuggestions
-  git:
+  ansible.builtin.git:
     repo: https://github.com/zsh-users/zsh-autosuggestions
-    dest: "{{ ansible_user_dir }}/.oh-my-zsh/custom/plugins/zsh-autosuggestions"
+    dest: "{{ ansible_facts.user_dir }}/.oh-my-zsh/custom/plugins/zsh-autosuggestions"
 
 
 - name: Create Dracula Dir If Not Exists
-  file:
-    path: "{{ ansible_user_dir }}/dracula"
+  ansible.builtin.file:
+    path: "{{ ansible_facts.user_dir }}/dracula"
     state: directory
     mode: 0755
 
 
 - name: Download Dracula Theme
-  git:
+  ansible.builtin.git:
     repo: https://github.com/dracula/zsh.git
-    dest: "{{ ansible_user_dir }}/dracula/zsh"
+    dest: "{{ ansible_facts.user_dir }}/dracula/zsh"
 
 
 - name: Install Dracula Theme
-  file:
-    path: "{{ ansible_user_dir }}/.oh-my-zsh/themes/dracula.zsh-theme"
+  ansible.builtin.file:
+    path: "{{ ansible_facts.user_dir }}/.oh-my-zsh/themes/dracula.zsh-theme"
     state: link
-    src: "{{ ansible_user_dir }}/dracula/zsh/dracula.zsh-theme"
+    src: "{{ ansible_facts.user_dir }}/dracula/zsh/dracula.zsh-theme"

@@ -1,39 +1,39 @@
 ---
 - name: Install OpenJDK LTS
-  homebrew_cask:
+  community.general.homebrew_cask:
     name:
       - temurin@17
       - temurin@21
       - temurin
-  when: ansible_distribution == 'MacOSX'
+  when: ansible_facts.distribution == 'MacOSX'
 
 
 - name: Install Maven
-  homebrew:
+  community.general.homebrew:
     name: maven
-  when: ansible_distribution == 'MacOSX'
+  when: ansible_facts.distribution == 'MacOSX'
 
 
 - name: Install Eclipse JDT Language Server
-  homebrew:
+  community.general.homebrew:
     name: jdtls
-  when: ansible_distribution == 'MacOSX'
+  when: ansible_facts.distribution == 'MacOSX'
 
 
 - name: Tap GNG
-  homebrew_tap:
+  community.general.homebrew_tap:
     name: gdubw/gng
-  when: ansible_distribution == 'MacOSX'
+  when: ansible_facts.distribution == 'MacOSX'
 
 
 - name: Install GNG
-  homebrew:
+  community.general.homebrew:
     name: gng
-  when: ansible_distribution == 'MacOSX'
+  when: ansible_facts.distribution == 'MacOSX'
 
 
 - name: Link Java Zsh Configuration
-  file:
+  ansible.builtin.file:
     state: link
     src: "{{ dotfiles_dir }}/java/java.zsh"
-    dest: "{{ ansible_user_dir }}/.oh-my-zsh/custom/java.zsh"
+    dest: "{{ ansible_facts.user_dir }}/.oh-my-zsh/custom/java.zsh"

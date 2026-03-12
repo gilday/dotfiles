@@ -1,25 +1,30 @@
 ---
 - name: Install pyenv
-  homebrew:
+  community.general.homebrew:
     name: pyenv
-  when: ansible_distribution == 'MacOSX'
+  when: ansible_facts.distribution == 'MacOSX'
 
 
 - name: Install pipx
-  homebrew:
+  community.general.homebrew:
     name: pipx
-  when: ansible_distribution == 'MacOSX'
+  when: ansible_facts.distribution == 'MacOSX'
 
 
 - name: Install uv
-  homebrew:
+  community.general.homebrew:
     name: uv
-  when: ansible_distribution == 'MacOSX'
+  when: ansible_facts.distribution == 'MacOSX'
+
+
+- name: Install ansible-lint
+  community.general.homebrew:
+    name: ansible-lint
+  when: ansible_facts.distribution == 'MacOSX'
 
 
 - name: Link Python Zsh Configuration
-  file:
+  ansible.builtin.file:
     state: link
     src: "{{ dotfiles_dir }}/python/python.zsh"
-    dest: "{{ ansible_user_dir }}/.oh-my-zsh/custom/python.zsh"
-
+    dest: "{{ ansible_facts.user_dir }}/.oh-my-zsh/custom/python.zsh"

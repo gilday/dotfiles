@@ -5,23 +5,42 @@
     dotfiles_dir: "{{ playbook_dir }}"
     docuum_threshold: "50 GB"
   tasks:
-    - include_tasks: core/core.yml
-    - include_tasks: ssh/ssh.yml
-    - include_tasks: git/git.yml
-    - include_tasks: git-identity/git-identity.yml
-    - include_tasks: zsh/zsh.yml
-    - include_tasks: python/python.yml
-    - include_tasks: java/java.yml
-    - include_tasks: node/node.yml
-    - include_tasks: ruby/ruby.yml
-    - include_tasks: vim/vim.yml
-    - include_tasks: vscode/vscode.yml
-    - include_tasks: macos/macos.yml
-      when: ansible_distribution == 'MacOSX'
-    - include_tasks: aws/aws.yml
-    - include_tasks: github/github.yml
-    - include_tasks: docuum/docuum.yml
-    - include_tasks: 1password/1password.yml
-    - include_tasks: ghostty/ghostty.yml
-    - include_tasks: just/just.yml
-    - include_tasks: claude/claude.yml
+    - ansible.builtin.include_tasks: core/core.yml
+      tags: [core]
+    - ansible.builtin.include_tasks: ssh/ssh.yml
+      tags: [ssh]
+    - ansible.builtin.include_tasks: git/git.yml
+      tags: [git]
+    - ansible.builtin.include_tasks: git-identity/git-identity.yml
+      tags: [git-identity]
+    - ansible.builtin.include_tasks: zsh/zsh.yml
+      tags: [zsh]
+    - ansible.builtin.include_tasks: python/python.yml
+      tags: [python]
+    - ansible.builtin.include_tasks: java/java.yml
+      tags: [java]
+    - ansible.builtin.include_tasks: node/node.yml
+      tags: [node]
+    - ansible.builtin.include_tasks: ruby/ruby.yml
+      tags: [ruby]
+    - ansible.builtin.include_tasks: vim/vim.yml
+      tags: [vim]
+    - ansible.builtin.include_tasks: vscode/vscode.yml
+      tags: [vscode]
+    - ansible.builtin.include_tasks: macos/macos.yml
+      when: ansible_facts.distribution == 'MacOSX'
+      tags: [macos]
+    - ansible.builtin.include_tasks: aws/aws.yml
+      tags: [aws]
+    - ansible.builtin.include_tasks: github/github.yml
+      tags: [github]
+    - ansible.builtin.include_tasks: docuum/docuum.yml
+      tags: [docuum]
+    - ansible.builtin.include_tasks: 1password/1password.yml
+      tags: [1password]
+    - ansible.builtin.include_tasks: ghostty/ghostty.yml
+      tags: [ghostty]
+    - ansible.builtin.include_tasks: just/just.yml
+      tags: [just]
+    - ansible.builtin.include_tasks: claude/claude.yml
+      tags: [claude]
