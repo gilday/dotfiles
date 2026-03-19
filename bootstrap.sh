@@ -73,9 +73,9 @@ print_info "Installing Ansible collection dependencies..."
 ansible-galaxy collection install -r requirements.yml
 print_success "Ansible collections installed"
 
-# Run the Codespace-specific provisioning playbook
+# Run the provisioning playbook (CODESPACES env var auto-detected)
 print_info "Running Codespace provisioning playbook..."
-ansible-playbook provision-codespace.yml
+ansible-playbook provision.yml
 
 print_success "Codespace bootstrap complete!"
 print_info "Note: Only configuration tasks were run. No packages were installed."
