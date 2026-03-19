@@ -1,6 +1,8 @@
 ---
 - name: Link Visual Studio Code Zsh Configuration
-  ansible.builtin.file:
-    state: link
-    src: "{{ dotfiles_dir }}/vscode/vscode.zsh"
-    dest: "{{ ansible_facts.user_dir }}/.oh-my-zsh/custom/vscode.zsh"
+  ansible.builtin.include_tasks:
+    file: "{{ dotfiles_dir }}/includes/link_zsh_config.yml"
+  vars:
+    zsh_config_name: Visual Studio Code
+    zsh_config_src: vscode/vscode.zsh
+    zsh_config_dest: vscode.zsh

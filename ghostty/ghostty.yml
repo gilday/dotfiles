@@ -3,7 +3,7 @@
   block:
     - name: Ensure Ghostty config directory exists
       ansible.builtin.file:
-        path: "{{ ansible_facts.env.HOME }}/Library/Application Support/com.mitchellh.ghostty"
+        path: "{{ home_dir }}/Library/Application Support/com.mitchellh.ghostty"
         state: directory
         mode: '0755'
 
@@ -15,7 +15,7 @@
     - name: Link Ghostty configuration
       ansible.builtin.file:
         src: "{{ dotfiles_dir }}/ghostty/config"
-        dest: "{{ ansible_facts.env.HOME }}/Library/Application Support/com.mitchellh.ghostty/config"
+        dest: "{{ home_dir }}/Library/Application Support/com.mitchellh.ghostty/config"
         state: link
         force: yes
       when: ghostty_config_file.stat.exists

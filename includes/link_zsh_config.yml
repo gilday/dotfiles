@@ -1,0 +1,6 @@
+---
+- name: "Link {{ zsh_config_name }} Zsh Configuration"
+  ansible.builtin.file:
+    state: link
+    src: "{{ dotfiles_dir }}/{{ zsh_config_src }}"
+    dest: "{{ home_dir }}/.oh-my-zsh/custom/{{ zsh_config_dest }}"

@@ -4,22 +4,22 @@
   ansible.builtin.file:
     state: link
     src: "{{ dotfiles_dir }}/git/gitconfig"
-    dest: "{{ ansible_facts.user_dir }}/.gitconfig"
+    dest: "{{ home_dir }}/.gitconfig"
     force: yes
 
 - name: Link gitconfig-pixee
   ansible.builtin.file:
     state: link
     src: "{{ dotfiles_dir }}/gitconfig-pixee"
-    dest: "{{ ansible_facts.user_dir }}/.gitconfig-pixee"
+    dest: "{{ home_dir }}/.gitconfig-pixee"
     force: yes
 
 - name: Install gitmoji
   community.general.homebrew:
     name: gitmoji
-  when: ansible_facts.distribution == 'MacOSX'
+  when: is_macos
 
 - name: Install git-absorb
   community.general.homebrew:
     name: git-absorb
-  when: ansible_facts.distribution == 'MacOSX'
+  when: is_macos

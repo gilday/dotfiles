@@ -3,6 +3,8 @@
   connection: local
   vars:
     dotfiles_dir: "{{ playbook_dir }}"
+    home_dir: "{{ ansible_facts.user_dir }}"
+    is_macos: "{{ ansible_facts.distribution == 'MacOSX' }}"
     docuum_threshold: "50 GB"
   tasks:
     - ansible.builtin.include_tasks: core/core.yml
@@ -28,7 +30,7 @@
     - ansible.builtin.include_tasks: vscode/vscode.yml
       tags: [vscode]
     - ansible.builtin.include_tasks: macos/macos.yml
-      when: ansible_facts.distribution == 'MacOSX'
+      when: is_macos
       tags: [macos]
     - ansible.builtin.include_tasks: aws/aws.yml
       tags: [aws]

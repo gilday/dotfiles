@@ -5,35 +5,37 @@
       - temurin@17
       - temurin@21
       - temurin
-  when: ansible_facts.distribution == 'MacOSX'
+  when: is_macos
 
 
 - name: Install Maven
   community.general.homebrew:
     name: maven
-  when: ansible_facts.distribution == 'MacOSX'
+  when: is_macos
 
 
 - name: Install Eclipse JDT Language Server
   community.general.homebrew:
     name: jdtls
-  when: ansible_facts.distribution == 'MacOSX'
+  when: is_macos
 
 
 - name: Tap GNG
   community.general.homebrew_tap:
     name: gdubw/gng
-  when: ansible_facts.distribution == 'MacOSX'
+  when: is_macos
 
 
 - name: Install GNG
   community.general.homebrew:
     name: gng
-  when: ansible_facts.distribution == 'MacOSX'
+  when: is_macos
 
 
 - name: Link Java Zsh Configuration
-  ansible.builtin.file:
-    state: link
-    src: "{{ dotfiles_dir }}/java/java.zsh"
-    dest: "{{ ansible_facts.user_dir }}/.oh-my-zsh/custom/java.zsh"
+  ansible.builtin.include_tasks:
+    file: "{{ dotfiles_dir }}/includes/link_zsh_config.yml"
+  vars:
+    zsh_config_name: Java
+    zsh_config_src: java/java.zsh
+    zsh_config_dest: java.zsh

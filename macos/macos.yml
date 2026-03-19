@@ -1,7 +1,7 @@
 ---
 - name: Create Dedicated Screenshots Directory
   ansible.builtin.file:
-    path: "{{ ansible_facts.user_dir }}/Desktop/sshots"
+    path: "{{ home_dir }}/Desktop/sshots"
     state: directory
 
 
@@ -9,32 +9,34 @@
   community.general.osx_defaults:
     domain: com.apple.screencapture
     key: location
-    value: "{{ ansible_facts.user_dir }}/Desktop/sshots"
+    value: "{{ home_dir }}/Desktop/sshots"
 
 
 - name: Link inputrc
   ansible.builtin.file:
     state: link
     src: "{{ dotfiles_dir }}/macos/inputrc"
-    dest: "{{ ansible_facts.user_dir }}/.inputrc"
+    dest: "{{ home_dir }}/.inputrc"
 
 
 
 
 - name: Create Dracula Dir If Not Exists
   ansible.builtin.file:
-    path: "{{ ansible_facts.user_dir }}/dracula"
+    path: "{{ home_dir }}/dracula"
     state: directory
     mode: 0755
 
 
 
 
-- name: macOS Specific ZSH Config
-  ansible.builtin.file:
-    state: link
-    src: "{{ dotfiles_dir }}/macos/macos.zsh"
-    dest: "{{ ansible_facts.user_dir }}/.oh-my-zsh/custom/macos.zsh"
+- name: Link macOS Zsh Configuration
+  ansible.builtin.include_tasks:
+    file: "{{ dotfiles_dir }}/includes/link_zsh_config.yml"
+  vars:
+    zsh_config_name: macOS
+    zsh_config_src: macos/macos.zsh
+    zsh_config_dest: macos.zsh
 
 
 - name: Core Brew Packages

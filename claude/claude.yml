@@ -1,28 +1,28 @@
 ---
 - name: Ensure Claude config directory exists
   ansible.builtin.file:
-    path: "{{ ansible_facts.user_dir }}/.claude"
+    path: "{{ home_dir }}/.claude"
     state: directory
     mode: '0755'
 
 - name: Ensure Claude settings file exists
   ansible.builtin.copy:
     content: "{}\n"
-    dest: "{{ ansible_facts.user_dir }}/.claude/settings.json"
+    dest: "{{ home_dir }}/.claude/settings.json"
     force: no
 
 - name: Find Claude skill scripts to exclude from sandbox
   ansible.builtin.find:
     paths:
-      - "{{ ansible_facts.user_dir }}/.claude/skills"
-      - "{{ ansible_facts.user_dir }}/.claude/plugins/cache/pixee-internal-claude-plugins"
+      - "{{ home_dir }}/.claude/skills"
+      - "{{ home_dir }}/.claude/plugins/cache/pixee-internal-claude-plugins"
     patterns: "*.sh"
     recurse: yes
   register: claude_sandbox_scripts
 
 - name: Read existing Claude settings
   ansible.builtin.slurp:
-    src: "{{ ansible_facts.user_dir }}/.claude/settings.json"
+    src: "{{ home_dir }}/.claude/settings.json"
   register: claude_settings_raw
 
 - name: Merge managed settings into existing
@@ -35,4 +35,4 @@
 - name: Apply managed Claude settings
   ansible.builtin.copy:
     content: "{{ claude_merged | to_nice_json(indent=2) }}\n"
-    dest: "{{ ansible_facts.user_dir }}/.claude/settings.json"
+    dest: "{{ home_dir }}/.claude/settings.json"
