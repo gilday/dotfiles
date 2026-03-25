@@ -21,7 +21,39 @@ statusLine:
     if [[ -n "$used" ]]; then
       context_info=$(printf '\033[35m[%s%% ctx]\033[0m ' "$used");
     fi;
-    printf '\033[34m%s\033[0m %s%s\033[35m%s\033[0m' "$dir_name" "$git_status" "$context_info" "$model"
+    rate_info="";
+    five_pct=$(echo "$input" | jq -r '.rate_limits.five_hour.used_percentage // empty');
+    five_resets=$(echo "$input" | jq -r '.rate_limits.five_hour.resets_at // empty');
+    if [[ -n "$five_pct" ]]; then
+      filled=$(echo "$five_pct" | awk '{printf "%d", ($1 / 10 + 0.5)}');
+      empty=$((10 - filled));
+      bar="";
+      for ((i = 0; i < filled; i++)); do bar="${bar}▓"; done;
+      for ((i = 0; i < empty; i++)); do bar="${bar}░"; done;
+      if (( $(echo "$five_pct >= 80" | bc -l) )); then
+        color="\033[31m";
+      elif (( $(echo "$five_pct >= 50" | bc -l) )); then
+        color="\033[33m";
+      else
+        color="\033[32m";
+      fi;
+      reset_str="";
+      if [[ -n "$five_resets" ]]; then
+        now=$(date +%s);
+        diff=$((five_resets - now));
+        if (( diff > 0 )); then
+          hrs=$((diff / 3600));
+          mins=$(( (diff % 3600) / 60 ));
+          if (( hrs > 0 )); then
+            reset_str=$(printf ' ~%dh%02dm' "$hrs" "$mins");
+          else
+            reset_str=$(printf ' ~%dm' "$mins");
+          fi;
+        fi;
+      fi;
+      rate_info=$(printf "${color}[%s%s]\033[0m " "$bar" "$reset_str");
+    fi;
+    printf '\033[34m%s\033[0m %s%s%s\033[35m%s\033[0m' "$dir_name" "$git_status" "$context_info" "$rate_info" "$model"
 
 permissions:
   allow:
@@ -30,6 +62,9 @@ permissions:
     - "Bash(git commit:*)"
     - "Bash(git push:*)"
     - "Bash(git status:*)"
+    - "Bash(git log:*)"
+    - "Bash(git show:*)"
+    - "Bash(git diff:*)"
     - "Read(~/.claude/skills/reviewing-pull-requests/TONE.md)"
 
 sandbox:
