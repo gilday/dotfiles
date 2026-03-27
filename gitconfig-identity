@@ -24,4 +24,6 @@
 	path = ~/.gitconfig-personal
 [includeIf "gitdir:**/pixee/**"]
         path = ~/.gitconfig-pixee
+[includeIf "gitdir:**/pixee-sandbox/**"]
+        path = ~/.gitconfig-pixee
 
