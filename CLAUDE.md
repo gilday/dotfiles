@@ -47,6 +47,7 @@ This is a dotfiles repository using Ansible for configuration management:
   - Configuration files (e.g., `.vimrc`, `.gitconfig`)
   - Optional `.zsh` files for shell configuration
 - **Linking strategy**: Files are symlinked with `force: yes` for live editing
+- **Homebrew**: Guard `homebrew` and `homebrew_cask` tasks with `when: is_macos` (Homebrew is untested on non-macOS)
 
 ## Module Organization & Dependencies
 
