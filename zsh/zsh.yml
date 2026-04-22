@@ -80,3 +80,18 @@
     path: "{{ home_dir }}/.oh-my-zsh/themes/dracula.zsh-theme"
     state: link
     src: "{{ home_dir }}/dracula/zsh/dracula.zsh-theme"
+
+
+- name: Ensure Dracula theme subdirectory exists
+  ansible.builtin.file:
+    path: "{{ home_dir }}/.oh-my-zsh/themes/dracula"
+    state: directory
+    mode: 0755
+
+
+- name: Link Dracula async lib
+  ansible.builtin.file:
+    path: "{{ home_dir }}/.oh-my-zsh/themes/dracula/lib"
+    state: link
+    src: "{{ home_dir }}/dracula/zsh/lib"
+    force: yes
