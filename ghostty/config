@@ -1,4 +1,6 @@
 theme = dark:Dracula,light:Nord Light
 keybind = shift+enter=text:\n
+keybind = super+alt+left=previous_tab
+keybind = super+alt+right=next_tab
 font-family = JetBrains Mono
 
