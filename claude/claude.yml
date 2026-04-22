@@ -1,4 +1,15 @@
 ---
+- name: Uninstall Claude Code stable channel
+  community.general.homebrew_cask:
+    name: claude-code
+    state: absent
+  when: is_macos
+
+- name: Install Claude Code (latest channel)
+  community.general.homebrew_cask:
+    name: claude-code@latest
+  when: is_macos
+
 - name: Ensure Claude config directory exists
   ansible.builtin.file:
     path: "{{ home_dir }}/.claude"
