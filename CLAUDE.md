@@ -18,6 +18,14 @@ Follow the formatting rules defined in `.editorconfig`:
 3. Review any errors the user reports and make corrections
 4. Do NOT attempt to run the playbook directly from Claude Code
 
+## Worktrees: this repo is the exception
+
+This repo is exempt from the global "always use a worktree" default that applies elsewhere. Worktrees isolate the git working copy, but `ansible-playbook` mutates the **target machine**: `~/.gitconfig` and related symlinks, LaunchAgents, Keychain entries, Oh My Zsh custom files under `~/.oh-my-zsh/custom/`, Homebrew installs, and so on. That host state is shared by all worktrees, the main checkout, and every other Claude Code agent on this machine. There is no isolation between agents at the host layer.
+
+When `ansible-playbook` runs from a worktree, `playbook_dir` resolves to the worktree path, and every symlink the playbook installs points into `.../.worktrees/<branch>/...`. Removing the worktree later breaks those symlinks and corrupts the host setup for every shell on the machine, not just the one that ran the playbook.
+
+Work directly on a feature branch in the main checkout. To coordinate multiple changes in flight, use branches plus stash or temporary commits, not worktrees.
+
 ## Commands
 
 ```bash
