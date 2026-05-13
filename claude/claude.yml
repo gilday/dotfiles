@@ -47,3 +47,92 @@
   ansible.builtin.copy:
     content: "{{ claude_merged | to_nice_json(indent=2) }}\n"
     dest: "{{ home_dir }}/.claude/settings.json"
+
+# Bespoke signing identity for Claude Code sessions (macOS only).
+#
+# Source of truth: 1Password SSH Key item at
+# op://Employee/Claude Code in the pixee.1password.com account
+# (item UUID 7iox6e7jvxyycjhgqn52i6dhmi). The private key is piped from
+# 1Password directly into ssh-add via stdin and never touches disk.
+# The public key is written to ~/.ssh/claude-agent-signing.pub for
+# inspection convenience; the canonical reference for signing config is
+# the inline pubkey in claude/gitconfig-claude.
+#
+# Threat-model note: this identity is registered on GitHub for both
+# signing and authentication, so a leak grants push access in addition
+# to forged commits. Blast radius is bounded by independent revocation
+# (separate 1Password item, separate GitHub key registration) and by
+# the fact that it only activates inside Claude Code subprocesses.
+#
+# Claude Code subprocesses pick up SSH_AUTH_SOCK + GIT_CONFIG_GLOBAL from
+# managed-settings.yml.j2 above.
+#
+# Provisioning requires `op signin --account pixee` and that 1Password's
+# "Integrate with 1Password CLI" toggle is enabled in Settings → Developer.
+- name: Configure Claude Code signing identity
+  when: is_macos
+  block:
+    - name: Read agent public key from 1Password
+      ansible.builtin.command: op --account pixee.1password.com read --no-newline "op://Employee/Claude Code/public_key"
+      register: agent_public_key
+      changed_when: false
+
+    - name: Write agent public key
+      ansible.builtin.copy:
+        content: "{{ agent_public_key.stdout }} claude-agent-signing\n"
+        dest: "{{ home_dir }}/.ssh/claude-agent-signing.pub"
+        mode: "0644"
+
+    - name: Make wrapper script executable
+      ansible.builtin.file:
+        path: "{{ dotfiles_dir }}/claude/claude-ssh-agent"
+        mode: "0755"
+
+    - name: Render LaunchAgent plist
+      ansible.builtin.template:
+        src: com.gilday.claude-ssh-agent.plist.j2
+        dest: "{{ home_dir }}/Library/LaunchAgents/com.gilday.claude-ssh-agent.plist"
+        mode: "0644"
+      register: claude_launchagent_plist
+
+    - name: Check whether LaunchAgent is already loaded
+      ansible.builtin.command: launchctl list com.gilday.claude-ssh-agent
+      register: launchctl_check
+      changed_when: false
+      failed_when: false
+
+    # launchctl caches the plist in-memory at load time. If the on-disk plist
+    # changed (e.g., the script path was renamed), we must unload first or the
+    # next restart will exec the stale path.
+    - name: Unload stale LaunchAgent (plist changed)
+      ansible.builtin.command: launchctl unload {{ home_dir }}/Library/LaunchAgents/com.gilday.claude-ssh-agent.plist
+      when: claude_launchagent_plist.changed and launchctl_check.rc == 0
+
+    - name: Load LaunchAgent
+      ansible.builtin.command: launchctl load -w {{ home_dir }}/Library/LaunchAgents/com.gilday.claude-ssh-agent.plist
+      when: launchctl_check.rc != 0 or claude_launchagent_plist.changed
+
+    - name: Wait for ssh-agent socket
+      ansible.builtin.wait_for:
+        path: "{{ home_dir }}/.ssh/claude-agent.sock"
+        timeout: 5
+
+    - name: Ensure key is loaded in the agent (pipe from 1Password)
+      ansible.builtin.shell: |
+        set -euo pipefail
+        export SSH_AUTH_SOCK="{{ home_dir }}/.ssh/claude-agent.sock"
+        if /usr/bin/ssh-add -l 2>/dev/null | grep -q -F "{{ agent_public_key.stdout.split()[1] }}"; then
+          exit 0
+        fi
+        op --account pixee.1password.com read --no-newline \
+           "op://Employee/Claude Code/private_key?ssh-format=openssh" \
+          | /usr/bin/ssh-add -
+      changed_when: "'Identity added' in result.stdout"
+      register: result
+
+    - name: Link gitconfig-claude
+      ansible.builtin.file:
+        state: link
+        src: "{{ dotfiles_dir }}/claude/gitconfig-claude"
+        dest: "{{ home_dir }}/.gitconfig-claude"
+        force: yes
