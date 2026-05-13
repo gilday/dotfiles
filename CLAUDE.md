@@ -18,6 +18,10 @@ Follow the formatting rules defined in `.editorconfig`:
 3. Review any errors the user reports and make corrections
 4. Do NOT attempt to run the playbook directly from Claude Code
 
+## "Update a Claude setting" means this repo
+
+When the user asks to update, change, or add a Claude Code setting, edit the files under `claude/` in this dotfiles repo: typically `claude/managed-settings.yml.j2` (merged into `~/.claude/settings.json` by `claude/claude.yml`), and occasionally `claude/claude.yml` itself. Do NOT edit `~/.claude/settings.json` directly: the auto-mode classifier treats it as self-modification of agent config and the playbook will overwrite hand edits on the next run. After editing, prompt the user to run `just provision` to apply.
+
 ## Worktrees: this repo is the exception
 
 This repo is exempt from the global "always use a worktree" default that applies elsewhere. Worktrees isolate the git working copy, but `ansible-playbook` mutates the **target machine**: `~/.gitconfig` and related symlinks, LaunchAgents, Keychain entries, Oh My Zsh custom files under `~/.oh-my-zsh/custom/`, Homebrew installs, and so on. That host state is shared by all worktrees, the main checkout, and every other Claude Code agent on this machine. There is no isolation between agents at the host layer.
