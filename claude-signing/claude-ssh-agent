@@ -1,0 +1,23 @@
+#!/bin/bash
+# LaunchAgent entrypoint: runs a dedicated ssh-agent at a fixed socket and
+# loads the Claude agent-signing key by piping it directly from 1Password
+# into ssh-add. The private key never touches disk on this machine.
+#
+# Used only by Claude Code sessions (SSH_AUTH_SOCK is overridden to this
+# socket via ~/.claude/settings.json). Interactive shells continue to use
+# the 1Password SSH agent socket exported by 1password/1password.zsh.
+#
+# Requires 1Password's "Integrate with 1Password CLI" toggle and the desktop
+# app unlocked. If `op` is unavailable at agent startup (e.g., 1Password
+# locked), the agent stays up empty so a manual `ssh-add` can populate it.
+
+set -euo pipefail
+AGENT_SOCK="$HOME/.ssh/claude-agent.sock"
+rm -f "$AGENT_SOCK"
+/usr/bin/ssh-agent -D -a "$AGENT_SOCK" &
+AGENT_PID=$!
+while [ ! -S "$AGENT_SOCK" ]; do sleep 0.1; done
+op --account pixee.1password.com read --no-newline \
+   "op://Employee/Claude Code Signing/private_key?ssh-format=openssh" \
+  | SSH_AUTH_SOCK="$AGENT_SOCK" /usr/bin/ssh-add - || true
+wait "$AGENT_PID"

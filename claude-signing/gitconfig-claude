@@ -1,0 +1,24 @@
+# Used by Claude Code subprocesses via GIT_CONFIG_GLOBAL=~/.gitconfig-claude
+# (set by claude/managed-settings.yml.j2). Inherits everything from
+# ~/.gitconfig (including [includeIf] identity overlays for email) and
+# overrides ONLY signing so Claude commits use the agent-signing identity
+# instead of the 1Password-managed personal key.
+#
+# Why: AFK Claude Code tasks block on the 1Password biometric prompt when
+# op-ssh-sign asks the agent to sign. A separate, file-backed key in a
+# dedicated ssh-agent removes the prompt while keeping commits signed and
+# clearly attributable to the agent identity.
+
+[include]
+    path = ~/.gitconfig
+
+# Bypass op-ssh-sign so signing uses the dedicated ssh-agent socket
+# (~/.ssh/claude-agent.sock) instead of the 1Password agent.
+[gpg "ssh"]
+    program = /usr/bin/ssh-keygen
+
+# Override the per-identity signingkey set by ~/.gitconfig's [includeIf]
+# overlays. All Claude commits sign with the agent identity; email still
+# reflects pixee vs personal based on gitdir.
+[user]
+    signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBrya99h9zfr1WiJ5/44EipZzl8WuKAnz4Ewd8JvB/dd claude-agent-signing

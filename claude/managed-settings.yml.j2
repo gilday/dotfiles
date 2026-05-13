@@ -57,6 +57,10 @@ statusLine:
 
 tui: fullscreen
 
+env:
+  GIT_CONFIG_GLOBAL: "{{ home_dir }}/.gitconfig-claude"
+  SSH_AUTH_SOCK: "{{ home_dir }}/.ssh/claude-agent.sock"
+
 permissions:
   allow:
     - "Bash(ntfy:*)"
@@ -100,3 +104,4 @@ sandbox:
       - "services.gradle.org"
     allowUnixSockets:
       - "{{ lookup('env', 'SSH_AUTH_SOCK') }}"
+      - "{{ home_dir }}/.ssh/claude-agent.sock"

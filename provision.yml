@@ -67,3 +67,6 @@
     - ansible.builtin.include_tasks: claude/claude.yml
       tags: [claude]
       when: not is_codespace
+    - ansible.builtin.include_tasks: claude-signing/claude-signing.yml
+      tags: [claude-signing]
+      when: is_macos and not is_codespace
