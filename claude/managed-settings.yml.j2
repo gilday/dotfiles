@@ -55,6 +55,8 @@ statusLine:
     fi;
     printf '\033[34m%s\033[0m %s%s%s\033[35m%s\033[0m' "$dir_name" "$git_status" "$context_info" "$rate_info" "$model"
 
+tui: fullscreen
+
 permissions:
   allow:
     - "Bash(ntfy:*)"
