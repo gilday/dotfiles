@@ -79,8 +79,9 @@ permissions:
 sandbox:
   enabled: true
   autoAllowBashIfSandboxed: true
+  allowUnsandboxedCommands: false
+  enableWeakerNetworkIsolation: true
   excludedCommands:
-    - "gh:*"
     - "git:*"
     - "npx:*"
     - "ntfy:*"
