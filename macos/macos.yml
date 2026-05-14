@@ -20,15 +20,11 @@
     dest: "{{ home_dir }}/.inputrc"
 
 
-
-
 - name: Create Dracula Dir If Not Exists
   ansible.builtin.file:
     path: "{{ home_dir }}/dracula"
     state: directory
     mode: "0755"
-
-
 
 
 - name: Link macOS Zsh Configuration
