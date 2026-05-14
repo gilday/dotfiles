@@ -37,8 +37,9 @@
     - echo-server.py
     - tcp-proxy.sh
 
-- name: Set Terminal Directory Color Scheme
+- name: Set Terminal Directory Color Scheme  # noqa: latest[git]
   ansible.builtin.git:
     repo: https://github.com/seebi/dircolors-solarized
     dest: "{{ home_dir }}/.dircolors"
     depth: 1
+    version: HEAD

@@ -14,10 +14,11 @@
     - zshrc_stat.stat.exists
     - lookup('env', 'CODESPACES') == 'true'
 
-- name: Install Oh My ZSH
+- name: Install Oh My ZSH  # noqa: latest[git]
   ansible.builtin.git:
     repo: https://github.com/ohmyzsh/ohmyzsh.git
     dest: "{{ home_dir }}/.oh-my-zsh"
+    version: HEAD
 
 
 - name: Link zshrc
@@ -57,10 +58,11 @@
     dest: "{{ home_dir }}/.oh-my-zsh/custom/plugins/logcli"
 
 
-- name: Install zsh-autosuggestions
+- name: Install zsh-autosuggestions  # noqa: latest[git]
   ansible.builtin.git:
     repo: https://github.com/zsh-users/zsh-autosuggestions
     dest: "{{ home_dir }}/.oh-my-zsh/custom/plugins/zsh-autosuggestions"
+    version: HEAD
 
 
 - name: Create Dracula Dir If Not Exists
@@ -70,10 +72,11 @@
     mode: "0755"
 
 
-- name: Download Dracula Theme
+- name: Download Dracula Theme  # noqa: latest[git]
   ansible.builtin.git:
     repo: https://github.com/dracula/zsh.git
     dest: "{{ home_dir }}/dracula/zsh"
+    version: HEAD
 
 
 - name: Install Dracula Theme
