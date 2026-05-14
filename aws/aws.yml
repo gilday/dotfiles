@@ -9,26 +9,7 @@
   community.general.homebrew:
     name: docker-credential-helper-ecr
   when: is_macos
-  register: ecr_helper_result
-
-
-- name: ECR Docker Configuration Instructions
-  ansible.builtin.debug:
-    msg: |
-      ⚠️  Amazon ECR Docker Credential Helper installed!
-
-      To use it with your AWS ECR registries, add the following to ~/.docker/config.json:
-
-      {
-        "credHelpers": {
-          "public.ecr.aws": "ecr-login",
-          "<aws_account_id>.dkr.ecr.<region>.amazonaws.com": "ecr-login"
-        }
-      }
-
-      Replace <aws_account_id> and <region> with your actual values.
-      You can configure multiple ECR registries by adding more entries.
-  when: ecr_helper_result.changed
+  notify: Print ECR Docker configuration instructions
 
 
 - name: Install aws-ssm-ec2-proxy-command  # noqa: latest[git]
