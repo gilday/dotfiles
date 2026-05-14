@@ -4,11 +4,13 @@
   ansible.builtin.file:
     path: "{{ home_dir }}/bin"
     state: directory
+    mode: "0755"
 
 - name: Development Tools Directory
   ansible.builtin.file:
     path: "{{ home_dir }}/devtools"
     state: directory
+    mode: "0755"
 
 - name: Link basic dotfiles
   ansible.builtin.file:
@@ -24,6 +26,7 @@
   ansible.builtin.file:
     state: directory
     path: "{{ home_dir }}/bin"
+    mode: "0755"
 
 - name: Bin Scripts
   ansible.builtin.file:

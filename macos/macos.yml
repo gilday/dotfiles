@@ -3,6 +3,7 @@
   ansible.builtin.file:
     path: "{{ home_dir }}/Desktop/sshots"
     state: directory
+    mode: "0755"
 
 
 - name: Save Screenshots to Dedicated Directory

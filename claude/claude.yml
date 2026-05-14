@@ -21,6 +21,7 @@
     content: "{}\n"
     dest: "{{ home_dir }}/.claude/settings.json"
     force: false
+    mode: "0600"
 
 - name: Find Claude skill scripts to exclude from sandbox
   ansible.builtin.find:
@@ -47,6 +48,7 @@
   ansible.builtin.copy:
     content: "{{ claude_merged | to_nice_json(indent=2) }}\n"
     dest: "{{ home_dir }}/.claude/settings.json"
+    mode: "0600"
 
 # Bespoke signing identity for Claude Code sessions (macOS only).
 #
