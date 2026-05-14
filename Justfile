@@ -4,7 +4,7 @@ install:
 
 # Run ansible-lint and syntax check
 check:
-    ansible-lint provision.yml --offline
+    ansible-lint --strict provision.yml
     ansible-playbook provision.yml --syntax-check
 
 # Run the provisioning playbook

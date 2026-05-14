@@ -14,9 +14,10 @@ Follow the formatting rules defined in `.editorconfig`:
 
 **Important:** The provisioning playbook requires interactive password prompts that cannot be handled in Claude Code's environment. When assisting with provisioning:
 1. Make necessary edits to the playbook files
-2. Prompt the user to run `ansible-playbook provision.yml` in their terminal
-3. Review any errors the user reports and make corrections
-4. Do NOT attempt to run the playbook directly from Claude Code
+2. Run `just check` to confirm ansible-lint (strict mode) and syntax check still pass; fix any violations before handing back to the user
+3. Prompt the user to run `ansible-playbook provision.yml` in their terminal
+4. Review any errors the user reports and make corrections
+5. Do NOT attempt to run the playbook directly from Claude Code
 
 ## "Update a Claude setting" means this repo
 
