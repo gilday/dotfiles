@@ -136,3 +136,11 @@
         src: "{{ dotfiles_dir }}/claude/gitconfig-claude"
         dest: "{{ home_dir }}/.gitconfig-claude"
         force: yes
+
+- name: Link Claude Zsh Configuration
+  ansible.builtin.include_tasks:
+    file: "{{ dotfiles_dir }}/includes/link_zsh_config.yml"
+  vars:
+    zsh_config_name: Claude
+    zsh_config_src: claude/claude.zsh
+    zsh_config_dest: claude.zsh
