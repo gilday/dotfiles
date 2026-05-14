@@ -5,14 +5,14 @@
     state: link
     src: "{{ dotfiles_dir }}/git/gitconfig"
     dest: "{{ home_dir }}/.gitconfig"
-    force: yes
+    force: true
 
 - name: Link gitconfig-pixee
   ansible.builtin.file:
     state: link
     src: "{{ dotfiles_dir }}/gitconfig-pixee"
     dest: "{{ home_dir }}/.gitconfig-pixee"
-    force: yes
+    force: true
 
 - name: Install gitmoji
   community.general.homebrew:

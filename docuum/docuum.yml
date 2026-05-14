@@ -23,5 +23,5 @@
 
 - name: Enable doccum launchd Service
   ansible.builtin.command: "launchctl load {{ home_dir }}/Library/LaunchAgents/com.github.stepchowfun.docuum.plist"
-  become: yes
+  become: true
   when: is_macos

@@ -20,7 +20,7 @@
   ansible.builtin.copy:
     content: "{}\n"
     dest: "{{ home_dir }}/.claude/settings.json"
-    force: no
+    force: false
 
 - name: Find Claude skill scripts to exclude from sandbox
   ansible.builtin.find:
@@ -28,7 +28,7 @@
       - "{{ home_dir }}/.claude/skills"
       - "{{ home_dir }}/.claude/plugins/cache/pixee-internal-claude-plugins"
     patterns: "*.sh"
-    recurse: yes
+    recurse: true
   register: claude_sandbox_scripts
 
 - name: Read existing Claude settings
@@ -135,7 +135,7 @@
         state: link
         src: "{{ dotfiles_dir }}/claude/gitconfig-claude"
         dest: "{{ home_dir }}/.gitconfig-claude"
-        force: yes
+        force: true
 
 - name: Link Claude Zsh Configuration
   ansible.builtin.include_tasks:

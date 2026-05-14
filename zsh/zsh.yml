@@ -8,7 +8,7 @@
   ansible.builtin.copy:
     src: "{{ home_dir }}/.zshrc"
     dest: "{{ home_dir }}/.zshrc.codespaces-backup"
-    remote_src: yes
+    remote_src: true
   when:
     - zshrc_stat.stat.exists
     - lookup('env', 'CODESPACES') == 'true'
@@ -24,7 +24,7 @@
     state: link
     src: "{{ dotfiles_dir }}/zsh/zshrc"
     dest: "{{ home_dir }}/.zshrc"
-    force: yes
+    force: true
 
 
 - name: Link zprofile
@@ -32,7 +32,7 @@
     state: link
     src: "{{ dotfiles_dir }}/zsh/zprofile"
     dest: "{{ home_dir }}/.zprofile"
-    force: yes
+    force: true
 
 
 - name: Link Aliases and Functions
@@ -94,4 +94,4 @@
     path: "{{ home_dir }}/.oh-my-zsh/themes/dracula/lib"
     state: link
     src: "{{ home_dir }}/dracula/zsh/lib"
-    force: yes
+    force: true

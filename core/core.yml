@@ -15,7 +15,7 @@
     state: link
     src: "{{ dotfiles_dir }}/{{ item }}"
     dest: "{{ home_dir }}/.{{ item }}"
-    force: yes
+    force: true
   loop:
     - ackrc
     - screenrc
