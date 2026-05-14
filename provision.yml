@@ -1,5 +1,6 @@
 ---
-- hosts: localhost
+- name: Provision dotfiles
+  hosts: localhost
   connection: local
   vars:
     dotfiles_dir: "{{ playbook_dir }}"
@@ -8,14 +9,18 @@
     is_codespace: "{{ lookup('env', 'CODESPACES') == 'true' }}"
     docuum_threshold: "50 GB"
   tasks:
-    - ansible.builtin.include_tasks: core/core.yml
+    - name: Provision core
+      ansible.builtin.include_tasks: core/core.yml
       tags: [core]
-    - ansible.builtin.include_tasks: ssh/ssh.yml
+    - name: Provision ssh
+      ansible.builtin.include_tasks: ssh/ssh.yml
       tags: [ssh]
       when: not is_codespace
-    - ansible.builtin.include_tasks: git/git.yml
+    - name: Provision git
+      ansible.builtin.include_tasks: git/git.yml
       tags: [git]
-    - ansible.builtin.include_tasks: git-identity/git-identity.yml
+    - name: Provision git-identity
+      ansible.builtin.include_tasks: git-identity/git-identity.yml
       tags: [git-identity]
       when: not is_codespace
     - name: Check if zsh is available
@@ -24,46 +29,61 @@
       failed_when: false
       changed_when: false
       tags: [zsh]
-    - ansible.builtin.include_tasks: zsh/zsh.yml
+    - name: Provision zsh
+      ansible.builtin.include_tasks: zsh/zsh.yml
       when: not is_codespace or zsh_check.rc == 0
       tags: [zsh]
-    - ansible.builtin.include_tasks: python/python.yml
+    - name: Provision python
+      ansible.builtin.include_tasks: python/python.yml
       tags: [python]
       when: not is_codespace
-    - ansible.builtin.include_tasks: java/java.yml
+    - name: Provision java
+      ansible.builtin.include_tasks: java/java.yml
       tags: [java]
       when: not is_codespace
-    - ansible.builtin.include_tasks: node/node.yml
+    - name: Provision node
+      ansible.builtin.include_tasks: node/node.yml
       tags: [node]
       when: not is_codespace
-    - ansible.builtin.include_tasks: ruby/ruby.yml
+    - name: Provision ruby
+      ansible.builtin.include_tasks: ruby/ruby.yml
       tags: [ruby]
       when: not is_codespace
-    - ansible.builtin.include_tasks: vim/vim.yml
+    - name: Provision vim
+      ansible.builtin.include_tasks: vim/vim.yml
       tags: [vim]
-    - ansible.builtin.include_tasks: vscode/vscode.yml
+    - name: Provision vscode
+      ansible.builtin.include_tasks: vscode/vscode.yml
       tags: [vscode]
-    - ansible.builtin.include_tasks: macos/macos.yml
+    - name: Provision macos
+      ansible.builtin.include_tasks: macos/macos.yml
       when: is_macos and not is_codespace
       tags: [macos]
-    - ansible.builtin.include_tasks: aws/aws.yml
+    - name: Provision aws
+      ansible.builtin.include_tasks: aws/aws.yml
       tags: [aws]
       when: not is_codespace
-    - ansible.builtin.include_tasks: github/github.yml
+    - name: Provision github
+      ansible.builtin.include_tasks: github/github.yml
       tags: [github]
       when: not is_codespace
-    - ansible.builtin.include_tasks: docuum/docuum.yml
+    - name: Provision docuum
+      ansible.builtin.include_tasks: docuum/docuum.yml
       tags: [docuum]
       when: not is_codespace
-    - ansible.builtin.include_tasks: 1password/1password.yml
+    - name: Provision 1password
+      ansible.builtin.include_tasks: 1password/1password.yml
       tags: [1password]
       when: not is_codespace
-    - ansible.builtin.include_tasks: ghostty/ghostty.yml
+    - name: Provision ghostty
+      ansible.builtin.include_tasks: ghostty/ghostty.yml
       tags: [ghostty]
       when: not is_codespace
-    - ansible.builtin.include_tasks: just/just.yml
+    - name: Provision just
+      ansible.builtin.include_tasks: just/just.yml
       tags: [just]
       when: not is_codespace
-    - ansible.builtin.include_tasks: claude/claude.yml
+    - name: Provision claude
+      ansible.builtin.include_tasks: claude/claude.yml
       tags: [claude]
       when: not is_codespace
