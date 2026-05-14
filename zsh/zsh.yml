@@ -66,7 +66,7 @@
   ansible.builtin.file:
     path: "{{ home_dir }}/dracula"
     state: directory
-    mode: 0755
+    mode: "0755"
 
 
 - name: Download Dracula Theme
@@ -86,7 +86,7 @@
   ansible.builtin.file:
     path: "{{ home_dir }}/.oh-my-zsh/themes/dracula"
     state: directory
-    mode: 0755
+    mode: "0755"
 
 
 - name: Link Dracula async lib
