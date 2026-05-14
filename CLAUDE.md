@@ -59,24 +59,27 @@ This is a dotfiles repository using Ansible for configuration management:
   - `<module>.yml`: Ansible playbook
   - Configuration files (e.g., `.vimrc`, `.gitconfig`)
   - Optional `.zsh` files for shell configuration
-- **Linking strategy**: Files are symlinked with `force: yes` for live editing
+- **Linking strategy**: Files are symlinked with `force: true` for live editing
 - **Homebrew**: Guard `homebrew` and `homebrew_cask` tasks with `when: is_macos` (Homebrew is untested on non-macOS)
 
 ## Module Organization & Dependencies
 
-**Execution Order Matters:**
-1. `/core`: Base configuration, SSH setup, creates `~/devtools` directory
-2. `/zsh`: Oh My Zsh installation (must run before modules that use `~/.oh-my-zsh/custom`)
-3. Other modules in any order:
-   - `/git`: Git config with SSH signing and conditional work/personal includes
+`provision.yml` is the authoritative source for module order. The high-level dependencies:
+
+1. `/core`: Base directories (`~/bin`, `~/devtools`), `ackrc`/`screenrc` symlinks, dircolors
+2. `/ssh`: SSH config (`~/.ssh/config`, `config.d/`, `allowed_signers`)
+3. `/zsh`: Oh My Zsh installation (must run before modules that drop files in `~/.oh-my-zsh/custom`)
+4. Remaining modules (see `provision.yml` for exact order):
+   - `/git`, `/git-identity`: Git config with SSH commit signing and conditional work/personal includes
    - `/vim`: Vim with vim-plug package manager
+   - `/python`, `/node`, `/ruby`, `/java`: Language environments (Java requires admin password for Temurin casks)
    - `/aws`: AWS CLI, ECR credential helper, SSM SSH proxy
-   - `/java`: OpenJDK, Maven, GNG (requires sudo)
-   - `/python`, `/node`, `/ruby`: Language environments
+   - `/github`: `gh` CLI and Codespaces SSH config
    - `/1password`: CLI and SSH agent integration
    - `/macos`: macOS-specific settings, dark mode, Homebrew packages
-   - `/vscode`: VS Code configuration
-   - `/bin`: Custom utility scripts
+   - `/docuum`: Docker image cache cleanup LaunchAgent
+   - `/ghostty`, `/vscode`, `/just`: Editor and terminal config
+   - `/claude`: Claude Code SSH signing identity and managed settings
 
 ## Post-Provisioning Manual Steps
 
