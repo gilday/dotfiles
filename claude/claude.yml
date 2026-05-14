@@ -1,14 +1,24 @@
 ---
-- name: Uninstall Claude Code stable channel
+# Claude Code is installed via Anthropic's native installer rather than a
+# Homebrew cask. Homebrew deletes the previous version directory on upgrade,
+# which yanks the binary out from under any long-running Claude Code session
+# whose Agent spawner resolved `claude` to that absolute Caskroom path
+# (anthropics/claude-code#48889). The native installer updates in place via a
+# background auto-updater, so running sessions never see the binary disappear.
+- name: Uninstall Claude Code Homebrew casks
   community.general.homebrew_cask:
-    name: claude-code
+    name: "{{ item }}"
     state: absent
+  loop:
+    - claude-code
+    - claude-code@latest
   when: is_macos
 
-- name: Install Claude Code (latest channel)
-  community.general.homebrew_cask:
-    name: claude-code@latest
-  when: is_macos
+- name: Install Claude Code via native installer
+  ansible.builtin.shell:
+    cmd: set -o pipefail && curl -fsSL https://claude.ai/install.sh | bash
+    creates: "{{ home_dir }}/.local/bin/claude"
+    executable: /bin/bash
 
 - name: Ensure Claude config directory exists
   ansible.builtin.file:
