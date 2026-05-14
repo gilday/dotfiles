@@ -21,7 +21,15 @@
   when: is_macos
 
 
-- name: Enable doccum launchd Service
+- name: Check whether docuum LaunchAgent is already loaded
+  ansible.builtin.command: launchctl list com.github.stepchowfun.docuum
+  register: docuum_launchctl_check
+  changed_when: false
+  failed_when: false
+  when: is_macos
+
+- name: Enable docuum launchd Service
   ansible.builtin.command: "launchctl load {{ home_dir }}/Library/LaunchAgents/com.github.stepchowfun.docuum.plist"
   become: true
-  when: is_macos
+  when: is_macos and docuum_launchctl_check.rc != 0
+  changed_when: true
