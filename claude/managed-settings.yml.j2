@@ -94,7 +94,9 @@ sandbox:
 {% endfor %}
   filesystem:
     allowWrite:
+      - "~/.ansible"
       - "~/.gradle"
+      - "~/.npm"
   network:
     allowLocalBinding: true
     allowedDomains:
