@@ -26,6 +26,24 @@
     state: directory
     mode: '0755'
 
+- name: Ensure Claude hooks directory exists
+  ansible.builtin.file:
+    path: "{{ home_dir }}/.claude/hooks"
+    state: directory
+    mode: '0755'
+
+- name: Make load-dotenv hook executable
+  ansible.builtin.file:
+    path: "{{ dotfiles_dir }}/claude/hooks/load-dotenv.sh"
+    mode: "0755"
+
+- name: Link load-dotenv hook
+  ansible.builtin.file:
+    state: link
+    src: "{{ dotfiles_dir }}/claude/hooks/load-dotenv.sh"
+    dest: "{{ home_dir }}/.claude/hooks/load-dotenv.sh"
+    force: true
+
 - name: Ensure Claude settings file exists
   ansible.builtin.copy:
     content: "{}\n"

@@ -61,6 +61,12 @@ env:
   GIT_CONFIG_GLOBAL: "{{ home_dir }}/.gitconfig-claude"
   SSH_AUTH_SOCK: "{{ home_dir }}/.ssh/claude-agent.sock"
 
+hooks:
+  SessionStart:
+    - hooks:
+        - type: command
+          command: "{{ home_dir }}/.claude/hooks/load-dotenv.sh"
+
 permissions:
   allow:
     - "Bash(ntfy:*)"
