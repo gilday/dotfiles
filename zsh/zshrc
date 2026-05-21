@@ -37,7 +37,7 @@ export EDITOR=vim
 # PATH
 # unique entries in path array
 typeset -U path
-path+=$HOME/bin
+path=($HOME/bin $path)
 
 
 # ZSH Line Editor
