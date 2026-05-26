@@ -26,7 +26,7 @@ alias android-disconnect="fusermount -u /media/GalaxyNexus"
 
 # MAVEN
 export M2_REPO="$HOME/.m2/repository"
-export MAVEN_OPTS='-Djava.awt.headless=true' # http://stackoverflow.com/a/17951720/501368
+export MAVEN_OPTS="${MAVEN_OPTS:+$MAVEN_OPTS }-Djava.awt.headless=true" # http://stackoverflow.com/a/17951720/501368
 path+="${HOME}/devtools/maven/bin"
 
 # GRAALVM

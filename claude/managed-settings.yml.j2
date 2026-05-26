@@ -105,6 +105,7 @@ sandbox:
       - "~/.claude/plugins/data"
       - "~/.codex"
       - "~/.gradle"
+      - "~/.m2"
       - "~/.npm"
   network:
     allowLocalBinding: true
@@ -114,6 +115,7 @@ sandbox:
       - "api.github.com"
       - "github.com"
       - "registry.npmjs.org"
+      - "repo.maven.apache.org"
       - "services.gradle.org"
     allowUnixSockets:
       - "{{ lookup('env', 'SSH_AUTH_SOCK') }}"
