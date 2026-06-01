@@ -9,10 +9,27 @@
 # How to apply: Claude Code passes CLAUDE_ENV_FILE, an append-only file that
 # the session sources before any tool call. Appending `set -a; . .env; set +a`
 # exports every assignment in .env into the session environment.
+#
+# Trust boundary: only honor .env files inside one of the directories listed
+# in ALLOWLIST. Anything outside is ignored, so a stray repo can't smuggle
+# variables into a session just by virtue of being where the agent landed.
 set -euo pipefail
+
+ALLOWLIST=(
+  "$HOME/development/github/pixee"
+  "$HOME/development/github/gilday"
+)
 
 [ -n "${CLAUDE_ENV_FILE:-}" ] || exit 0
 [ -f "$PWD/.env" ] || exit 0
+
+allowed=
+for prefix in "${ALLOWLIST[@]}"; do
+  case "$PWD" in
+    "$prefix"/*) allowed=1; break ;;
+  esac
+done
+[ -n "$allowed" ] || exit 0
 
 {
   echo "set -a"
