@@ -107,6 +107,9 @@ sandbox:
       - "~/.gradle"
       - "~/.m2"
       - "~/.npm"
+      - "~/.cache/uv"
+      - "~/Library/Caches/helm"
+      - "~/Library/Preferences/helm"
   network:
     allowLocalBinding: true
     allowedDomains:
@@ -120,3 +123,7 @@ sandbox:
     allowUnixSockets:
       - "{{ lookup('env', 'SSH_AUTH_SOCK') }}"
       - "{{ home_dir }}/.ssh/claude-agent.sock"
+
+worktree:
+  symlinkDirectories:
+    - "node_modules"
