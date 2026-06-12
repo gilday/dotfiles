@@ -28,6 +28,31 @@ staying clearly distinct from me.
 - **Visibly distinct in history.** `git log --show-signature` shows the
   agent identity, not mine.
 
+## Connecting to servers
+
+Claude offers its own agent key first; falling back to my 1Password key
+(Touch ID) is a deliberate, gated escalation.
+
+- **Primary, no Touch ID.** `ssh <host>` works as-is. The catch: the
+  1Password-generated blocks in `~/.ssh/1Password/config` pin
+  `IdentitiesOnly yes` per host, which tells ssh to ignore every agent
+  key except the pinned 1Password identity, including Claude's. So
+  `ssh/claude-agent.conf` (deployed to `~/.ssh/config.d/00-claude-agent.conf`)
+  flips `IdentitiesOnly no` *only* when the Claude agent is active. It
+  sorts ahead of the 1Password include, and ssh takes the first value,
+  so it wins. Human sessions are untouched.
+- **Trust is per-server.** Add the "Claude Code" pubkey to a server's
+  `authorized_keys` and Claude logs in unattended. Omit it and the
+  primary attempt fails: `claude-agent.sock` holds only Claude's key and
+  cannot present any 1Password key.
+- **Fallback, Touch ID.** For a server Claude isn't trusted on, escalate
+  explicitly to the 1Password agent. This prompts for a fingerprint and
+  acts as the access check:
+
+  ```sh
+  ssh -o IdentityAgent="$HOME/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock" <host>
+  ```
+
 ## What's where
 
 - `claude/`: Ansible playbook, managed settings, LaunchAgent plist, and

@@ -12,6 +12,15 @@
     dest: "{{ home_dir }}/.ssh/config"
     mode: "0600"
 
+# Let Claude Code present its own agent key. The 00- prefix orders this ahead
+# of the 1Password include so its `IdentitiesOnly no` (Claude sessions only)
+# wins; see ssh/claude-agent.conf for the full rationale.
+- name: SSH Claude Agent Override
+  ansible.builtin.copy:
+    src: claude-agent.conf
+    dest: "{{ home_dir }}/.ssh/config.d/00-claude-agent.conf"
+    mode: "0600"
+
 - name: SSH Allowed Signers
   ansible.builtin.copy:
     src: allowed_signers
