@@ -33,6 +33,13 @@
 [pull]
 	rebase = true
 
+# Reuse recorded resolution: remember how merge conflicts were resolved and
+# replay them automatically the next time the same conflict appears.
+# https://git-scm.com/book/en/v2/Git-Tools-Rerere
+[rerere]
+	enabled = true
+	autoupdate = true
+
 [init]
         defaultBranch = main
 
