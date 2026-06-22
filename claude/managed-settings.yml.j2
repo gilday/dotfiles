@@ -96,6 +96,7 @@ sandbox:
     - "npx:*"
     - "ntfy:*"
     - "open:*"
+    - "tailscale:*"
 {% for script in claude_sandbox_scripts.files %}
     - "{{ script.path | replace(home_dir, '~') }}:*"
 {% endfor %}
