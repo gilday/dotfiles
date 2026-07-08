@@ -26,6 +26,25 @@
   when: is_macos
 
 
+# Homebrew 6+ refuses to load formulae from non-official taps unless the tap is
+# trusted (brew trust). Trust gdubw/gng so `Install GNG` works on fresh machines.
+- name: Read Trusted Homebrew Taps
+  ansible.builtin.command:
+    cmd: brew trust --json v1
+  register: brew_trust
+  changed_when: false
+  when: is_macos
+
+
+- name: Trust GNG
+  ansible.builtin.command:
+    cmd: brew trust --tap gdubw/gng
+  changed_when: true
+  when:
+    - is_macos
+    - "'gdubw/gng' not in (brew_trust.stdout | from_json).taps"
+
+
 - name: Install GNG
   community.general.homebrew:
     name: gng
