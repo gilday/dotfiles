@@ -20,6 +20,21 @@
     dest: "{{ home_dir }}/.inputrc"
 
 
+- name: Development Source Tree Directory
+  ansible.builtin.file:
+    path: "{{ home_dir }}/development"
+    state: directory
+    mode: "0700"
+
+
+- name: Exclude Development Tree From Spotlight Indexing
+  ansible.builtin.copy:
+    dest: "{{ home_dir }}/development/.metadata_never_index"
+    content: ""
+    force: false
+    mode: "0644"
+
+
 - name: Create Dracula Dir If Not Exists
   ansible.builtin.file:
     path: "{{ home_dir }}/dracula"
