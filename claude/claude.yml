@@ -26,23 +26,39 @@
     state: directory
     mode: '0755'
 
-- name: Ensure Claude hooks directory exists
+# .env loading moved from a local SessionStart hook to the dotenv plugin
+# (dotenv@gilday-claude-plugins). Remove the now-dangling symlink to the
+# deleted local script.
+- name: Remove legacy load-dotenv hook symlink
   ansible.builtin.file:
-    path: "{{ home_dir }}/.claude/hooks"
-    state: directory
-    mode: '0755'
+    path: "{{ home_dir }}/.claude/hooks/load-dotenv.sh"
+    state: absent
 
-- name: Make load-dotenv hook executable
-  ansible.builtin.file:
-    path: "{{ dotfiles_dir }}/claude/hooks/load-dotenv.sh"
-    mode: "0755"
-
-- name: Link load-dotenv hook
-  ansible.builtin.file:
-    state: link
-    src: "{{ dotfiles_dir }}/claude/hooks/load-dotenv.sh"
-    dest: "{{ home_dir }}/.claude/hooks/load-dotenv.sh"
-    force: true
+# The settings merge below is additive (combine), so it cannot by itself drop
+# the SessionStart entry it used to inject for the local hook. Prune any
+# load-dotenv SessionStart hook before the merge reads the file, without
+# touching externally managed hooks (e.g. PostToolUse/Stop).
+- name: Remove legacy load-dotenv SessionStart hook from Claude settings
+  ansible.builtin.shell:
+    cmd: |
+      set -euo pipefail
+      f="{{ home_dir }}/.claude/settings.json"
+      [ -f "$f" ] || exit 0
+      before=$(cat "$f")
+      after=$(printf '%s' "$before" | jq '
+        if (.hooks.SessionStart | type) == "array" then
+          .hooks.SessionStart |= map(select(
+            any(.hooks[]?.command // ""; contains("load-dotenv")) | not))
+        else . end
+        | if (.hooks | has("SessionStart")) and (.hooks.SessionStart == [])
+          then del(.hooks.SessionStart) else . end
+        | if (.hooks // {}) == {} then del(.hooks) else . end')
+      if [ "$before" != "$after" ]; then
+        printf '%s\n' "$after" > "$f"
+        echo CHANGED
+      fi
+  register: dotenv_hook_prune
+  changed_when: "'CHANGED' in dotenv_hook_prune.stdout"
 
 - name: Ensure Claude settings file exists
   ansible.builtin.copy:

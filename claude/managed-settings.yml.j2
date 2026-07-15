@@ -60,12 +60,16 @@ tui: fullscreen
 env:
   GIT_CONFIG_GLOBAL: "{{ home_dir }}/.gitconfig-claude"
   SSH_AUTH_SOCK: "{{ home_dir }}/.ssh/claude-agent.sock"
+  # Trusted trees whose per-repo .env the dotenv plugin may source at session
+  # start. Colon-separated, literal absolute paths (settings values are not
+  # shell-expanded). Consumed by dotenv@gilday-claude-plugins; unset -> no-op.
+  CLAUDE_DOTENV_ALLOWLIST: "{{ home_dir }}/development/github/pixee:{{ home_dir }}/development/github/gilday"
 
-hooks:
-  SessionStart:
-    - hooks:
-        - type: command
-          command: "{{ home_dir }}/.claude/hooks/load-dotenv.sh"
+# Per-repo .env loading is handled by the dotenv plugin (its own SessionStart
+# hook), not a local hook. It reads the trusted trees from
+# CLAUDE_DOTENV_ALLOWLIST above.
+enabledPlugins:
+  dotenv@gilday-claude-plugins: true
 
 permissions:
   allow:
