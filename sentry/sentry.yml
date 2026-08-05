@@ -1,0 +1,48 @@
+---
+# Install the Sentry CLI from the official installer rather than Homebrew: the
+# Homebrew formulae lag well behind upstream (getsentry/tools/sentry is pinned to
+# 0.39.0, and homebrew/core carries the older 2.x sentry-cli line).
+- name: Check for Sentry CLI
+  ansible.builtin.stat:
+    path: "{{ home_dir }}/bin/sentry-cli"
+  register: sentry_cli
+
+
+# The installer exits 1 when the binary is already present, telling you to run
+# `sentry-cli update` instead, so skip it once installed. INSTALL_DIR keeps it out
+# of the default /usr/local/bin, which would need sudo; ~/bin is created by the
+# core module and put on PATH by zshrc.
+- name: Install Sentry CLI
+  ansible.builtin.shell:
+    cmd: set -o pipefail && curl -sL https://sentry.io/get-cli/ | sh
+    executable: /bin/bash
+  environment:
+    INSTALL_DIR: "{{ home_dir }}/bin"
+  when: not sentry_cli.stat.exists
+  changed_when: true
+
+
+# The installer only writes zsh completions when the major version is 2 and only
+# on a fresh install, so generate them here to cover 3.x and to refresh them after
+# an upgrade. Oh My Zsh puts custom/completions on fpath before running compinit,
+# which is what makes the completion load. A custom plugin cannot do this: plugin
+# files are sourced after compinit, too late for an fpath assignment to register.
+- name: Create Oh My Zsh Completions Directory
+  ansible.builtin.file:
+    path: "{{ home_dir }}/.oh-my-zsh/custom/completions"
+    state: directory
+    mode: "0755"
+
+
+- name: Generate Sentry CLI Zsh Completion
+  ansible.builtin.command:
+    cmd: "{{ home_dir }}/bin/sentry-cli completions zsh"
+  register: sentry_cli_completion
+  changed_when: false
+
+
+- name: Install Sentry CLI Zsh Completion
+  ansible.builtin.copy:
+    content: "{{ sentry_cli_completion.stdout }}\n"
+    dest: "{{ home_dir }}/.oh-my-zsh/custom/completions/_sentry-cli"
+    mode: "0644"

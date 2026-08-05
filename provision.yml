@@ -67,6 +67,10 @@
       ansible.builtin.include_tasks: github/github.yml
       tags: [github]
       when: not is_codespace
+    - name: Provision sentry
+      ansible.builtin.include_tasks: sentry/sentry.yml
+      tags: [sentry]
+      when: not is_codespace
     - name: Provision docuum
       ansible.builtin.include_tasks: docuum/docuum.yml
       tags: [docuum]
