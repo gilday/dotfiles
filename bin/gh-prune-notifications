@@ -1,0 +1,164 @@
+#!/usr/bin/env bash
+# Sweep GitHub inbox notifications for pull requests that are already merged or
+# closed. GitHub has no native setting for this: inbox filters cover activity
+# type (is:issue-or-pull-request, is:commit, ...) and triage status (is:unread,
+# is:done, ...), but never pull request state, and nothing marks a thread Done
+# on merge. So we ask the API ourselves.
+#
+# Marking a thread Done is DELETE /notifications/threads/{id}, which drops it
+# from the inbox without unsubscribing; later activity on the same pull request
+# surfaces it again.
+#
+# https://docs.github.com/en/rest/activity/notifications
+set -euo pipefail
+
+concurrency="${GH_PRUNE_CONCURRENCY:-5}"
+
+usage() {
+	cat <<'EOF'
+Usage: gh-prune-notifications [options]
+
+Marks GitHub notifications as Done when the pull request they point at is
+merged or closed. Notifications for open pull requests are left alone.
+
+Options:
+  -n, --dry-run      report what would be swept, change nothing
+  -m, --merged-only  sweep merged pull requests only, keep closed-unmerged ones
+  -u, --unread-only  examine unread notifications only (default: whole inbox)
+  -v, --verbose      also report the notifications that were kept
+  -h, --help         show this help
+
+Environment:
+  GH_PRUNE_CONCURRENCY  parallel pull request lookups (default: 5)
+EOF
+}
+
+die() {
+	printf 'gh-prune-notifications: %s\n' "$1" >&2
+	exit 1
+}
+
+# Worker mode: one pull request lookup, then a Done call if it qualifies. Runs
+# under xargs -P for concurrency, so outcomes go to stdout as tab separated
+# records for the parent to format and tally.
+check_one() {
+	local thread_id="$1" pr_path="$2" reason="$3"
+	local pr state html_url disposition
+
+	# Collapse merged_at into the state so neither line can come back empty: a
+	# null field would vanish into tab splitting and misreport an open pull
+	# request as merged.
+	if ! pr=$(gh api "$pr_path" \
+		--jq '(if .merged_at then "merged" else .state end), .html_url' 2>/dev/null); then
+		printf 'ERROR\t%s\t%s\t%s\n' 'unknown' "$reason" "$pr_path"
+		return 0
+	fi
+	{
+		read -r state
+		read -r html_url
+	} <<<"$pr"
+
+	if [[ $state == merged ]]; then
+		disposition=merged
+	elif [[ $state == closed && ${GH_PRUNE_MERGED_ONLY:-0} != 1 ]]; then
+		disposition=closed
+	else
+		printf 'KEPT\t%s\t%s\t%s\n' "$state" "$reason" "$html_url"
+		return 0
+	fi
+
+	if [[ ${GH_PRUNE_DRY_RUN:-0} == 1 ]]; then
+		printf 'WOULD\t%s\t%s\t%s\n' "$disposition" "$reason" "$html_url"
+	elif gh api --method DELETE "/notifications/threads/$thread_id" >/dev/null 2>&1; then
+		printf 'PRUNED\t%s\t%s\t%s\n' "$disposition" "$reason" "$html_url"
+	else
+		printf 'ERROR\t%s\t%s\t%s\n' "$disposition" "$reason" "$html_url"
+	fi
+}
+
+if [[ ${1:-} == --check-one ]]; then
+	shift
+	check_one "$@"
+	exit 0
+fi
+
+all=true
+verbose=false
+while [[ $# -gt 0 ]]; do
+	case "$1" in
+	-n | --dry-run) export GH_PRUNE_DRY_RUN=1 ;;
+	-m | --merged-only) export GH_PRUNE_MERGED_ONLY=1 ;;
+	-u | --unread-only) all=false ;;
+	-v | --verbose) verbose=true ;;
+	-h | --help)
+		usage
+		exit 0
+		;;
+	*)
+		printf 'gh-prune-notifications: unknown option: %s\n' "$1" >&2
+		usage >&2
+		exit 64
+		;;
+	esac
+	shift
+done
+
+command -v gh >/dev/null || die 'gh not found in PATH; see https://cli.github.com'
+command -v jq >/dev/null || die 'jq not found in PATH'
+gh auth status >/dev/null 2>&1 || die 'gh is not authenticated; run: gh auth login'
+
+# Resolve our own path so the worker invocation survives a PATH lookup or a
+# ~/bin symlink.
+self="$0"
+[[ -x $self ]] || self="$(command -v -- "$0")"
+
+# --paginate emits one JSON array per page, hence the slurped `add`.
+threads=$(gh api notifications --method GET --paginate -F "all=$all" |
+	jq -rs 'add // []
+		| map(select(.subject.type == "PullRequest" and .subject.url != null))
+		| unique_by(.id)
+		| .[]
+		| [.id, (.subject.url | sub("^https://api\\.github\\.com"; "")), .reason]
+		| @tsv')
+
+if [[ -z $threads ]]; then
+	printf 'No pull request notifications in the inbox.\n'
+	exit 0
+fi
+
+total=$(grep -c '' <<<"$threads")
+printf 'Checking %s pull request notification(s)...\n' "$total"
+
+pruned=0 kept=0 errors=0
+while IFS=$'\t' read -r outcome detail reason target; do
+	case "$outcome" in
+	PRUNED)
+		pruned=$((pruned + 1))
+		printf '  done      %-7s %-18s %s\n' "$detail" "$reason" "$target"
+		;;
+	WOULD)
+		pruned=$((pruned + 1))
+		printf '  would do  %-7s %-18s %s\n' "$detail" "$reason" "$target"
+		;;
+	KEPT)
+		kept=$((kept + 1))
+		if [[ $verbose == true ]]; then
+			printf '  keep      %-7s %-18s %s\n' "$detail" "$reason" "$target"
+		fi
+		;;
+	ERROR)
+		errors=$((errors + 1))
+		printf '  error     %-7s %-18s %s\n' "$detail" "$reason" "$target" >&2
+		;;
+	esac
+done < <(xargs -P "$concurrency" -n 3 "$self" --check-one <<<"$threads")
+
+if [[ ${GH_PRUNE_DRY_RUN:-0} == 1 ]]; then
+	printf '%s to sweep, %s left open' "$pruned" "$kept"
+else
+	printf '%s swept, %s left open' "$pruned" "$kept"
+fi
+if ((errors > 0)); then
+	printf ', %s unreadable' "$errors"
+fi
+printf '\n'

@@ -35,6 +35,7 @@
     dest: "{{ home_dir }}/bin/{{ item }}"
   loop:
     - echo-server.py
+    - gh-prune-notifications
     - tcp-proxy.sh
 
 - name: Set Terminal Directory Color Scheme  # noqa: latest[git]
