@@ -185,10 +185,9 @@
         dest: "{{ home_dir }}/.gitconfig-claude"
         force: true
 
-- name: Link Claude Zsh Configuration
-  ansible.builtin.include_tasks:
-    file: "{{ dotfiles_dir }}/includes/link_zsh_config.yml"
-  vars:
-    zsh_config_name: Claude
-    zsh_config_src: claude/claude.zsh
-    zsh_config_dest: claude.zsh
+# claude.zsh held a caffeinate toggle that Claude Code's own sleep inhibitor
+# made redundant; drop the dangling symlink so oh-my-zsh stops sourcing it.
+- name: Remove legacy Claude Zsh configuration symlink
+  ansible.builtin.file:
+    path: "{{ home_dir }}/.oh-my-zsh/custom/claude.zsh"
+    state: absent
