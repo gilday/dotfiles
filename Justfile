@@ -10,3 +10,9 @@ check:
 # Run the provisioning playbook
 provision: install
     ansible-playbook --ask-become-pass provision.yml
+
+# Restart the Claude Code signing ssh-agent and reload its key from 1Password
+claude-agent-reload:
+    launchctl kickstart -k gui/$(id -u)/com.gilday.claude-ssh-agent
+    @echo "Unlock 1Password if prompted, then verify:"
+    @echo "  SSH_AUTH_SOCK=~/.ssh/claude-agent.sock ssh-add -l"
