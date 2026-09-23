@@ -37,7 +37,7 @@ Claude offers its own agent key first; falling back to my 1Password key
   1Password-generated blocks in `~/.ssh/1Password/config` pin
   `IdentitiesOnly yes` per host, which tells ssh to ignore every agent
   key except the pinned 1Password identity, including Claude's. So
-  `ssh/claude-agent.conf` (deployed to `~/.ssh/config.d/00-claude-agent.conf`)
+  `ssh/claude-agent.conf.j2` (deployed to `~/.ssh/config.d/00-claude-agent.conf`)
   flips `IdentitiesOnly no` *only* when the Claude agent is active. It
   sorts ahead of the 1Password include, and ssh takes the first value,
   so it wins. Human sessions are untouched.

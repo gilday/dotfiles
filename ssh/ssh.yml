@@ -12,12 +12,13 @@
     dest: "{{ home_dir }}/.ssh/config"
     mode: "0600"
 
-# Let Claude Code present its own agent key. The 00- prefix orders this ahead
-# of the 1Password include so its `IdentitiesOnly no` (Claude sessions only)
-# wins; see ssh/claude-agent.conf for the full rationale.
+# Let Claude Code present its own agent key and reach hosts through the
+# sandbox proxy. The 00- prefix orders this ahead of the 1Password include so
+# its settings (Claude sessions only) win; see ssh/claude-agent.conf.j2 for
+# the full rationale.
 - name: SSH Claude Agent Override
-  ansible.builtin.copy:
-    src: claude-agent.conf
+  ansible.builtin.template:
+    src: claude-agent.conf.j2
     dest: "{{ home_dir }}/.ssh/config.d/00-claude-agent.conf"
     mode: "0600"
 

@@ -1,4 +1,4 @@
-# Managed by dotfiles: ssh/claude-agent.conf -> ~/.ssh/config.d/00-claude-agent.conf
+# Managed by dotfiles: ssh/claude-agent.conf.j2 -> ~/.ssh/config.d/00-claude-agent.conf
 #
 # Claude Code runs with SSH_AUTH_SOCK pointed at ~/.ssh/claude-agent.sock, a
 # persistent agent that holds only the dedicated "Claude Code" key (loaded from
@@ -26,3 +26,13 @@
 #       ssh -o IdentityAgent="$HOME/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock" <host>
 Match exec "test \"$SSH_AUTH_SOCK\" = \"$HOME/.ssh/claude-agent.sock\""
   IdentitiesOnly no
+
+# Inside the Claude Code sandbox, plain `ssh` cannot reach the network
+# directly: the sandbox only allows traffic through its local proxy, which
+# sets $HTTPS_PROXY. Tunnel through that proxy the same way the SessionStart
+# hook in claude/managed-settings.yml.j2 does for git, so the sandbox's domain
+# allowlist still applies (anthropics/claude-code#70684). Hosts that already
+# carry their own ProxyCommand (SSM, Codespaces) are left alone, and
+# `ssh -o ProxyCommand=...` on the command line still wins over this.
+Match !host "i-*,mi-*,cs.*" exec "test \"$SSH_AUTH_SOCK\" = \"$HOME/.ssh/claude-agent.sock\" -a -n \"$HTTPS_PROXY\""
+  ProxyCommand {{ dotfiles_dir }}/claude/sandbox-ssh-proxy %h %p
