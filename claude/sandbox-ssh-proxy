@@ -1,0 +1,68 @@
+#!/usr/bin/env python3
+# ssh ProxyCommand for Claude Code sessions: `sandbox-ssh-proxy %h %p`.
+#
+# On macOS the Claude Code sandbox injects
+#   GIT_SSH_COMMAND=ssh ... -o ProxyCommand='nc -X 5 -x localhost:<port> %h %p'
+# which fails twice over: bare `nc` resolves to Homebrew GNU netcat (no -X),
+# and even BSD nc cannot answer the SOCKS5 login the sandbox proxy requires
+# (anthropics/claude-code#70684). The same proxy accepts HTTP CONNECT with the
+# credentials already carried in $HTTPS_PROXY, so tunnel that way instead.
+#
+# Outside the sandbox (no $HTTPS_PROXY), connect directly so unsandboxed
+# commands in the same session keep working. Remove this script and its
+# SessionStart hook once #70684 is fixed upstream.
+
+import base64
+import os
+import socket
+import sys
+import threading
+from urllib.parse import unquote, urlparse
+
+
+def connect_via_proxy(proxy_url, host, port):
+    proxy = urlparse(proxy_url)
+    sock = socket.create_connection((proxy.hostname, proxy.port or 80))
+    request = f"CONNECT {host}:{port} HTTP/1.1\r\nHost: {host}:{port}\r\n"
+    if proxy.username:
+        credentials = f"{unquote(proxy.username)}:{unquote(proxy.password or '')}"
+        request += f"Proxy-Authorization: Basic {base64.b64encode(credentials.encode()).decode()}\r\n"
+    sock.sendall((request + "\r\n").encode())
+
+    # Read the response headers one byte at a time so nothing the server sends
+    # after them (the SSH banner) gets swallowed.
+    response = b""
+    while not response.endswith(b"\r\n\r\n"):
+        chunk = sock.recv(1)
+        if not chunk:
+            break
+        response += chunk
+    status = response.split(b"\r\n", 1)[0].decode(errors="replace")
+    if status.split()[1:2] != ["200"]:
+        sys.exit(f"sandbox-ssh-proxy: proxy refused CONNECT {host}:{port}: {status}")
+    return sock
+
+
+def relay(sock):
+    def upstream():
+        while data := os.read(sys.stdin.fileno(), 65536):
+            sock.sendall(data)
+        sock.shutdown(socket.SHUT_WR)
+
+    threading.Thread(target=upstream, daemon=True).start()
+    while data := sock.recv(65536):
+        os.write(sys.stdout.fileno(), data)
+
+
+def main():
+    host, port = sys.argv[1], int(sys.argv[2])
+    proxy_url = os.environ.get("HTTPS_PROXY") or os.environ.get("https_proxy")
+    if proxy_url:
+        sock = connect_via_proxy(proxy_url, host, port)
+    else:
+        sock = socket.create_connection((host, port))
+    relay(sock)
+
+
+if __name__ == "__main__":
+    main()

@@ -71,6 +71,20 @@ env:
 enabledPlugins:
   dotenv@gilday-claude-plugins: true
 
+# The sandbox's injected GIT_SSH_COMMAND cannot log in to its own proxy on
+# macOS (anthropics/claude-code#70684). Replace it with one that tunnels over
+# HTTP CONNECT. This must go through $CLAUDE_ENV_FILE: the env block above is
+# applied before the sandbox injects its value, so the injected one would win.
+hooks:
+  SessionStart:
+    - matcher: ""
+      hooks:
+        - type: command
+          command: >-
+            echo "export GIT_SSH_COMMAND=\"ssh -o ControlMaster=no -o ControlPath=none
+            -o ProxyCommand='{{ dotfiles_dir }}/claude/sandbox-ssh-proxy %h %p'\""
+            >> "$CLAUDE_ENV_FILE"
+
 permissions:
   allow:
     - "Bash(ntfy:*)"
