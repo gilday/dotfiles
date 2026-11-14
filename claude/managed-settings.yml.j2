@@ -75,6 +75,10 @@ enabledPlugins:
 # macOS (anthropics/claude-code#70684). Replace it with one that tunnels over
 # HTTP CONNECT. This must go through $CLAUDE_ENV_FILE: the env block above is
 # applied before the sandbox injects its value, so the injected one would win.
+#
+# SSH_AUTH_SOCK goes through the same file. In Claude Desktop sessions the env
+# block's value does not take effect and the login shell's 1Password agent
+# socket wins, so commit signing looks for the Claude key in the wrong agent.
 hooks:
   SessionStart:
     - matcher: ""
@@ -83,6 +87,8 @@ hooks:
           command: >-
             echo "export GIT_SSH_COMMAND=\"ssh -o ControlMaster=no -o ControlPath=none
             -o ProxyCommand='{{ dotfiles_dir }}/claude/sandbox-ssh-proxy %h %p'\""
+            >> "$CLAUDE_ENV_FILE";
+            echo "export SSH_AUTH_SOCK=\"{{ home_dir }}/.ssh/claude-agent.sock\""
             >> "$CLAUDE_ENV_FILE"
 
 permissions:
