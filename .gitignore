@@ -24,3 +24,7 @@ Icon
 
 scratch/
 
+
+# Ansible local working directory
+
+.ansible/
