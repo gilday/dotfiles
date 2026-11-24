@@ -64,6 +64,8 @@ env:
   # start. Colon-separated, literal absolute paths (settings values are not
   # shell-expanded). Consumed by dotenv@gilday-claude-plugins; unset -> no-op.
   CLAUDE_DOTENV_ALLOWLIST: "{{ home_dir }}/development/github/pixee:{{ home_dir }}/development/github/gilday"
+  # https://www.joancomadran.dev/blog/claude-code-code-mode
+  CLAUDE_CODE_EXPERIMENTAL_CODE_MODE: "1"
 
 # Per-repo .env loading is handled by the dotenv plugin (its own SessionStart
 # hook), not a local hook. It reads the trusted trees from
