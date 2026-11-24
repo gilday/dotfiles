@@ -54,3 +54,9 @@ setopt APPEND_HISTORY
 setopt INC_APPEND_HISTORY
 # removes blank lines from history
 setopt HIST_REDUCE_BLANKS
+
+
+# bun completions
+# Homebrew installs _bun into site-functions, which `brew shellenv` already puts
+# on $fpath. `bun completions` skips editing .zshrc when it finds the heading
+# above, so keep it to stop bun from appending a hardcoded ~/.bun/_bun source.
