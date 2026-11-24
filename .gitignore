@@ -28,3 +28,8 @@ scratch/
 # Ansible local working directory
 
 .ansible/
+
+
+# Claude Code local state (worktrees, local settings)
+
+.claude/
